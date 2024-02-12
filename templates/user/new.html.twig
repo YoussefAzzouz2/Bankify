@@ -5,9 +5,56 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Create new User</h1>
+	<style>
+		/* CSS for form labels */
+		.form-label {
+			display: inline-block;
+			width: 200px; /* Adjust the width as needed */
+			text-align: left; /* Align text to the right */
+			margin-right: 30px; /* Add some space between label and input */
+		}
+	</style>
 
-	{{ include('user/_form.html.twig') }}
+	<div style="text-align: center;">
+		<div class="form-container" style="display: inline-block;">
+			<h2>Create User</h2>
 
-	<a href="{{ path('app_user_index') }}">back to list</a>
+			{{ form_errors(registrationForm) }}
+
+			{{ form_start(registrationForm) }}
+
+			<div class="form-group">
+				{{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+			</div>
+
+			<div class="form-group">
+				{{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(registrationForm.nom, 'Nom', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(registrationForm.prenom, 'Prenom', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(registrationForm.dateNaissance, 'Date de Naissance', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.dateNaissance, {'attr': {'class': 'form-control'}}) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(registrationForm.genre, 'Genre', {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.genre, {'attr': {'class': 'form-control'}}) }}
+			</div>
+
+			<button type="submit" class="btn btn-primary">Register</button>
+			{{ form_end(registrationForm) }}
+		</div>
+
+		<a href="{{ path('app_user_index') }}" class="btn btn-primary" style="margin-top: 70px;">Back to list</a>
+	</div>
+
+
 {% endblock %}

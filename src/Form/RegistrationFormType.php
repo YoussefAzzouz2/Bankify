@@ -11,6 +11,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,16 +21,9 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('agreeTerms', CheckboxType::class, [
-                                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+
             ->add('plainPassword', PasswordType::class, [
-                                // instead of being set onto the object directly,
+                // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
@@ -42,8 +38,32 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])->add('nom', TextType::class, [
+                'required' => true,
+                'label' => 'Last Name',
             ])
-        ;
+            // Add 'prenom' (first name) field
+            ->add('prenom', TextType::class, [
+                'required' => true,
+                'label' => 'First Name',
+            ])
+            // Add 'genre' (gender) field
+            ->add('genre', ChoiceType::class, [
+                'choices' => [
+                    'Male' => 'male',
+                    'Female' => 'female',
+                    'Other' => 'other',
+                ],
+                'required' => true,
+                'placeholder' => 'Choose an option',
+                'label' => 'Gender',
+            ])
+            // Add 'dateNaissance' (date of birth) field
+            ->add('dateNaissance', BirthdayType::class, [
+                'required' => true,
+                'label' => 'Date of Birth',
+                // You can specify additional options for the BirthdayType here
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

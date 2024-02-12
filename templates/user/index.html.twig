@@ -1,41 +1,90 @@
 {% extends 'backbase.html.twig' %}
 
 {% block title %}
-	<title>User index</title>
+	<title>Gestion d' Utilisateurs</title>
 {% endblock %}
 
 {% block content %}
-	<h1>User index</h1>
+	<section style="margin-left:50px">
+		<h1>Table des Utilisateurs</h1>
+		<style>
+			/* Styles for the button */
+			.button {
+				display: inline-block;
+				background-color: #4CAF50; /* Green background */
+				color: white;
+				padding: 10px 20px;
+				text-align: center;
+				text-decoration: none;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+			}
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Email</th>
-				<th>Roles</th>
-				<th>Password</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for user in users %}
-				<tr>
-					<td>{{ user.id }}</td>
-					<td>{{ user.email }}</td>
-					<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-					<td>{{ user.password }}</td>
-					<td>
-						<a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-						<a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+			/* Hover effect */
+			.button:hover {
+				background-color: #45a049; /* Darker green */
+			}
+			/* Styles for the buttons */
+			.button2 {
+				display: inline-block;
+				background-color: #007bff; /* Blue background */
+				color: white;
+				padding: 6px 12px; /* Adjust padding to make the buttons smaller */
+				text-align: center;
+				text-decoration: none;
+				border: none;
+				border-radius: 3px;
+				cursor: pointer;
+				transition: background-color 0.3s;
+				margin-right: 5px; /* Add some margin between the buttons */
+			}
 
-	<a href="{{ path('app_user_new') }}">Create new</a>
+			/* Hover effect */
+			.button2:hover {
+				background-color: #0056b3; /* Darker blue on hover */
+			}
+		</style>
+		<table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Email</th>
+					<th>Nom</th>
+					<th>Prenom</th>
+					<th>Date de Naissance</th>
+					<th>Genre</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% set i = 1 %}
+				{% for user in users %}
+					{% if 'ROLE_ADMIN' not in user.roles %}
+						<tr>
+							<td>{{ i }}</td>
+							<td>{{ user.email }}</td>
+							<td>{{ user.nom }}</td>
+							<td>{{ user.prenom }}</td>
+							<td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') }}</td>
+
+							<td>{{ user.genre }}</td>
+							<td>
+								<a href="{{ path('app_user_show', {'id': user.id}) }}" class="button2">show</a>
+								<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="button2">edit</a>
+							</td>
+						</tr>
+						{% set i = i + 1 %}
+					{% endif %}
+				{% else %}
+					<tr>
+						<td colspan="5">no records found</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<a href="{{ path('app_user_new') }}" class="button">Create new</a>
+	</section>
 {% endblock %}
