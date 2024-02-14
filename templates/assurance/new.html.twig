@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire d'ajout Assurance Admin{% endblock %}
+
+{% block body %}
+    <h1>Ajouter Une Assurance</h1>
+
+    {{ include('assurance/_form.html.twig') }}
+
+    <a href="{{ path('app_assurance_index') }}">back to list</a>
+{% endblock %}
