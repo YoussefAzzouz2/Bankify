@@ -15,7 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+    #[Route('/userslist', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
@@ -80,6 +80,9 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
