@@ -31,7 +31,7 @@ class ProfileType extends AbstractType
                 'choices' => [
                     'Male' => 'male',
                     'Female' => 'female',
-                    'Other' => 'other',
+
                 ],
                 'required' => true,
                 'placeholder' => 'Choose an option',
