@@ -21,7 +21,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message: "Email is required")]
-    #[Assert\Email(message: "The email '{{ value }} ' is not a valid email")]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -31,23 +30,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\Length(min: 10, message: "Votre mot de passe ne contient pas {{ limit }} caractères.")]
+    #[Assert\Length(min: 10, minMessage: "Votre mot de passe ne contient pas {{ limit }} caractères.")]
+    #[Assert\NotBlank(message: "Password is required")]
     private ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
+
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank]
+
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Choice(choices: ['male', 'female'])]
+
     private ?string $genre = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    #[Assert\Date]
+
     private ?\DateTimeInterface $dateNaissance = null;
 
     public function getId(): ?int
