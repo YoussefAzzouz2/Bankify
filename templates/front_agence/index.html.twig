@@ -6,22 +6,23 @@
 
     <table class="table">
         <thead>
-            <tr>
+        <tr style="color: white;">
+            
                 <th>Id</th>
                 <th>Nom_agence</th>
                 <th>Email_agence</th>
                 <th>Tel_agence</th>
                 <th>actions</th>
-            </tr>
+         </tr>   
         </thead>
         <tbody>
         {% for agence in agences %}
             <tr>
-                <td>{{ agence.id }}</td>
-                <td>{{ agence.nomAgence }}</td>
-                <td>{{ agence.emailAgence }}</td>
-                <td>{{ agence.telAgence }}</td>
-                <td>
+                <td  style="color: white;">{{ agence.id }}</td>
+                <td  style="color: white;">{{ agence.nomAgence }}</td>
+                <td  style="color: white;">{{ agence.emailAgence }}</td>
+                <td  style="color: white;">{{ agence.telAgence }}</td>
+                <td  style="color: white;">
 
                 </td>
             </tr>
