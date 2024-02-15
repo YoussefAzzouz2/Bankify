@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Carte</title>{% endblock %}
+
+{% block section %}
+    <h1>Carte</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ carte.id }}</td>
+            </tr>
+            <tr>
+                <th>Num_C</th>
+                <td>{{ carte.NumC }}</td>
+            </tr>
+            <tr>
+                <th>Date_Exp</th>
+                <td>{{ carte.DateExp ? carte.DateExp|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Type_C</th>
+                <td>{{ carte.TypeC }}</td>
+            </tr>
+            <tr>
+                <th>Statut_C</th>
+                <td>{{ carte.StatutC }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_carte_index') }}">back to list</a>
+
+    <a href="{{ path('app_carte_edit', {'id': carte.id}) }}">edit</a>
+
+    {{ include('carte/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block sec2 %}
+{% endblock %}
+{% block why %}
+{% endblock %}

@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CarteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CarteRepository::class)]
 class Carte
@@ -15,35 +18,30 @@ class Carte
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $ID_C = null;
-
-    #[ORM\Column]
     private ?int $Num_C = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $Date_Exp = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Choice(choices: ['débit', 'crédit','prépayée'])]
     private ?string $Type_C = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Choice(choices: ['active', 'bloquée','expirée'])]
     private ?string $Statut_C = null;
+
+    #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'id_C')]
+    private Collection $transactions;
+
+    public function __construct()
+    {
+        $this->transactions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIDC(): ?int
-    {
-        return $this->ID_C;
-    }
-
-    public function setIDC(int $ID_C): static
-    {
-        $this->ID_C = $ID_C;
-
-        return $this;
     }
 
     public function getNumC(): ?int
@@ -90,6 +88,36 @@ class Carte
     public function setStatutC(string $Statut_C): static
     {
         $this->Statut_C = $Statut_C;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Transaction>
+     */
+    public function getTransactions(): Collection
+    {
+        return $this->transactions;
+    }
+
+    public function addTransaction(Transaction $transaction): static
+    {
+        if (!$this->transactions->contains($transaction)) {
+            $this->transactions->add($transaction);
+            $transaction->setIdC($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTransaction(Transaction $transaction): static
+    {
+        if ($this->transactions->removeElement($transaction)) {
+            // set the owning side to null (unless already changed)
+            if ($transaction->getIdC() === $this) {
+                $transaction->setIdC(null);
+            }
+        }
 
         return $this;
     }

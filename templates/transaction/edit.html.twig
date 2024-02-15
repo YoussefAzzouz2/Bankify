@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Edit Transaction</title>{% endblock %}
+
+{% block section %}
+    <h1>Edit Transaction</h1>
+
+    {{ include('transaction/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_transaction_index') }}">back to list</a>
+
+    {{ include('transaction/_delete_form.html.twig') }}
+{% endblock %}
+
+{% block sec2 %}
+{% endblock %}
+{% block why %}
+{% endblock %}
