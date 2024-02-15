@@ -1,0 +1,47 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}<title>CompteClient index</title>{% endblock %}
+
+{% block content %}
+<div>
+    <h1>CompteClient</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Rib</th>
+                <th>Mail</th>
+                <th>Tel</th>
+                <th>Solde</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for compte_client in compte_clients %}
+            <tr>
+                <td>{{ compte_client.id }}</td>
+                <td>{{ compte_client.nom }}</td>
+                <td>{{ compte_client.prenom }}</td>
+                <td>{{ compte_client.rib }}</td>
+                <td>{{ compte_client.mail }}</td>
+                <td>{{ compte_client.tel }}</td>
+                <td>{{ compte_client.solde }}</td>
+                <td>
+                    <a href="{{ path('app_compte_client_show', {'id': compte_client.id}) }}">show</a>
+                    <a href="{{ path('app_compte_client_edit', {'id': compte_client.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_compte_client_new') }}">Create new</a>
+    </div>
+{% endblock %}
