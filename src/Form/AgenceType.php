@@ -31,7 +31,7 @@ class AgenceType extends AbstractType
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length([
-                        'min' => 3,
+                        'min' => 8,
                     ]),
                 ],
             ]);
