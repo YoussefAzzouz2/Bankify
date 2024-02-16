@@ -1,0 +1,43 @@
+{% extends 'backbase.html.twig' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+<style>
+    .table-container {
+        margin: 0 auto;
+    }
+
+    .cell {
+        padding: 40px;
+        text-align: center;
+    }
+
+    .link {
+        font-size: 26px;
+        text-align: center;
+    }
+</style>
+
+<h1 style="padding-left: 10px;">Que voulez-vous consulter...</h1>
+
+<div class="table-container">
+    <table>
+        <tr>
+            <td class="cell">
+                <img src="https://cdn.pixabay.com/photo/2016/08/19/20/37/time-1606153_1280.png" alt="En attente" width="300px">
+            </td>
+            <td class="cell">
+                <img src="https://cdn.pixabay.com/photo/2020/12/17/22/32/music-5840715_1280.png" alt="En cours" width="300px">
+            </td>
+            <td class="cell">
+                <img src="https://cdn.pixabay.com/photo/2021/05/04/18/17/right-6229376_1280.png" alt="Payés" width="300px">
+            </td>
+        </tr>
+        <tr>
+            <td class="link"><a href="{{ path('credits_demandes') }}">En attente</a></td>
+            <td class="link"><a href="{{ path('credit_accepted') }}">En cours</a></td>
+            <td class="link"><a href="{{ path('credits_payes') }}">Payés</a></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

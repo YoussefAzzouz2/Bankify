@@ -1,0 +1,42 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <a href="{{ path('credit_index') }}">Back</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Id Client</th>
+                <th style="text-align: center;">Id Credit</th>
+                <th style="text-align: center;">Montant Totale</th>
+                <th style="text-align: center;">Interet</th>
+                <th style="text-align: center;">Date Creation</th>
+                <th style="text-align: center;">Date Paiement</th>
+                <th style="text-align: center;">Duree Totale</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for credit in credits %}
+            <tr>
+                <td style="text-align: center;">id_client</td>
+                <td style="text-align: center;">{{ credit.id }}</td>
+                <td style="text-align: center;">{{ credit.montantTotale }}</td>
+                <td style="text-align: center;">{{ credit.interet }}</td>
+                <td style="text-align: center;">{{ credit.dateC ? credit.dateC|date('Y-m-d') : '' }}</td>
+                <td style="text-align: center;">date_dernier_remboursement</td>
+                <td style="text-align: center;">{{ credit.dureeTotale }}</td>
+                <td style="text-align: center;">
+                    <a href="{{ path('credit_delete', {'id': credit.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8" style="text-align: center;">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

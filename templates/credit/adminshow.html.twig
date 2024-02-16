@@ -1,0 +1,50 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<div style="padding: 10px;">
+    <h1>Credit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id Client</th>
+                <td>id_client</td>
+            </tr>
+            <tr>
+                <th>Id Credit</th>
+                <td>{{ credit.id }}</td>
+            </tr>
+            <tr>
+                <th>Montant Totale</th>
+                <td>{{ credit.montantTotale }}</td>
+            </tr>
+            <tr>
+                <th>Montant Restante</th>
+                <td>dernier_remboursement</td>
+            </tr>
+            <tr>
+                <th>Interét</th>
+                <td>{{ credit.interet }}</td>
+            </tr>
+            <tr>
+                <th>Date Creation</th>
+                <td>{{ credit.dateC ? credit.dateC|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree Totale</th>
+                <td>{{ credit.dureeTotale }}</td>
+            </tr>
+            <tr>
+                <th>Duree Restante</th>
+                <td>dernier_remboursement</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('credit_accepted') }}">back</a>
+    <br>
+    <a href="#">Suivre Remboursements</a>
+</div>
+{% endblock %}
