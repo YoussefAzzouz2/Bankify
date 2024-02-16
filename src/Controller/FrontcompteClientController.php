@@ -34,7 +34,7 @@ class FrontcompteClientController extends AbstractController
             $entityManager->persist($compteClient);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_frontcompte_client_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('frontcompte_client/new.html.twig', [
@@ -42,10 +42,10 @@ class FrontcompteClientController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[Route('/{id}', name: 'app_frontcompte_client_show', methods: ['GET'])]    
     public function show(CompteClient $compteClient): Response
 {
-    dump($compteClient); // Check if the entity is correctly fetched
+    // Check if the entity is correctly fetched
     return $this->render('frontcompte_client/show.html.twig', [
         'compte_client' => $compteClient,
     ]);
@@ -61,7 +61,8 @@ class FrontcompteClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_frontcompte_client_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
+
         }
 
         return $this->renderForm('frontcompte_client/edit.html.twig', [
@@ -78,6 +79,6 @@ class FrontcompteClientController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_frontcompte_client_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
     }
 }

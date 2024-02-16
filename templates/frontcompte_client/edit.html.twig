@@ -3,11 +3,11 @@
 {% block title %}<title>Edit CompteClient</title>{% endblock %}
 
 {% block content %}
-    <h1>Edit CompteClient</h1>
+    <h1 style="text-align:center;color:white">Edit CompteClient</h1>
 
     {{ include('frontcompte_client/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_frontcompte_client_index') }}">back to list</a>
+<a href="{{ path('app_frontcompte_client') }}" class="btn btn-primary" style="width: 150px; display: block; margin: 0 auto;">Back to List</a>
 
     {{ include('frontcompte_client/_delete_form.html.twig') }}
 {% endblock %}
