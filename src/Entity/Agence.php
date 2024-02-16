@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\AgenceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
+ //use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: AgenceRepository::class)]
 class Agence
@@ -22,6 +24,14 @@ class Agence
 
     #[ORM\Column(length: 255)]
     private ?string $tel_agence = null;
+
+    #[ORM\OneToMany(targetEntity: Assurance::class, mappedBy: 'agence')]
+    private Collection $id_agence;
+
+    public function __construct()
+    {
+        $this->id_agence = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,6 +70,36 @@ class Agence
     public function setTelAgence(string $tel_agence): static
     {
         $this->tel_agence = $tel_agence;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Assurance>
+     */
+    public function getIdAgence(): Collection
+    {
+        return $this->id_agence;
+    }
+
+    public function addIdAgence(Assurance $idAgence): static
+    {
+        if (!$this->id_agence->contains($idAgence)) {
+            $this->id_agence->add($idAgence);
+            $idAgence->setAgence($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdAgence(Assurance $idAgence): static
+    {
+        if ($this->id_agence->removeElement($idAgence)) {
+            // set the owning side to null (unless already changed)
+            if ($idAgence->getAgence() === $this) {
+                $idAgence->setAgence(null);
+            }
+        }
 
         return $this;
     }

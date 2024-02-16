@@ -29,6 +29,9 @@ class Assurance
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $infoAssurance = null;
 
+    #[ORM\ManyToOne(inversedBy: 'id_agence')]
+    private ?Agence $agence = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +93,18 @@ class Assurance
     public function setInfoAssurance(?string $infoAssurance): static
     {
         $this->infoAssurance = $infoAssurance;
+
+        return $this;
+    }
+
+    public function getAgence(): ?Agence
+    {
+        return $this->agence;
+    }
+
+    public function setAgence(?Agence $agence): static
+    {
+        $this->agence = $agence;
 
         return $this;
     }
