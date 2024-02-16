@@ -42,14 +42,15 @@ class FrontcompteClientController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/{id}', name: 'app_frontcompte_client_show', methods: ['GET'])]    
+    #[Route('/show', name: 'app_frontcompte_client_show', methods: ['GET'])]
     public function show(CompteClient $compteClient): Response
-{
-    // Check if the entity is correctly fetched
-    return $this->render('frontcompte_client/show.html.twig', [
-        'compte_client' => $compteClient,
-    ]);
-}
+    {
+        // Check if the entity is correctly fetched
+        return $this->render('frontcompte_client/show.html.twig', [
+            'compte_client' => $compteClient,
+        ]);
+    }
+    
 
 
     #[Route('/{id}/edit', name: 'app_frontcompte_client_edit', methods: ['GET', 'POST'])]
