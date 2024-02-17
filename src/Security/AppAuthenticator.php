@@ -15,6 +15,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordC
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use App\Entity\User;
 
 class AppAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -46,6 +47,9 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
+        }
+        if ($token->getUser()->isAdmin()) {
+            return new RedirectResponse($this->urlGenerator->generate('app_user_index'));
         }
 
         // For example:

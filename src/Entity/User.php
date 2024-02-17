@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -178,5 +180,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->dateNaissance = $dateNaissance;
 
         return $this;
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array(self::ROLE_ADMIN, $this->getRoles());
     }
 }
