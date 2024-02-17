@@ -15,6 +15,20 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
+    #[Route('/user', name: 'app_user')]
+    public function index2(): Response
+    {
+        $this->denyAccessUnlessGranted("IS_AUTHENTICATED_FULLY");
+
+        /** @var User $user */
+        $user = $this->getUser();
+
+        return match ($user->isVerified()) {
+            true => $this->render("homepage/homepage.html.twig"),
+            false => $this->render("user/please-verify-email.html.twig"),
+        };
+    }
+
     #[Route('/userslist', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {

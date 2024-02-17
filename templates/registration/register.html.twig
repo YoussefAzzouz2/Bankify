@@ -51,7 +51,11 @@
 		}
 	</style>
 
+
 	<div class="form-container " style="margin-top:100px">
+		{% for flash_error in app.flashes('verify_email_error') %}
+			<div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+		{% endfor %}
 		<h2>Register</h2>
 
 
@@ -92,5 +96,7 @@
 
 		<button type="submit" class="btn btn-primary">Register</button>
 		{{ form_end(registrationForm) }}
+		<p>do you already have an email?<a href="{{ path('app_login') }}">click here login</a>
+		</p>
 	</div>
 {% endblock %}

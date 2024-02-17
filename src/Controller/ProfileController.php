@@ -73,4 +73,28 @@ class ProfileController extends AbstractController
 
         return $this->redirectToRoute('app_landinpage');
     }
+
+
+
+    #[Route('/confirm-email/{email}', name: 'confirm_email')]
+    public function confirmEmail($email, Request $request, EntityManagerInterface $em): Response
+    {
+        $repo = $em->getRepository(User::class);
+        $utilisateur = $repo->findOneBy(['email' => $email]);
+        // If the user is found, update the 'verifi' field
+        if ($utilisateur instanceof User) {
+            $utilisateur->setIsVerified(1);
+
+            // Persist the changes to the database
+            $em->flush();
+
+            // TODO: Redirect to a success page or perform other actions
+            return $this->render('blank.html.twig');
+        }
+
+
+
+        // TODO: Redirect to an error page or perform other actions
+        return $this->render('blank.html.twig');
+    }
 }

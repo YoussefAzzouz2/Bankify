@@ -30,24 +30,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\Length(min: 10, minMessage: "Votre mot de passe ne contient pas {{ limit }} caractères.")]
-    #[Assert\NotBlank(message: "Password is required")]
+    #[Assert\Length(min: 6, minMessage: "Votre mot de passe ne contient pas {{ limit }} caractères.")]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "Nom is required")]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-
+    #[Assert\NotBlank(message: "Prenom is required")]
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-
     private ?string $genre = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-
     private ?\DateTimeInterface $dateNaissance = null;
 
     public function getId(): ?int
@@ -117,7 +117,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->password = null;
+        // $this->plainPassword = null;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 
     public function getNom(): ?string

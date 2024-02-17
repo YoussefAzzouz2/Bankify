@@ -82,5 +82,11 @@
 
 			<button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
 		</form>
+		<p>did you forgot your password?
+			<a href="{{ path('app_forgot_password_request') }}">click here to reset.</a>
+		</p>
+		<p>you don't have an account?
+			<a href="{{ path('app_register') }}">click here to register</a>
+		</p>
 	</div>
 {% endblock %}
