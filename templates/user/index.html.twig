@@ -55,6 +55,7 @@
 					<th>Prenom</th>
 					<th>Date de Naissance</th>
 					<th>Genre</th>
+					<th>Status</th>
 					<th>actions</th>
 				</tr>
 			</thead>
@@ -70,9 +71,12 @@
 							<td>{{ user.dateNaissance ? user.dateNaissance|date('Y-m-d') }}</td>
 
 							<td>{{ user.genre }}</td>
+							<td>{{ user.isActive ? 'Active' : 'Inactive' }}</td>
 							<td>
-								<a href="{{ path('app_user_show', {'id': user.id}) }}" class="button2">show</a>
-								<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="button2">edit</a>
+								<a href="{{ path('app_user_show', {'id': user.id}) }}" class="button2">Show</a>
+								<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="button2">Edit</a>
+								<a href="{{ path('admin_user_activate', {'id': user.id}) }}" class="button2">Activate</a>
+								<a href="{{ path('admin_user_deactivate', {'id': user.id}) }}" style="background-color:red" class="button2">Deactivate</a>
 							</td>
 						</tr>
 						{% set i = i + 1 %}
