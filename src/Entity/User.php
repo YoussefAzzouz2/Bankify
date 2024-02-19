@@ -56,10 +56,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column]
     private ?bool $isActive = True;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $authCode = null;
 
 
+=======
+>>>>>>> 7984e53e2c46ca795c04c321f78f8b9fd0ac243b
     public function getId(): ?int
     {
         return $this->id;
@@ -206,6 +209,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function isEmailAuthEnabled(): bool
     {
@@ -250,4 +254,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         $this->authCode = $authCode;
     }
+=======
+>>>>>>> 7984e53e2c46ca795c04c321f78f8b9fd0ac243b
 }
