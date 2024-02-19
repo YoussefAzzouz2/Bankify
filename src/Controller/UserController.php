@@ -12,9 +12,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Doctrine\Persistence\ManagerRegistry;
+
 
 class UserController extends AbstractController
 {
+    private $doctrine;
+
+    public function __construct(ManagerRegistry $doctrine)
+    {
+        $this->doctrine = $doctrine;
+    }
+
     #[Route('/user', name: 'app_user')]
     public function index2(): Response
     {
@@ -107,5 +116,25 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/admin/user/{id}/activate', name: 'admin_user_activate')]
+    public function activateUser(Request $request, User $user): Response
+    {
+        $user->setIsActive(true);
+        $this->doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('app_user_index');
+    }
+
+
+    #[Route('/admin/user/{id}/deactivate', name: 'admin_user_deactivate')]
+    public function deactivateUser(Request $request, User $user): Response
+    {
+        $user->setIsActive(false);
+        $this->doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('app_user_index');
     }
 }
