@@ -108,4 +108,8 @@ class Assurance
 
         return $this;
     }
+    public static function findDistinctTypes(AssuranceRepository $repository): array
+    {
+        return $repository->findDistinctTypes();
+    }
 }
