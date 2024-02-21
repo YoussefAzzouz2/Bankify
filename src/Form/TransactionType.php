@@ -18,10 +18,7 @@ class TransactionType extends AbstractType
             ->add('Date_T')
             ->add('Type_T')
             ->add('Statut_T')
-            ->add('id_C', EntityType::class, [
-                'class' => Carte::class,
-'choice_label' => 'id',
-            ])
+            
         ;
     }
 

@@ -34,6 +34,9 @@ class Carte
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'id_C')]
     private Collection $transactions;
 
+    #[ORM\ManyToOne(inversedBy: 'cartes')]
+    private ?CompteClient $account = null;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
@@ -118,6 +121,18 @@ class Carte
                 $transaction->setIdC(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAccount(): ?CompteClient
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?CompteClient $account): static
+    {
+        $this->account = $account;
 
         return $this;
     }

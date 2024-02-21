@@ -22,6 +22,14 @@ class TransactionController extends AbstractController
         ]);
     }
 
+    #[Route('/indexback', name: 'app_transaction_indexback', methods: ['GET'])]
+    public function indexback(TransactionRepository $transactionRepository): Response
+    {
+        return $this->render('transaction/indexback.html.twig', [
+            'transactions' => $transactionRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_transaction_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

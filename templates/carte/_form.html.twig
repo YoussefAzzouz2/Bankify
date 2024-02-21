@@ -1,4 +1,27 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="form-group">
+        {{ form_label(form.Num_C) }}
+        {{ form_widget(form.Num_C, {'attr': {'class': 'form-control'}}) }}
+    </div>
+<div class="form-group">
+        {{ form_label(form.Date_Exp) }}
+        {{ form_widget(form.Date_Exp, {'attr': {'class': 'form-control'}}) }}
+    </div>
+<div class="form-group">
+        {{ form_label(form.Type_C) }}
+        {{ form_widget(form.Type_C, {'attr': {'class': 'form-control'}}) }}
+    </div>
+<div class="form-group">
+        {{ form_label(form.Statut_C) }}
+        {{ form_widget(form.Statut_C, {'attr': {'class': 'form-control'}}) }}
+    </div>
+<div class="form-group">
+        {{ form_label(form.account) }}
+        {{ form_widget(form.account, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+
+<button class="btn">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}

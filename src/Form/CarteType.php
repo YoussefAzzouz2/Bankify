@@ -6,6 +6,8 @@ use App\Entity\Carte;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use App\Entity\CompteClient;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CarteType extends AbstractType
 {
@@ -16,6 +18,10 @@ class CarteType extends AbstractType
             ->add('Date_Exp')
             ->add('Type_C')
             ->add('Statut_C')
+            ->add('account', EntityType::class, [
+                'class' => CompteClient::class,
+'choice_label' => 'id',
+            ])
         ;
     }
 

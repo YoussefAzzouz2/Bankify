@@ -3,9 +3,13 @@
 {% block title %}<title>New Carte</title>{% endblock %}
 
 {% block content %}
-    <h1>Create new Carte</h1>
+    <div style="display: flex; justify-content: center;">
+        <div>
+            <h1>Create new Carte</h1>
 
-    {{ include('carte/_form.html.twig') }}
+            {{ include('carte/_form.html.twig') }}
 
-    <a href="{{ path('app_carte_index') }}">back to list</a>
+            <a href="{{ path('app_carte_index') }}">back to list</a>
+        </div>
+    </div>
 {% endblock %}
