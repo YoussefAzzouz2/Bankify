@@ -3,8 +3,8 @@
 {% block title %}<title>Carte</title>{% endblock %}
 
 {% block section %}
-    <h1>Carte</h1>
-
+    <center><h1>Carte</h1></center>
+    <center>
     <table class="table">
         <tbody>
             <tr>
@@ -29,12 +29,12 @@
             </tr>
         </tbody>
     </table>
+    </center>
+    <center>
 
-    <a href="{{ path('app_carte_index') }}">back to list</a>
 
-    <a href="{{ path('app_carte_edit', {'id': carte.id}) }}">edit</a>
-
-    {{ include('carte/_delete_form.html.twig') }}
+     {{ include('carte/_delete_form.html.twig') }}
+    </center>
 {% endblock %}
 
 {% block sec2 %}

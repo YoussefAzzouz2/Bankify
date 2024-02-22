@@ -13,6 +13,7 @@
                 <th>Date_Expiration</th>
                 <th>Network</th>
                 <th>Statue de la carte</th>
+                <th>Type</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -25,8 +26,13 @@
                 <td>{{ carte.TypeC }}</td>
                 <td>{{ carte.StatutC }}</td>
                 <td>
+                    {% if carte.getType() is not null %}
+                    {{ carte.getType().Type }}
+                    {% endif %}
+                </td>
+                <td>
                     
-                    <a href="{{ path('app_carte_edit', {'id': carte.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_carte_edit', {'id': carte.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,7 +43,7 @@
         </tbody>
     </table>
     </center>
-    <center><a href="{{ path('app_carte_new') }}">Create new</a></center>
+    <center><a class="btn btn-primary" href="{{ path('app_carte_new') }}">Create new</a></center>
 {% endblock %}
 
 

@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Transaction{% endblock %}
 
-{% block body %}
-    <h1>Transaction</h1>
 
+{% block section %}
+    <center><h1>Transaction</h1></center>
+    <center>
     <table class="table">
         <tbody>
             <tr>
@@ -29,10 +29,17 @@
             </tr>
         </tbody>
     </table>
+    </center>
+    <center>
+    <div><a class="btn btn-secondary mt-3" href="{{ path('app_transaction_index') }}">back to list</a></div>
 
-    <a href="{{ path('app_transaction_index') }}">back to list</a>
-
-    <a href="{{ path('app_transaction_edit', {'id': transaction.id}) }}">edit</a>
+    <div><a class="btn btn-secondary mt-3" href="{{ path('app_transaction_edit', {'id': transaction.id}) }}">edit</a></div>
 
     {{ include('transaction/_delete_form.html.twig') }}
+    </center>
+{% endblock %}
+
+{% block sec2 %}
+{% endblock %}
+{% block why %}
 {% endblock %}

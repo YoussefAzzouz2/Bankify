@@ -8,17 +8,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CarteRepository::class)]
+#[UniqueEntity(fields: ['Num_C'], message: "Ce numero existe déjà .")]
 class Carte
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[UniqueEntity(fields: ['Num_C'], message: "Ce numero existe déjà .")]
     private ?int $id = null;
 
-    #[ORM\Column (unique: true)]
+    #[ORM\Column(unique: true)]
     #[Assert\NotBlank(message:"Vous devez saisir un numero")]
     
     private ?int $Num_C = null;
