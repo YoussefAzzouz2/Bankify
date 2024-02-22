@@ -10,9 +10,10 @@
             <tr style="color: white;">
                 <th>Id</th>
                 <th>NomCategorie</th>
-                <th>Description</th>
+                
                 <th>TypeCouverture</th>
                 <th>AgenceResponsable</th>
+                <th>actions</th>
                 
             </tr>
         </thead>
@@ -21,10 +22,15 @@
 <tr>
     <td><span style="color: white;">{{ categorie_assurance.id }}</span></td>
     <td><span style="color: white;">{{ categorie_assurance.nomCategorie }}</span></td>
-    <td><span style="color: white;">{{ categorie_assurance.description }}</span></td>
+    
     <td><span style="color: white;">{{ categorie_assurance.typeCouverture }}</span></td>
     <td><span style="color: white;">{{ categorie_assurance.agenceResponsable }}</span></td>
+    <td>
+        <a href="{{ path('app_front_categorie_show', {'id': categorie_assurance.id}) }}"class="btn btn-primary">show</a>
+        
+    </td>    
 </tr>
+
 
         {% else %}
             <tr>
