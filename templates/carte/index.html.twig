@@ -3,16 +3,16 @@
 {% block title %}<title>Cartes</title>{% endblock %}
 
 {% block content %}
-    <h1>Les cartes </h1>
-
+    <center><h1>Les cartes </h1></center>
+    <center>
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Num_C</th>
-                <th>Date_Exp</th>
-                <th>Type_C</th>
-                <th>Statut_C</th>
+                <th>Numero</th>
+                <th>Date_Expiration</th>
+                <th>Network</th>
+                <th>Statue de la carte</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -36,8 +36,8 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_carte_new') }}">Create new</a>
+    </center>
+    <center><a href="{{ path('app_carte_new') }}">Create new</a></center>
 {% endblock %}
 
 

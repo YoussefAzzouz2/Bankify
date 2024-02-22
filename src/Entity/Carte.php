@@ -15,20 +15,25 @@ class Carte
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[UniqueEntity(fields: ['Num_C'], message: 'Ce numero existe deja')]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Vous devez saisir un numero")]
     private ?int $Num_C = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Vous devez saisir une date")]
     private ?\DateTimeInterface $Date_Exp = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Choice(choices: ['débit', 'crédit','prépayée'])]
+    #[Assert\NotBlank(message:"Vous devez saisir un network")]
+    #[Assert\Choice(choices: ['visa', 'mastercard'], message: "Les networeks valides sont visa et mastercard.")]
     private ?string $Type_C = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Choice(choices: ['active', 'bloquée','expirée'])]
+    #[Assert\NotBlank(message:"Vous devez saisir un statue")]
+    #[Assert\Choice(choices: ['active', 'bloquée','expirée'], message: "Les statues valides sont active, bloquée, expirée.")]
     private ?string $Statut_C = null;
 
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'id_C')]

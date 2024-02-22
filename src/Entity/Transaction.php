@@ -16,17 +16,21 @@ class Transaction
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Vous devez saisir un montant")]
     private ?int $Montant = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank(message:"Vous devez saisir une date")]
     private ?\DateTimeInterface $Date_T = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Choice(choices: ['achat', 'retrait','paiement'])]
+    #[Assert\NotBlank(message:"Vous devez saisir un type")]
+    #[Assert\Choice(choices: ['achat', 'retrait','paiement'], message: "Les types valides sont achat, retrait, paiement.")]
     private ?string $Type_T = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Choice(choices: ['approuvée', 'en attente','refusée'])]
+    #[Assert\NotBlank(message:"Vous devez saisir un statue")]
+    #[Assert\Choice(choices: ['approuvée', 'en attente','refusée'],message: "Les statues valides sont approuvée, en attente,refusée.")]
     private ?string $Statut_T = null;
 
     #[ORM\ManyToOne(inversedBy: 'transactions')]

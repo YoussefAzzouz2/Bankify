@@ -3,11 +3,15 @@
 {% block title %}<title>Edit Carte</title>{% endblock %}
 
 {% block content %}
-    <h1>Edit Carte</h1>
+    <div style="display: flex; justify-content: center;">
+    <div>
+    <h1>Modifier Carte</h1>
 
-    {{ include('carte/_form.html.twig', {'button_label': 'Update'}) }}
+    <center>{{ include('carte/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('app_carte_index') }}">back to list</a>
 
-    {{ include('carte/_delete_form.html.twig') }}
+    {{ include('carte/_delete_form.html.twig') }}</center>
+    </div>
+    </div>
 {% endblock %}
