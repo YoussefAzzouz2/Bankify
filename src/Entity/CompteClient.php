@@ -49,6 +49,10 @@ class CompteClient
     #[ORM\OneToMany(targetEntity: Virement::class, mappedBy: 'id_compte')]
     private Collection $virements;
 
+    #[ORM\ManyToOne(targetEntity: Type::class, inversedBy: 'compteClients')]
+    #[ORM\JoinColumn(name: "type_name", referencedColumnName: "nom_type")]
+    private ?Type $nom_type = null;
+
     public function __construct()
     {
         $this->virements = new ArrayCollection();
@@ -157,6 +161,18 @@ class CompteClient
                 $virement->setIdCompte(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNomType(): ?Type
+    {
+        return $this->nom_type;
+    }
+
+    public function setNomType(?Type $nom_type): static
+    {
+        $this->nom_type = $nom_type;
 
         return $this;
     }

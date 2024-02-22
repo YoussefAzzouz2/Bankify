@@ -62,6 +62,7 @@
                 <th>Mail</th>
                 <th>Tel</th>
                 <th>Solde</th>
+                <th>TypeCompte</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -75,7 +76,12 @@
                 <td>{{ compte_client.mail }}</td>
                 <td>{{ compte_client.tel }}</td>
                 <td>{{ compte_client.solde }}</td>
-                <td>
+<td>
+    {% if compte_client.getNomType() is not null %}
+        {{ compte_client.getNomType().NomType }}
+    {% endif %}
+</td>
+                    <td>
                     <a href="{{ path('app_frontcompte_client_show', {'id': compte_client.id}) }}">show</a>
                     <a href="{{ path('app_frontcompte_client_edit', {'id': compte_client.id}) }}">edit</a>
                 </td>

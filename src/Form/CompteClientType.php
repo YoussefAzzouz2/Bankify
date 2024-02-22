@@ -2,6 +2,8 @@
 
 namespace App\Form;
 
+use App\Entity\Type;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\CompteClient;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +20,11 @@ class CompteClientType extends AbstractType
             ->add('mail')
             ->add('tel')
             ->add('solde')
+            ->add('nom_type', EntityType::class, [
+                'class' => Type::class,
+                'choice_label' => 'nomType',
+                'label' => 'nomType'
+            ])
         ;
     }
 

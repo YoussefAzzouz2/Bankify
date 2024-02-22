@@ -1,6 +1,6 @@
 {% extends 'backbase.html.twig' %}
 
-{% block title %}<title>CompteClient index</title>{% endblock %}
+{% block title %}<title>Type</title>{% endblock %}
 
 {% block content %}
 <style>
@@ -42,53 +42,35 @@
 				background-color: #0056b3; /* Darker blue on hover */
 			}
 		</style>
-<div>
-    <h1>CompteClient</h1>
+    <div>
+    <h1>Type</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Rib</th>
-                <th>Mail</th>
-                <th>Tel</th>
-                <th>Solde</th>
-                 <th>Type</th>
+                <th>NomType</th>
+                <th>Description</th>
                 <th>actions</th>
-                
             </tr>
         </thead>
         <tbody>
-        {% for compte_client in compte_clients %}
+        {% for type in types %}
             <tr>
-                <td>{{ compte_client.id }}</td>
-                <td>{{ compte_client.nom }}</td>
-                <td>{{ compte_client.prenom }}</td>
-                <td>{{ compte_client.rib }}</td>
-                <td>{{ compte_client.mail }}</td>
-                <td>{{ compte_client.tel }}</td>
-                <td>{{ compte_client.solde }}</td>
+                <td>{{ type.nomType }}</td>
+                <td>{{ type.description }}</td>
                 <td>
-    {% if compte_client.getNomType() is not null %}
-        {{ compte_client.getNomType().NomType }}
-    {% endif %}
-</td>
-
-                <td>
-                    <a href="{{ path('app_compte_client_show', {'id': compte_client.id}) }}" class="button2">show</a>
-                    <a href="{{ path('app_compte_client_edit', {'id': compte_client.id}) }}" class="button2">edit</a>
+                    <a href="{{ path('app_type_show', {'nomType': type.nomType}) }}"class="button2">show</a>
+                    <a href="{{ path('app_type_edit', {'nomType': type.nomType}) }}"class="button2">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="3">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_compte_client_new') }}"class="button">Create new</a>
+    <a href="{{ path('app_type_new') }}"class="button">Create new</a>
     </div>
 {% endblock %}
