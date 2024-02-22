@@ -53,6 +53,10 @@ class CompteClient
     #[ORM\JoinColumn(name: "type_name", referencedColumnName: "nom_type")]
     private ?Type $nom_type = null;
 
+    #[ORM\ManyToOne(targetEntity: Pack::class, inversedBy: 'compteClients')]
+    #[ORM\JoinColumn(name: "nom_pack", referencedColumnName: "nom_pack")]
+    private ?Pack $nom_pack = null;
+
     public function __construct()
     {
         $this->virements = new ArrayCollection();
@@ -173,6 +177,18 @@ class CompteClient
     public function setNomType(?Type $nom_type): static
     {
         $this->nom_type = $nom_type;
+
+        return $this;
+    }
+
+    public function getNomPack(): ?Pack
+    {
+        return $this->nom_pack;
+    }
+
+    public function setNomPack(?Pack $nom_pack): static
+    {
+        $this->nom_pack = $nom_pack;
 
         return $this;
     }

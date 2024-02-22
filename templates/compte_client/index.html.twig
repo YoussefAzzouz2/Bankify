@@ -55,7 +55,8 @@
                 <th>Mail</th>
                 <th>Tel</th>
                 <th>Solde</th>
-                 <th>Type</th>
+                <th>Type</th>
+                <th>Pack</th>
                 <th>actions</th>
                 
             </tr>
@@ -71,10 +72,15 @@
                 <td>{{ compte_client.tel }}</td>
                 <td>{{ compte_client.solde }}</td>
                 <td>
-    {% if compte_client.getNomType() is not null %}
-        {{ compte_client.getNomType().NomType }}
-    {% endif %}
-</td>
+                    {% if compte_client.getNomType() is not null %}
+                    {{ compte_client.getNomType().NomType }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if compte_client.getNomPack() is not null %}
+                    {{ compte_client.getNomPack().NomPack }}
+                    {% endif %}
+                </td>
 
                 <td>
                     <a href="{{ path('app_compte_client_show', {'id': compte_client.id}) }}" class="button2">show</a>

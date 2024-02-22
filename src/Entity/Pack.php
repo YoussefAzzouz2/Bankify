@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PackRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,6 +23,17 @@ class Pack
 
     #[ORM\Column(length: 500)]
     private ?string $benefits = null;
+
+    #[ORM\OneToMany(targetEntity: CompteClient::class, mappedBy: 'nom_pack')]
+    private Collection $compteClients;
+
+    #[ORM\Column]
+    private ?int $id = null;
+
+    public function __construct()
+    {
+        $this->compteClients = new ArrayCollection();
+    }
 
     public function getNomPack(): ?string
     {
@@ -66,6 +79,48 @@ class Pack
     public function setBenefits(string $benefits): static
     {
         $this->benefits = $benefits;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CompteClient>
+     */
+    public function getCompteClients(): Collection
+    {
+        return $this->compteClients;
+    }
+
+    public function addCompteClient(CompteClient $compteClient): static
+    {
+        if (!$this->compteClients->contains($compteClient)) {
+            $this->compteClients->add($compteClient);
+            $compteClient->setNomPack($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompteClient(CompteClient $compteClient): static
+    {
+        if ($this->compteClients->removeElement($compteClient)) {
+            // set the owning side to null (unless already changed)
+            if ($compteClient->getNomPack() === $this) {
+                $compteClient->setNomPack(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
 
         return $this;
     }
