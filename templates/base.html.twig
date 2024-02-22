@@ -58,7 +58,7 @@
 					<header class="header_section">
 						<div class="container-fluid">
 							<nav class="navbar navbar-expand-lg custom_nav-container ">
-								<a class="navbar-brand" href="index.html">
+								<a class="navbar-brand" href="{{ path('app_home_page') }}">
 									<span>
 										Bankify
 									</span>
@@ -71,7 +71,7 @@
 								<div class="collapse navbar-collapse" id="navbarSupportedContent">
 									<ul class="navbar-nav  ">
 										<li class="nav-item active">
-											<a class="nav-link" href="index.html">Acceuil
+											 <a class="nav-link" href="{{ path('app_home_page') }}">Acceuil</a>
 												<span class="sr-only">(current)</span>
 											</a>
 										</li>
@@ -91,10 +91,21 @@
 										<li class="nav-item">
 											<a class="nav-link" href="/modifier">
 												<i class="fa fa-user" aria-hidden="true"></i>
-												Mon compte</a>
+												user</a>
 										</li>
-
-										
+<li class="nav-item">
+    <a class="nav-link" href="{{ path('app_frontcompte_client') }}">Mon Espace</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ path('app_front_pack') }}">Nos Pack</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ path('app_front_type') }}">Nos Type</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ path('app_virement_index') }}">Virement</a>
+</li>
+										<!-- ********************************************************************************* -->
 									</ul>
 								</div>
 							</nav>
