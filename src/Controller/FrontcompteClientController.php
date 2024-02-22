@@ -42,7 +42,7 @@ class FrontcompteClientController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/show', name: 'app_frontcompte_client_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'app_frontcompte_client_show', methods: ['GET'])]
     public function show(CompteClient $compteClient): Response
     {
         // Check if the entity is correctly fetched
