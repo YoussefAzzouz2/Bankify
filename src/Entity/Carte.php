@@ -15,11 +15,12 @@ class Carte
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[UniqueEntity(fields: ['Num_C'], message: 'Ce numero existe deja')]
+    #[UniqueEntity(fields: ['Num_C'], message: "Ce numero existe déjà .")]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column (unique: true)]
     #[Assert\NotBlank(message:"Vous devez saisir un numero")]
+    
     private ?int $Num_C = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -41,6 +42,9 @@ class Carte
 
     #[ORM\ManyToOne(inversedBy: 'cartes')]
     private ?CompteClient $account = null;
+
+    #[ORM\ManyToOne(inversedBy: 'cartes')]
+    private ?Type $type = null;
 
     public function __construct()
     {
@@ -138,6 +142,18 @@ class Carte
     public function setAccount(?CompteClient $account): static
     {
         $this->account = $account;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }

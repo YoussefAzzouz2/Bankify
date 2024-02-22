@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Entity\CompteClient;
 
 #[Route('/carte')]
 class CarteController extends AbstractController
@@ -20,6 +21,23 @@ class CarteController extends AbstractController
         return $this->render('carte/index.html.twig', [
             'cartes' => $carteRepository->findAll(),
         ]);
+    }
+
+    #[Route('/{id}/cartes', name: 'carte_index_for_compte', methods: ['GET'])]
+    public function indexForCompte(CompteClient $compte, CarteRepository $carteRepository): Response
+    {
+    // Récupérer le compte client spécifique
+    $compte = $this->getDoctrine()->getRepository(CompteClient::class)->find($compte);
+
+    // Récupérer les cartes associées à ce compte client spécifique
+    $cartes = $carteRepository->findBy(['account' => $compte]);
+
+    // Rendre la vue avec les informations sur les cartes et le compte client
+    return $this->render('carte/indexfront.html.twig', [
+        'compte' => $compte,
+        'cartes' => $cartes,
+    ]);
+
     }
 
     #[Route('/new', name: 'app_carte_new', methods: ['GET', 'POST'])]
