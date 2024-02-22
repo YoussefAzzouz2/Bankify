@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td style="padding: 5px; display: flex;">
-                {{ form_label(form.interet,"Interét") }}
+                {{ form_label(form.interet,"Interét et durée") }}
             </td>
             <td style="padding: 5px;">
                 {{ form_widget(form.interet) }}
@@ -31,13 +31,13 @@
         </tr>
         <tr>
             <td style="padding: 5px;">
-                {{ form_label(form.dureeTotale,"Durée de crédit") }}
+                {{ form_label(form.categorie,"Catégorie du crédit") }}
             </td>
             <td style="padding: 5px;">
-                {{ form_widget(form.dureeTotale) }}
+                {{ form_widget(form.categorie) }}
             </td>
             <td style="padding: 5px;">
-                {{ form_errors(form.dureeTotale) }}
+                {{ form_errors(form.categorie) }}
             </td>
         </tr>
     </table>

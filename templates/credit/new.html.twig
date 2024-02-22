@@ -10,6 +10,12 @@
     }
 </style>
 
+{% for message in app.flashes('danger') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+
 <section class="slider_section ">
     <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -39,7 +45,30 @@
     </div>
 </section>
 {% endblock %}
-{% block section %}{% endblock %}
+{% block section %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Categorie</th>
+            <th>Nom</th>
+            <th>Montant Minimale</th>
+            <th>Montant Maximal</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for categorie_credit in categories %}
+        <tr>
+            <td>{{ categorie_credit.id }}</td>
+            <td>{{ categorie_credit.nom }}</td>
+            <td>{{ categorie_credit.minMontant }}</td>
+            <td>{{ categorie_credit.maxMontant }}</td>
+        </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+{% endblock %}
 {% block sec2 %}{% endblock %}
 {% block why %}{% endblock %}
 {% block info %}{% endblock %}

@@ -1,8 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Remboursement{% endblock %}
+{% block title %}{% endblock %}
 
-{% block body %}
+{% block content %}
+<section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <div class="detail-box">
+                                <h1>
+                                    Vous pouvez ici voir tous informations concernant un remboursement
+
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="img-box">
+                                <img src="{{asset('front/images/slider-img.png')}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <ol class="carousel-indicators">
+            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+            
+        </ol>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block section %}
+    <a href="{{ path('remboursement_index',{'id':remboursement.credit.id}) }}">back to list</a>
     <h1>Remboursement</h1>
 
     <table class="table">
@@ -29,10 +64,7 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_remboursement_index') }}">back to list</a>
-
-    <a href="{{ path('app_remboursement_edit', {'id': remboursement.id}) }}">edit</a>
-
-    {{ include('remboursement/_delete_form.html.twig') }}
 {% endblock %}
+{% block sec2 %}{% endblock %}
+{% block why %}{% endblock %}
+{% block info %}{% endblock %}

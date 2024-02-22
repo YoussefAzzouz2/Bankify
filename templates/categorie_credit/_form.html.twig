@@ -1,0 +1,41 @@
+{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+
+<table>
+    <tr>
+        <td style="padding: 5px;">
+            {{ form_label(form.nom,"Nom") }}
+        </td>
+        <td style="padding: 5px;">
+            {{ form_widget(form.nom) }}
+        </td>
+        <td style="padding: 5px;">
+            {{ form_errors(form.nom) }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 5px; display: flex;">
+            {{ form_label(form.minMontant,"Montant Minimale") }}
+        </td>
+        <td style="padding: 5px;">
+            {{ form_widget(form.minMontant) }}
+        </td>
+        <td style="padding: 5px;">
+            {{ form_errors(form.minMontant) }}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 5px;">
+            {{ form_label(form.maxMontant,"Montant Maximal") }}
+        </td>
+        <td style="padding: 5px;">
+            {{ form_widget(form.maxMontant) }}
+        </td>
+        <td style="padding: 5px;">
+            {{ form_errors(form.maxMontant) }}
+        </td>
+    </tr>
+</table>
+<br>
+{{ form_widget(form.save) }}
+
+{{ form_end(form) }}

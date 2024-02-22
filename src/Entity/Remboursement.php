@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\RemboursementRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RemboursementRepository::class)]
@@ -15,6 +16,8 @@ class Remboursement
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Vous devez saisir un montant")]
+    #[Assert\Positive(message:"Vous devez saisir un montant positive")]
     private ?float $montantR = null;
 
     #[ORM\Column]

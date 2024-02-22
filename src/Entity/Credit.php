@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CreditRepository::class)]
 class Credit
@@ -21,10 +22,7 @@ class Credit
     #[ORM\Column]
     #[Assert\NotBlank(message:"Vous devez saisir un montant")]
     #[Assert\Positive(message:"Vous devez saisir un montant positive")]
-    #[Assert\Expression("(this.getInteret() == 10 and this.getMontantTotale() >= 50000.0) or
-    (this.getInteret() == 15 and (this.getMontantTotale() >= 10000.0 and this.getMontantTotale() <= 49999.0)) or
-    (this.getInteret() == 20 and (this.getMontantTotale() >= 2000.0 and this.getMontantTotale() <= 9999.0))"
-    ,message: 'Le montant total doit être valide en fonction de l\'intérêt.')]
+    #[Assert\Expression("this.getMontantTotale() > this.getCategorie().getMinMontant() && this.getMontantTotale() < this.getCategorie().getMaxMontant()",message:"Vous devez respecter l'intervale du montant.")]
     private ?float $montantTotale = null;
 
     #[ORM\Column]
@@ -35,7 +33,6 @@ class Credit
     private ?\DateTimeInterface $dateC = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"Vous devez choisir une durée")]
     private ?int $dureeTotale = null;
 
     #[ORM\Column]
@@ -46,6 +43,15 @@ class Credit
 
     #[ORM\OneToMany(targetEntity: Remboursement::class, mappedBy: 'credit', orphanRemoval: true)]
     private Collection $remboursements;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Compte $compte = null;
+
+    #[ORM\ManyToOne(inversedBy: 'credits')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:"Vous devez choisir une catégorie")]
+    private ?CategorieCredit $categorie = null;
 
     public function __construct()
     {
@@ -173,5 +179,35 @@ class Credit
                     ->addViolation();
             }
         }
+    }
+
+    public function __toString(): string
+    {
+        // Retourner une représentation de l'entité sous forme de chaîne
+        return 'Credit #' . $this->id; // Vous pouvez personnaliser cette représentation selon vos besoins
+    }
+
+    public function getCompte(): ?Compte
+    {
+        return $this->compte;
+    }
+
+    public function setCompte(Compte $compte): static
+    {
+        $this->compte = $compte;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?CategorieCredit
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?CategorieCredit $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }

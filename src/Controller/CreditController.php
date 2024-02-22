@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Credit;
 use App\Form\CreditType;
+use App\Repository\CompteRepository;
 use App\Repository\CreditRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\Constraint\IsEmpty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use App\Repository\CategorieCreditRepository;
 
 #[Route('/credit')]
 class CreditController extends AbstractController
@@ -45,9 +48,10 @@ class CreditController extends AbstractController
     }
 
     #[Route('/new', name: 'credit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,CategorieCreditRepository $categorieCreditRepository,CompteRepository $compteRepository,CreditRepository $creditRepository): Response
     {
         $credit = new Credit();
+        $categories = $categorieCreditRepository->findAll();
         $form = $this->createForm(CreditType::class, $credit);
         $form->handleRequest($request);
 
@@ -57,6 +61,20 @@ class CreditController extends AbstractController
             $credit->setDateC(new \DateTime());
             $montant = $credit->getMontantTotale() + ($credit->getMontantTotale() * ($credit->getInteret() / 100));
             $credit->setMontantTotale($montant);
+            $comptes = $compteRepository->findById(4);//apres integration la commande devient $this->security->getUser()->getCompte();
+            $compte = $comptes[0];
+            $credit->setCompte($compte);
+            $interet = $form->get('interet')->getData();
+            if($interet==10)
+                $credit->setDureeTotale(36);
+            if($interet==15)
+                $credit->setDureeTotale(48);
+            if($interet==20)
+                $credit->setDureeTotale(60);
+            if(count($creditRepository->findBy(['compte'=>$compte]))>0){
+                $this->addFlash('danger', 'Ce compte a déjà un crédit');
+                return $this->redirectToRoute('credit_new');
+            }
             $entityManager->persist($credit);
             $entityManager->flush();
 
@@ -66,6 +84,7 @@ class CreditController extends AbstractController
         return $this->render('credit/new.html.twig', [
             'credit' => $credit,
             'form' => $form,
+            'categories' => $categories,
         ]);
     }
 

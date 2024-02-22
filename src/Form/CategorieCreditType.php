@@ -2,28 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\Credit;
-use App\Entity\Remboursement;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\CategorieCredit;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RemboursementType extends AbstractType
+class CategorieCreditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('montantR')
-            ->add('save',SubmitType::class,['label' => 'Payer'])
+            ->add('nom')
+            ->add('minMontant')
+            ->add('maxMontant')
+            ->add('save',SubmitType::class,['label' => 'Enregistrer la categorie'])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Remboursement::class,
+            'data_class' => CategorieCredit::class,
         ]);
     }
 }

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<section class="slider_section ">
+    <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="container ">
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <div class="detail-box">
+                                <h1>
+                                    Vous pouvez ici suivre les remboursements de votre crédit
+                                </h1>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="img-box">
+                                <img src="{{asset('front/images/slider-img.png')}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <ol class="carousel-indicators">
+            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+            
+        </ol>
+    </div>
+
+</section>
+{% endblock %}
+
+{% block section %}
+<a href="#">Back</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">Id Remboursement</th>
+                <th style="text-align: center;">Montant Remboursé</th>
+                <th style="text-align: center;">Montant Restant</th>
+                <th style="text-align: center;">Date Remboursement</th>
+                <th style="text-align: center;">Duree Restante</th>
+                <th style="text-align: center;">actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for remboursement in remboursements %}
+            <tr>
+                <td style="text-align: center;">{{ remboursement.id }}</td>
+                <td style="text-align: center;">{{ remboursement.montantR }}</td>
+                <td style="text-align: center;">{{ remboursement.montantRestant }}</td>
+                <td style="text-align: center;">{{ remboursement.dateR ? remboursement.dateR|date('Y-m-d') : '' }}</td>
+                <td style="text-align: center;">{{ remboursement.dureeRestante }}</td>
+                <td style="text-align: center;">
+                    <a href="{{ path('remboursement_show', {'id': remboursement.id}) }}">Plus d'informations</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6" style="text-align: center;">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block sec2 %}{% endblock %}
+{% block why %}{% endblock %}
+{% block info %}{% endblock %}
