@@ -81,6 +81,22 @@
                 <th>Solde</th>
                 <td>{{ compte_client.solde }}</td>
             </tr>
+			 <tr>
+                <th>Type</th>
+                <td>
+                {% if compte_client.getNomType() is not null %}
+                    {{ compte_client.getNomType().NomType }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Pack</th>
+                <td>
+                 {% if compte_client.getNomPack() is not null %}
+                    {{ compte_client.getNomPack().NomPack }}
+                    {% endif %}
+                </td>
+             </tr>
         </tbody>
     </table>
 

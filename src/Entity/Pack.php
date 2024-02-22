@@ -7,21 +7,28 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PackRepository::class)]
 class Pack
 {
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le nom du pack ne peut pas être vide')]
+    #[Assert\Type(type: 'alpha', message: 'Le nom du pack doit être alphabétique')]
     private ?string $nom_pack = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(max: 500, maxMessage: 'La description ne peut pas dépasser {{ limit }} caractères')]
     private ?string $Description = null;
 
-    #[ORM\Column(type: 'string', length: 255)] // Modification du type en string
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: 'Le prix ne peut pas être vide')]
     private ?string $price = null;
 
     #[ORM\Column(length: 500)]
+    #[Assert\Length(max: 500, maxMessage: 'Les avantages ne peuvent pas dépasser {{ limit }} caractères')]
+    #[Assert\NotBlank(message: 'Les avantages ne peuvent pas être vides')]
     private ?string $benefits = null;
 
     #[ORM\OneToMany(targetEntity: CompteClient::class, mappedBy: 'nom_pack')]
@@ -59,12 +66,12 @@ class Pack
         return $this;
     }
 
-    public function getPrice(): ?string // Modification du type de retour en string
+    public function getPrice(): ?string
     {
         return $this->price;
     }
 
-    public function setPrice(string $price): static // Modification du type de l'argument en string
+    public function setPrice(string $price): static
     {
         $this->price = $price;
 

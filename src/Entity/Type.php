@@ -6,15 +6,24 @@ use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
 {
     #[ORM\Id]
     #[ORM\Column(name: "nom_type", type: "string", length: 255)]
+    #[Assert\NotBlank(message: 'Le nom du type ne peut pas être vide')]
+    #[Assert\Length(max: 255, maxMessage: 'Le nom du type ne peut pas dépasser {{ limit }} caractères')]
+    #[Assert\Regex(
+        pattern: '/^[a-zA-Z]+$/',
+        message: 'Le nom du type ne peut contenir que des lettres.'
+    )]
     private ?string $nomType = null;
 
     #[ORM\Column(length: 500)]
+    #[Assert\NotBlank(message: 'La description ne peut pas être vide')]
+    #[Assert\Length(max: 500, maxMessage: 'La description ne peut pas dépasser {{ limit }} caractères')]
     private ?string $description = null;
 
     #[ORM\OneToMany(targetEntity: CompteClient::class, mappedBy: 'nom_type')]
