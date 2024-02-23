@@ -54,7 +54,7 @@
 					<header
 						class="main-header">
 						<!-- Logo -->
-						<a href="index2.html" class="logo">
+						<a href="#" class="logo">
 							<b>Admin</b>LTE</a>
 						<!-- Header Navbar: style can be found in header.less -->
 						<nav
@@ -361,20 +361,20 @@
 						<!-- sidebar menu: : style can be found in sidebar.less -->
 						<ul class="sidebar-menu">
 							<li class="header">MAIN NAVIGATION</li>
-							<li class="active treeview">
+							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-dashboard"></i>
 									<span>Gestion des cartes</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li class="active">
-										<a href="index.html">
+									<li class="fa fa-circle-o">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Cartes</a>
 									</li>
 									<li>
-										<a href="index2.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Transactions</a>
 									</li>
@@ -389,12 +389,12 @@
 								</a>
 								<ul class="treeview-menu">
 									<li>
-										<a href="pages/tables/simple.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Compte</a>
 									</li>
 									<li>
-										<a href="pages/tables/data.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Virement</a>
 									</li>
@@ -402,7 +402,7 @@
 							</li>
 
 
-							<li class="treeview">
+							<li class="active treeview">
 								<a href="#">
 									<i class="fa fa-pie-chart"></i>
 									<span>Gestion des crédits</span>
@@ -410,14 +410,14 @@
 								</a>
 								<ul class="treeview-menu">
 									<li>
-										<a href="pages/charts/morris.html">
-											<i class="fa fa-circle-o"></i>
+										<a href="{{path('credit_index')}}">
+											<i class="active"></i>
 											Crédits</a>
 									</li>
 									<li>
-										<a href="pages/charts/flot.html">
+										<a href="{{path('categorie_index')}}">
 											<i class="fa fa-circle-o"></i>
-											Remboursement</a>
+											Catégories</a>
 									</li>
 								</ul>
 							</li>
@@ -430,12 +430,12 @@
 								</a>
 								<ul class="treeview-menu">
 									<li>
-										<a href="pages/UI/general.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Chèques</a>
 									</li>
 									<li>
-										<a href="pages/UI/icons.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Encaissement</a>
 									</li>
@@ -450,12 +450,12 @@
 								</a>
 								<ul class="treeview-menu">
 									<li>
-										<a href="pages/forms/general.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Agences</a>
 									</li>
 									<li>
-										<a href="pages/forms/advanced.html">
+										<a href="#">
 											<i class="fa fa-circle-o"></i>
 											Assurances</a>
 									</li>
@@ -1032,15 +1032,6 @@
 				{% endblock %}
 
 			</div>
-			<footer class="main-footer">
-				<div class="pull-right hidden-xs">
-					<b>Version</b>
-					2.0
-				</div>
-				<strong>Copyright &copy; 2014-2015
-					<a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong>
-				All rights reserved.
-			</footer>
 			<!-- ./wrapper -->
 			{% block js %}
 				<!-- jQuery 2.1.3 -->

@@ -7,7 +7,6 @@ use App\Form\CreditType;
 use App\Repository\CompteRepository;
 use App\Repository\CreditRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use PHPUnit\Framework\Constraint\IsEmpty;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +16,18 @@ use App\Repository\CategorieCreditRepository;
 #[Route('/credit')]
 class CreditController extends AbstractController
 {
+    #[Route('/client', name: 'credit_home')]
+    public function home(): Response
+    {
+        return $this->render('credit/home.html.twig');
+    }
+
+    #[Route('/admin', name: 'credit_admin')]
+    public function admin(): Response
+    {
+        return $this->render('credit/home.html.twig');
+    }
+
     #[Route('/', name: 'credit_index')]
     public function index(): Response
     {
@@ -78,7 +89,7 @@ class CreditController extends AbstractController
             $entityManager->persist($credit);
             $entityManager->flush();
 
-            return $this->redirectToRoute('credit_show', ['id' => $credit->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('client_show', ['id' => $credit->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('credit/new.html.twig', [
@@ -88,16 +99,20 @@ class CreditController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'credit_show', methods: ['GET'])]
-    public function show(Credit $credit): Response
-    {   if(2<1) //lors de l'integration la condition devient s'il est un admin
-            return $this->render('credit/adminshow.html.twig', [
-                'credit' => $credit,
-            ]);
-        else
+    #[Route('/{id}/client', name: 'client_show', methods: ['GET'])]
+    public function clientShow(Credit $credit): Response
+    {
         return $this->render('credit/clientshow.html.twig', [
             'credit' => $credit,
         ]);
+    }
+
+    #[Route('/{id}/admin', name: 'admin_show', methods: ['GET'])]
+    public function show(Credit $credit): Response
+    {
+            return $this->render('credit/adminshow.html.twig', [
+                'credit' => $credit,
+            ]);
     }
 
     #[Route('/{id}/accept', name: 'acredit_accept', methods: ['GET', 'POST'])]

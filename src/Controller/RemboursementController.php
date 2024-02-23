@@ -15,15 +15,19 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/remboursement')]
 class RemboursementController extends AbstractController
 {
-    #[Route('/credit/{id}', name: 'remboursement_index', methods: ['GET'])]
-    public function index(RemboursementRepository $remboursementRepository,CreditRepository $creditRepository,$id): Response
+    #[Route('/admin/credit/{id}', name: 'remboursement_admin', methods: ['GET'])]
+    public function admin(RemboursementRepository $remboursementRepository,CreditRepository $creditRepository,$id): Response
     {
         $credit=$creditRepository->findById($id);
-        if(2<1)
             return $this->render('remboursement/adminindex.html.twig', [
                 'remboursements' => $remboursementRepository->findBy(['credit' => $credit[0]]),
             ]);
-        else
+    }
+
+    #[Route('/client/credit/{id}', name: 'remboursement_client', methods: ['GET'])]
+    public function client(RemboursementRepository $remboursementRepository,CreditRepository $creditRepository,$id): Response
+    {
+        $credit=$creditRepository->findById($id);
         return $this->render('remboursement/clientindex.html.twig', [
             'remboursements' => $remboursementRepository->findBy(['credit' => $credit[0]]),
         ]);
@@ -82,7 +86,7 @@ class RemboursementController extends AbstractController
             $entityManager->persist($remboursement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('remboursement_index', ['id' => $id], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('remboursement_client', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('remboursement/new.html.twig', [
@@ -92,10 +96,18 @@ class RemboursementController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'remboursement_show', methods: ['GET'])]
-    public function show(Remboursement $remboursement): Response
+    #[Route('/client/{id}', name: 'remboursement_show_client', methods: ['GET'])]
+    public function showClient(Remboursement $remboursement): Response
     {
-        return $this->render('remboursement/show.html.twig', [
+        return $this->render('remboursement/show_client.html.twig', [
+            'remboursement' => $remboursement,
+        ]);
+    }
+
+    #[Route('/admin/{id}', name: 'remboursement_show_admin', methods: ['GET'])]
+    public function showAdmin(Remboursement $remboursement): Response
+    {
+        return $this->render('remboursement/show_admin.html.twig', [
             'remboursement' => $remboursement,
         ]);
     }

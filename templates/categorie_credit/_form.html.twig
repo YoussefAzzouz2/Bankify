@@ -1,41 +1,25 @@
-{{ form_start(form,{'attr': {'novalidate': 'novalidate'}}) }}
+<div class="container text-center">
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-<table>
-    <tr>
-        <td style="padding: 5px;">
-            {{ form_label(form.nom,"Nom") }}
-        </td>
-        <td style="padding: 5px;">
-            {{ form_widget(form.nom) }}
-        </td>
-        <td style="padding: 5px;">
-            {{ form_errors(form.nom) }}
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 5px; display: flex;">
-            {{ form_label(form.minMontant,"Montant Minimale") }}
-        </td>
-        <td style="padding: 5px;">
-            {{ form_widget(form.minMontant) }}
-        </td>
-        <td style="padding: 5px;">
-            {{ form_errors(form.minMontant) }}
-        </td>
-    </tr>
-    <tr>
-        <td style="padding: 5px;">
-            {{ form_label(form.maxMontant,"Montant Maximal") }}
-        </td>
-        <td style="padding: 5px;">
-            {{ form_widget(form.maxMontant) }}
-        </td>
-        <td style="padding: 5px;">
-            {{ form_errors(form.maxMontant) }}
-        </td>
-    </tr>
-</table>
-<br>
-{{ form_widget(form.save) }}
+    <div class="form-group">
+        {{ form_label(form.nom, "Nom") }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.nom) }}
+    </div>
 
-{{ form_end(form) }}
+    <div class="form-group">
+        {{ form_label(form.minMontant, "Montant Minimal") }}
+        {{ form_widget(form.minMontant, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.minMontant) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.maxMontant, "Montant Maximal") }}
+        {{ form_widget(form.maxMontant, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.maxMontant) }}
+    </div>
+
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+    {{ form_end(form) }}
+</div>

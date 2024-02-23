@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}<title>Nouveau Credit<title>{% endblock %}
 
 {% block content %}
 <style>
@@ -27,6 +27,8 @@
                                 <h1>Demander un credit</h1>
                                     <div class="credit-forum">
                                         {{ include('credit/_form.html.twig') }}
+                                        <br>
+                                        <p>*Pour savoir l'intervale de montant de chaque categorie voir le table ci-dessous</p>
                                     </div>
                             </div>
                         </div>
@@ -46,10 +48,40 @@
 </section>
 {% endblock %}
 {% block section %}
+<style>
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .table th,
+    .table td {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    .table th {
+        background-color: #f2f2f2;
+    }
+
+    .table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    h3 {
+        font-size: 24px; /* Taille de la police */
+        font-weight: bold; /* Poids de la police (gras) */
+        color: #333; /* Couleur du texte */
+        margin-bottom: 10px; /* Marge en bas */
+        /* Ajoutez d'autres styles selon vos besoins */
+    }
+</style>
+<h3>La liste des categories :</h3>
+<br>
 <table class="table">
     <thead>
         <tr>
-            <th>Id Categorie</th>
             <th>Nom</th>
             <th>Montant Minimale</th>
             <th>Montant Maximal</th>
@@ -58,7 +90,6 @@
     <tbody>
     {% for categorie_credit in categories %}
         <tr>
-            <td>{{ categorie_credit.id }}</td>
             <td>{{ categorie_credit.nom }}</td>
             <td>{{ categorie_credit.minMontant }}</td>
             <td>{{ categorie_credit.maxMontant }}</td>

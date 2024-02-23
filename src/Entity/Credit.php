@@ -8,8 +8,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CreditRepository::class)]
 class Credit
@@ -163,22 +161,6 @@ class Credit
         }
 
         return $this;
-    }
-    /**
-     * @Assert\Callback
-     */
-
-    public function validateMontantTotale(ExecutionContextInterface $context, $payload)
-    {
-        if ($this->montantTotale !== null && $this->interet !== null) {
-            if (($this->interet == 10 && $this->montantTotale < 50000.0) ||
-                ($this->interet == 15 && ($this->montantTotale < 10000.0 || $this->montantTotale > 49999.0)) ||
-                ($this->interet == 20 && ($this->montantTotale < 2000.0 || $this->montantTotale > 9999.0))) {
-                $context->buildViolation('Le montant total doit être valide en fonction de l\'intérêt.')
-                    ->atPath('montantTotale')
-                    ->addViolation();
-            }
-        }
     }
 
     public function __toString(): string

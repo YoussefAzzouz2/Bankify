@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}<title>Credit</title>{% endblock %}
 {% block content %}
 <section class="slider_section ">
     <div id="customCarousel1" class="carousel slide" data-ride="carousel">
@@ -40,10 +40,54 @@
 {% endblock %}
 
 {% block section %}
-<div style="padding: 10px;">
-    <a href="#">back</a>
+<style>
+    .container_table {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    
+    .table th,
+    .table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+    
+    .table th {
+        background-color: #f2f2f2;
+    }
+    
+    .button {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-right: 10px;
+    }
+    
+    .button:hover {
+        background-color: #0056b3;
+    }
+    
+    .actions {
+        margin-top: 20px;
+    }
+</style>
+<div class="container_table">
+    <a href="{{ path('credit_home') }}" class="button" style="background-color:#45a049">Retour</a>
     <br>
-
     <table class="table">
         <tbody>
             <tr>
@@ -51,37 +95,32 @@
                 <td>{{ credit.id }}</td>
             </tr>
             <tr>
-                <th>Montant Totale</th>
+                <th>Montant Total</th>
                 <td>{{ credit.montantTotale }}</td>
             </tr>
             <tr>
-                <th>Montant Restante</th>
-                <td>dernier_remboursement</td>
+                <th>Intérêt</th>
+                <td>{{ credit.interet }}</td>
             </tr>
             <tr>
-                <th>Interét</th>
-                <td>{{ credit.interet }}</td>
+                <th>Catégorie</th>
+                <td>{{ credit.categorie.getNom() }}</td>
             </tr>
             <tr>
                 <th>Date Creation</th>
                 <td>{{ credit.dateC ? credit.dateC|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree Totale</th>
+                <th>Durée Totale</th>
                 <td>{{ credit.dureeTotale }}</td>
-            </tr>
-            <tr>
-                <th>Duree Restante</th>
-                <td>dernier_remboursement</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="#">Suivre Remboursements</a>
-    <br>
-    <a href="#">Payer une partie de credit</a>
-    <br>
-    <a href="#">Payer la totalitée de credit</a>
+    <div class="actions">
+        <a href="{{ path('remboursement_client',{'id': credit.id}) }}" class="button">Suivre Remboursements</a>
+        <a href="{{ path('remboursement_new',{'id': credit.id}) }}" class="button">Payer une partie de crédit</a>
+    </div>
 </div>
 {% endblock %}
 {% block sec2 %}{% endblock %}

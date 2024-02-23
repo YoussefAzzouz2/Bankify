@@ -3,37 +3,72 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id Categorie</th>
-                <th>Nom</th>
-                <th>Montant Minimale</th>
-                <th>Montant Maximal</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<style>
+    .btn {
+        display: inline-block;
+        background-color: #007bff;
+        color: white;
+        padding: 6px 12px;
+        text-align: center;
+        text-decoration: none;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-right: 5px;
+    }
+    
+    .btn-info {
+        background-color: #17a2b8;
+    }
+    
+    .btn-primary {
+        background-color: #007bff;
+    }
+    
+    .btn-success {
+        background-color: #28a745;
+    }
+    
+    .btn-danger {
+        background-color: #dc3545;
+    }
+    
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    
+</style>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Id Catégorie</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Montant Minimal</th>
+            <th scope="col">Montant Maximal</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for categorie_credit in categorie_credits %}
-            <tr>
-                <td>{{ categorie_credit.id }}</td>
-                <td>{{ categorie_credit.nom }}</td>
-                <td>{{ categorie_credit.minMontant }}</td>
-                <td>{{ categorie_credit.maxMontant }}</td>
-                <td>
-                    <button class="btn" onclick="window.location.href='{{ path('categorie_show', {'id': categorie_credit.id}) }}'">Plus d'informations</button>
-                    <br>
-                    <button class="btn" onclick="window.location.href='{{ path('categorie_edit', {'id': categorie_credit.id}) }}'">Modifier</button>
-                    {{ include('categorie_credit/_delete_form.html.twig') }}
-                </td>
-            </tr>
+        <tr>
+            <td>{{ categorie_credit.id }}</td>
+            <td>{{ categorie_credit.nom }}</td>
+            <td>{{ categorie_credit.minMontant }}</td>
+            <td>{{ categorie_credit.maxMontant }}</td>
+            <td>
+                <button class="btn btn-sm btn-info" onclick="window.location.href='{{ path('categorie_show', {'id': categorie_credit.id}) }}'">Détails</button>
+                <button class="btn btn-sm btn-primary" onclick="window.location.href='{{ path('categorie_edit', {'id': categorie_credit.id}) }}'">Modifier</button>
+                {{ include('categorie_credit/_delete_form.html.twig') }}
+            </td>
+        </tr>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+        <tr>
+            <td colspan="5">Aucun enregistrement trouvé</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <button class="btn" onclick="window.location.href='{{ path('categorie_new') }}'">Ajouter une nouvelle categorie</button>
+<button class="btn btn-success" onclick="window.location.href='{{ path('categorie_new') }}'">Ajouter une nouvelle catégorie</button>
 {% endblock %}
