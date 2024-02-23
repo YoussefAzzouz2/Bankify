@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
@@ -56,13 +58,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     #[ORM\Column]
     private ?bool $isActive = True;
 
-<<<<<<< HEAD
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $authCode = null;
 
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'user')]
+    private Collection $images;
 
-=======
->>>>>>> 7984e53e2c46ca795c04c321f78f8b9fd0ac243b
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -209,7 +216,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function isEmailAuthEnabled(): bool
     {
@@ -254,6 +260,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         $this->authCode = $authCode;
     }
-=======
->>>>>>> 7984e53e2c46ca795c04c321f78f8b9fd0ac243b
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getUser() === $this) {
+                $image->setUser(null);
+            }
+        }
+
+        return $this;
+    }
 }

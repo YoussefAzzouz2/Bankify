@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use App\Security\AppCustomAuthenticator;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-
+use App\Entity\Image;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Encoder\UserPassworEncoderInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -21,6 +21,7 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ProfileController extends AbstractController
 {
@@ -41,6 +42,28 @@ class ProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uploadedImage = $form->get('image')->getData();
+
+            if ($uploadedImage) {
+                // Generate a unique filename for the uploaded image
+                $newFilename = uniqid() . '.' . $uploadedImage->guessExtension();
+
+               
+                    // Move the uploaded file to the desired directory
+                    $uploadedImage->move(
+                        $this->getParameter('image_directory'),
+                        $newFilename
+                    );
+                
+
+                // Create a new Image entity and associate it with the user
+                $image = new Image();
+                $image->setFilename($newFilename);
+                $image->setUser($user);
+
+                // Persist the image entity
+                $entityManager->persist($image);
+            }
 
             $entityManager->persist($user);
             $entityManager->flush();

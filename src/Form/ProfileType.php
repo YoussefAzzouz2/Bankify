@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProfileType extends AbstractType
 {
@@ -42,6 +44,13 @@ class ProfileType extends AbstractType
                 'required' => true,
                 'label' => 'Date of Birth',
                 // You can specify additional options for the BirthdayType here
+            ])->add('image', FileType::class, [
+                'label' => 'Profile Picture',
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+                // make it optional so you don't have to re-upload the file
+                // every time you edit the User profile details
+                'required' => false,
             ]);
     }
 
