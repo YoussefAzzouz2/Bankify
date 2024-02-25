@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\CompteClient;
 use Dompdf\Dompdf;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -21,8 +22,13 @@ class CarteController extends AbstractController
     #[Route('/', name: 'app_carte_index', methods: ['GET'])]
     public function index(CarteRepository $carteRepository): Response
     {
+        $visaCount = $carteRepository->countByType('visa');
+        $mastercardCount = $carteRepository->countByType('mastercard');
+
         return $this->render('carte/index.html.twig', [
             'cartes' => $carteRepository->findAll(),
+            'visaCount' => $visaCount,
+            'mastercardCount' => $mastercardCount,
         ]);
     }
 
@@ -105,4 +111,34 @@ class CarteController extends AbstractController
         'Content-Type' => 'application/pdf',
         'Content-Disposition' => 'inline; filename="cartes.pdf"',
     ]);}
+
+    #[Route('/carte/search', name: 'carte_search')]
+    public function search(Request $request, CarteRepository $carteRepository): JsonResponse
+    {
+    $query = $request->query->get('q');
+    $cartes = $carteRepository->search($query); // Implement your search logic in the repository
+
+    // Serialize the cartes data to return as JSON
+    $serializedCartes = $this->serializeCartes($cartes);
+
+    return new JsonResponse($serializedCartes);
+    }
+
+    // Helper function to serialize Carte entities
+    private function serializeCartes($cartes)
+    {
+        $serialized = [];
+        foreach ($cartes as $carte) {
+            $serialized[] = [
+                'id' => $carte->getId(),
+                'NumC' => $carte->getNumC(),
+                'DateExp' => $carte->getDateExp() ? $carte->getDateExp()->format('Y-m-d') : null,
+                'TypeC' => $carte->getTypeC(),
+                'StatutC' => $carte->getStatutC(),
+                'type' => $carte->getType(),
+                // Add more fields as needed
+            ];
+        }
+        return $serialized;
+    }
 }

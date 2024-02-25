@@ -4,6 +4,9 @@
 
 {% block content %}
     <center><h1>Les cartes </h1></center>
+    <input type="text" id="searchInput" placeholder="Search">
+<ul id="cartesList"></ul>
+
     <center>
     <table class="table">
         <thead>
@@ -44,7 +47,75 @@
     </table>
     </center>
     <center><a class="btn btn-primary" href="{{ path('app_carte_new') }}">Create new</a></center>
-    <a class="btn btn-primary" href="{{ path('generate_pdf') }}">Generate PDF</a>
+    <center><a class="btn btn-primary" href="{{ path('generate_pdf') }}">Generate PDF</a></center>
+    <canvas id="cardTypeChart" width="200" height="200"></canvas>
 {% endblock %}
 
+{% block javascripts %}
+<script>
+document.getElementById('searchInput').addEventListener('input', function() {
+    let query = this.value.trim();
+    if (query.length > 0) {
+        fetch(`/carte/search?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                displayCartes(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        clearCartesList();
+    }
+});
 
+function displayCartes(cartes) {
+    let cartesList = document.getElementById('cartesList');
+    cartesList.innerHTML = '';
+    cartes.forEach(carte => {
+        let li = document.createElement('li');
+        li.textContent = `ID: ${carte.id}, Numero: ${carte.NumC}, Type: ${carte.TypeC}, Statut: ${carte.StatutC}`;
+        cartesList.appendChild(li);
+    });
+}
+
+function clearCartesList() {
+    document.getElementById('cartesList').innerHTML = '';
+}
+</script>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const ctx = document.getElementById('cardTypeChart').getContext('2d');
+    
+    const visaCount = {{ visaCount }};
+    const mastercardCount = {{ mastercardCount }};
+    
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Visa', 'Mastercard'],
+            datasets: [{
+                label: 'Card Types',
+                data: [visaCount, mastercardCount],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)', // Red color for Visa
+                    'rgba(54, 162, 235, 0.6)', // Blue color for Mastercard
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            
+            title: {
+                display: true,
+                text: 'Card Types Distribution'
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

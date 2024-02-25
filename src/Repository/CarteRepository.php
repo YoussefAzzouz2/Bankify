@@ -45,4 +45,27 @@ class CarteRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+public function search($query): array
+{
+    $qb = $this->createQueryBuilder('c');
+
+    // Example: Search by card number
+    $qb->andWhere('c.NumC LIKE :query OR c.TypeC LIKE :query OR c.StatutC LIKE :query')
+       ->setParameter('query', '%'.$query.'%');
+
+    // Add more conditions as needed based on your search criteria
+
+    return $qb->getQuery()->getResult();
+}
+
+public function countByType(string $type): int
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->where('c.Type_C = :type')
+            ->setParameter('type', $type)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }
