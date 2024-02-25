@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\CompteClient;
+use Dompdf\Dompdf;
+
+
 
 #[Route('/carte')]
 class CarteController extends AbstractController
@@ -21,23 +24,6 @@ class CarteController extends AbstractController
         return $this->render('carte/index.html.twig', [
             'cartes' => $carteRepository->findAll(),
         ]);
-    }
-
-    #[Route('/{id}/cartes', name: 'carte_index_for_compte', methods: ['GET'])]
-    public function indexForCompte(CompteClient $compte, CarteRepository $carteRepository): Response
-    {
-    // Récupérer le compte client spécifique
-    $compte = $this->getDoctrine()->getRepository(CompteClient::class)->find($compte);
-
-    // Récupérer les cartes associées à ce compte client spécifique
-    $cartes = $carteRepository->findBy(['account' => $compte]);
-
-    // Rendre la vue avec les informations sur les cartes et le compte client
-    return $this->render('carte/indexfront.html.twig', [
-        'compte' => $compte,
-        'cartes' => $cartes,
-    ]);
-
     }
 
     #[Route('/new', name: 'app_carte_new', methods: ['GET', 'POST'])]
@@ -96,4 +82,27 @@ class CarteController extends AbstractController
 
         return $this->redirectToRoute('app_carte_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/carte/generate-pdf', name: 'generate_pdf', methods: ['GET'])]
+    public function generatePdf(CarteRepository $carteRepository): Response
+{
+    $cartes = $carteRepository->findAll();
+
+    // Render the Twig template to HTML
+    $html = $this->renderView('carte/pdfcarte.html.twig', [
+        'cartes' => $cartes,
+    ]);
+
+    // Generate PDF
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    // Return PDF as response
+    $pdfContent = $dompdf->output();
+    return new Response($pdfContent, Response::HTTP_OK, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="cartes.pdf"',
+    ]);}
 }
