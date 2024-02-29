@@ -21,6 +21,16 @@ class CategorieCreditRepository extends ServiceEntityRepository
         parent::__construct($registry, CategorieCredit::class);
     }
 
+    public function getStatistiques()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.nom as categorie', 'COUNT(cr.id) as nombreCredits')
+            ->leftJoin('c.credits', 'cr')
+            ->groupBy('c.nom')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return CategorieCredit[] Returns an array of CategorieCredit objects
 //     */

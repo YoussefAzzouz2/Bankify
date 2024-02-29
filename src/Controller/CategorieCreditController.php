@@ -18,8 +18,10 @@ class CategorieCreditController extends AbstractController
     #[Route('/', name: 'categorie_index', methods: ['GET'])]
     public function index(CategorieCreditRepository $categorieCreditRepository): Response
     {
+        $statistiques = $categorieCreditRepository->getStatistiques();
         return $this->render('categorie_credit/index.html.twig', [
             'categorie_credits' => $categorieCreditRepository->findAll(),
+            'statistiques' => $statistiques,
         ]);
     }
 
