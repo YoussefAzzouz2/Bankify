@@ -109,6 +109,9 @@
             </tr>
         </tbody>
     </table>
+    <div class="actions" style="text-align: center;">
+        <a href="{{ path('remboursement_pdf',{'id': remboursement.id}) }}" class="button" style="background-color:#0056b3">Génerer un réçu</a>
+    </div>
 </div>
 {% endblock %}
 {% block sec2 %}{% endblock %}

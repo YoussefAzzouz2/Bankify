@@ -83,6 +83,7 @@
     
     .actions {
         margin-top: 20px;
+        text-align: center;
     }
 </style>
 <div class="container_table">
@@ -120,6 +121,7 @@
     <div class="actions">
         <a href="{{ path('remboursement_client',{'id': credit.id}) }}" class="button">Suivre Remboursements</a>
         <a href="{{ path('remboursement_new',{'id': credit.id}) }}" class="button">Payer une partie de crédit</a>
+        <a href="{{ path('credit_pdf',{'id': credit.id}) }}" class="button">Génerer comme document</a>
     </div>
 </div>
 {% endblock %}

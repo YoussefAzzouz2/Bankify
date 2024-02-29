@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Dompdf\Dompdf;
 
 #[Route('/remboursement')]
 class RemboursementController extends AbstractController
@@ -95,4 +96,25 @@ class RemboursementController extends AbstractController
             'remboursement' => $remboursement,
         ]);
     }
+
+    #[Route('/pdf/{id}', name: 'remboursement_pdf', methods: ['GET'])]
+    public function generatePdf(RemboursementRepository $remboursementRepository,$id): Response
+    {
+    $remboursements = $remboursementRepository->findById($id);
+    $remboursement=$remboursements[0];
+
+    $html = $this->renderView('remboursement/remboursement_pdf.html.twig', [
+        'remboursement' => $remboursement,
+    ]);
+
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    $pdfContent = $dompdf->output();
+    return new Response($pdfContent, Response::HTTP_OK, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="remboursement.pdf"',
+    ]);}
 }

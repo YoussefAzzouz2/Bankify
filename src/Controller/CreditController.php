@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\CategorieCreditRepository;
+use Dompdf\Dompdf;
 
 #[Route('/credit')]
 class CreditController extends AbstractController
@@ -146,4 +147,25 @@ class CreditController extends AbstractController
         else
             return $this->redirectToRoute('credits_payes', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/pdf/{id}', name: 'credit_pdf', methods: ['GET'])]
+    public function generatePdf(CreditRepository $creditRepository,$id): Response
+    {
+    $credits = $creditRepository->findById($id);
+    $credit=$credits[0];
+
+    $html = $this->renderView('credit/credit_pdf.html.twig', [
+        'credit' => $credit,
+    ]);
+
+    $dompdf = new Dompdf();
+    $dompdf->loadHtml($html);
+    $dompdf->setPaper('A4', 'portrait');
+    $dompdf->render();
+
+    $pdfContent = $dompdf->output();
+    return new Response($pdfContent, Response::HTTP_OK, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="credit.pdf"',
+    ]);}
 }

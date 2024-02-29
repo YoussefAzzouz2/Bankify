@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du crédit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container_table {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .footer {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container_table">
+        <h1>Détails du crédit</h1>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id Crédit</th>
+                    <td>{{ credit.id }}</td>
+                </tr>
+                <tr>
+                    <th>Montant Total</th>
+                    <td>{{ credit.montantTotale }}</td>
+                </tr>
+                <tr>
+                    <th>Intérêt</th>
+                    <td>{{ credit.interet }}</td>
+                </tr>
+                <tr>
+                    <th>Catégorie</th>
+                    <td>{{ credit.categorie.getNom() }}</td>
+                </tr>
+                <tr>
+                    <th>Date Création</th>
+                    <td>{{ credit.dateC ? credit.dateC|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Durée Totale</th>
+                    <td>{{ credit.dureeTotale }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footer">
+            <h5>Signé</h5>
+        </div>
+    </div>
+</body>
+</html>
