@@ -77,7 +77,6 @@
             <th style="text-align: center;">Interet</th>
             <th style="text-align: center;">Categorie</th>
             <th style="text-align: center;">Date Creation</th>
-            <th style="text-align: center;">Date Paiement</th>
             <th style="text-align: center;">Duree Totale</th>
             <th style="text-align: center;">Actions</th>
         </tr>
@@ -91,7 +90,6 @@
             <td style="text-align: center;">{{ credit.interet }}</td>
             <td>{{ credit.categorie.getNom() }}</td>
             <td style="text-align: center;">{{ credit.dateC ? credit.dateC|date('Y-m-d') : '' }}</td>
-            <td style="text-align: center;">{{ credit.remboursements.last().getDateR() ? credit.remboursements.last().getDateR()|date('Y-m-d') : '' }}</td>
             <td style="text-align: center;">{{ credit.dureeTotale }}</td>
             <td style="text-align: center;">
                 <a href="{{ path('credit_delete', {'id': credit.id}) }}" style="background-color:red" class="button2">Supprimer</a>

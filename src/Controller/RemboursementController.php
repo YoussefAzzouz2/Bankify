@@ -46,11 +46,7 @@ class RemboursementController extends AbstractController
         $compte = $credit->getCompte();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($credit->getRemboursements()->isEmpty())
-                $remboursement->setMontantRestant($credit->getMontantTotale() - $remboursement->getMontantR());
-            else
-                $remboursement->setMontantRestant($credit->getRemboursements()->last()->getMontantRestant() - $remboursement->getMontantR());
-            $compte->setSolde($compte->getSolde() - $remboursement->getMontantR());
+            $remboursement->setMontantRestant($credit->getMontantTotale() - $remboursement->getMontantR());
             $today = new \DateTime();
             $remboursement->setDateR($today);
             $date = $today->diff($credit->getDateC());
@@ -58,13 +54,6 @@ class RemboursementController extends AbstractController
             $remboursement->setDateR(new \DateTime());
             $montant = $form->get('montantR')->getData();
 
-            if($montant>$compte->getSolde()){
-                $this->addFlash('danger', 'Verifier votre solde.');
-                return $this->redirectToRoute('remboursement_new', ['id' => $id]);
-            }if($montant>$credit->getRemboursements()->last()->getMontantRestant()){
-                $this->addFlash('danger', 'Le montant doit être inférieur au montant restant');
-                return $this->redirectToRoute('remboursement_new', ['id' => $id]);
-            }
             if($interet==10 && $montant<500){
                 $this->addFlash('danger', 'Le montant doit être supérieur à 500.');
                 return $this->redirectToRoute('remboursement_new', ['id' => $id]);
@@ -75,11 +64,6 @@ class RemboursementController extends AbstractController
             }
             if($interet==20 && ($montant<100 || $montant>299)){
                 $this->addFlash('danger', 'Le montant doit être compris entre 100 et 299.');
-                return $this->redirectToRoute('remboursement_new', ['id' => $id]);
-            }
-            if($credit->getRemboursements()->last()->getMontantRestant()==0){
-                $credit->setPayed(true);
-                $this->addFlash('danger', 'Le crédit est payé.');
                 return $this->redirectToRoute('remboursement_new', ['id' => $id]);
             }
 

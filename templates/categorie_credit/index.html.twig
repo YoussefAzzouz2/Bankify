@@ -1,6 +1,6 @@
 {% extends 'backbase.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}<title>Catégories</title>{% endblock %}
 
 {% block content %}
 <style>
@@ -64,7 +64,7 @@
         </tr>
         {% else %}
         <tr>
-            <td colspan="5">Aucun enregistrement trouvé</td>
+            <td colspan="5">Pas de catégorie</td>
         </tr>
         {% endfor %}
     </tbody>

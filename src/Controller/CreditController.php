@@ -17,9 +17,16 @@ use App\Repository\CategorieCreditRepository;
 class CreditController extends AbstractController
 {
     #[Route('/client', name: 'credit_home')]
-    public function home(): Response
+    public function home(CreditRepository $creditRepository,CompteRepository $compteRepository): Response
     {
-        return $this->render('credit/home.html.twig');
+        $comptes = $compteRepository->findById(1);//apres integration la commande devient $this->security->getUser()->getCompte();
+        $compte = $comptes[0];
+        $credits=$creditRepository->findBy(['compte' => $compte]);
+        if ($credits!=null){
+            $credit=$credits[0];
+            $id=$credit->getId();
+        } else $id=508;
+        return $this->render('credit/home.html.twig',['id' => $id]);
     }
 
     #[Route('/admin', name: 'credit_admin')]
@@ -72,7 +79,7 @@ class CreditController extends AbstractController
             $credit->setDateC(new \DateTime());
             $montant = $credit->getMontantTotale() + ($credit->getMontantTotale() * ($credit->getInteret() / 100));
             $credit->setMontantTotale($montant);
-            $comptes = $compteRepository->findById(4);//apres integration la commande devient $this->security->getUser()->getCompte();
+            $comptes = $compteRepository->findById(1);//apres integration la commande devient $this->security->getUser()->getCompte();
             $compte = $comptes[0];
             $credit->setCompte($compte);
             $interet = $form->get('interet')->getData();
