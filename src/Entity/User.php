@@ -50,9 +50,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private ?string $prenom = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: "Genre is required")]
     private ?string $genre = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\NotBlank(message: "Date de Naissance is required")]
     private ?\DateTimeInterface $dateNaissance = null;
 
     #[ORM\Column]
