@@ -20,77 +20,81 @@ return [
     ],
     [ // $regexpList
         0 => '{^(?'
-                .'|/cheques/([^/]++)(*:24)'
+                .'|/cheques(?'
+                    .'|/([^/]++)(*:27)'
+                    .'|1/([^/]++)(*:44)'
+                .')'
                 .'|/a(?'
                     .'|dd(?'
-                        .'|Rec/([^/]++)(*:53)'
-                        .'|enc1/([^/]++)(*:73)'
+                        .'|Rec/([^/]++)(*:74)'
+                        .'|enc1/([^/]++)(*:94)'
                     .')'
-                    .'|joutercheque1/([^/]++)(*:103)'
-                    .'|2/([^/]++)(*:121)'
-                    .'|/([^/]++)(*:138)'
+                    .'|joutercheque1/([^/]++)(*:124)'
+                    .'|2/([^/]++)(*:142)'
+                    .'|/([^/]++)(*:159)'
                 .')'
                 .'|/re(?'
-                    .'|c/([^/]++)(*:163)'
+                    .'|c/([^/]++)(*:184)'
                     .'|move(?'
                         .'|Enc(?'
-                            .'|/([^/]++)(*:193)'
-                            .'|1/([^/]++)(*:211)'
+                            .'|/([^/]++)(*:214)'
+                            .'|1/([^/]++)(*:232)'
                         .')'
                         .'|Cheque(?'
-                            .'|/([^/]++)(*:238)'
-                            .'|1/([^/]++)(*:256)'
+                            .'|/([^/]++)(*:259)'
+                            .'|1/([^/]++)(*:277)'
                         .')'
                     .')'
                 .')'
                 .'|/e(?'
                     .'|ditchequee(?'
-                        .'|/([^/]++)(*:294)'
-                        .'|e/([^/]++)(*:312)'
+                        .'|/([^/]++)(*:315)'
+                        .'|e/([^/]++)(*:333)'
                     .')'
-                    .'|nc1/([^/]++)(*:333)'
+                    .'|nc1/([^/]++)(*:354)'
                 .')'
-                .'|/pdf/([^/]++)(*:355)'
+                .'|/pdf/([^/]++)(*:376)'
                 .'|/_(?'
-                    .'|error/(\\d+)(?:\\.([^/]++))?(*:394)'
-                    .'|wdt/([^/]++)(*:414)'
+                    .'|error/(\\d+)(?:\\.([^/]++))?(*:415)'
+                    .'|wdt/([^/]++)(*:435)'
                     .'|profiler/([^/]++)(?'
                         .'|/(?'
-                            .'|search/results(*:460)'
-                            .'|router(*:474)'
+                            .'|search/results(*:481)'
+                            .'|router(*:495)'
                             .'|exception(?'
-                                .'|(*:494)'
-                                .'|\\.css(*:507)'
+                                .'|(*:515)'
+                                .'|\\.css(*:528)'
                             .')'
                         .')'
-                        .'|(*:517)'
+                        .'|(*:538)'
                     .')'
                 .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
-        24 => [[['_route' => 'cheque_list1', '_controller' => 'App\\Controller\\ChequeController::list1'], ['ref'], null, null, false, true, null]],
-        53 => [[['_route' => 'ajouterreclamtion1', '_controller' => 'App\\Controller\\ChequeController::ajouterreclamtion1'], ['ref'], null, null, false, true, null]],
-        73 => [[['_route' => 'ajouterreclamtion2', '_controller' => 'App\\Controller\\ChequeController::ajouterreclamtion11'], ['ref'], null, null, false, true, null]],
-        103 => [[['_route' => 'ajoutercheque1', '_controller' => 'App\\Controller\\ChequeController::ajoutercheque1'], ['ref'], null, null, false, true, null]],
-        121 => [[['_route' => 'a1', '_controller' => 'App\\Controller\\ChequeController::emptyRECTraitée1'], ['ref'], null, null, false, true, null]],
-        138 => [[['_route' => 'a11', '_controller' => 'App\\Controller\\ChequeController::emptyRECTraitée'], ['ref'], null, null, false, true, null]],
-        163 => [[['_route' => 'rec_edit', '_controller' => 'App\\Controller\\ChequeController::edit'], ['ref'], null, null, false, true, null]],
-        193 => [[['_route' => 'reclamtion_remove', '_controller' => 'App\\Controller\\ChequeController::deleteReclamtion'], ['id'], null, null, false, true, null]],
-        211 => [[['_route' => 'Reclamtion_remove1', '_controller' => 'App\\Controller\\ChequeController::deleteReclamtion1'], ['id'], null, null, false, true, null]],
-        238 => [[['_route' => 'cheque_remove', '_controller' => 'App\\Controller\\ChequeController::deleteCheque'], ['id'], null, null, false, true, null]],
-        256 => [[['_route' => 'cheque_remove1', '_controller' => 'App\\Controller\\ChequeController::deleteCheque1'], ['id'], null, null, false, true, null]],
-        294 => [[['_route' => 'ch_edit', '_controller' => 'App\\Controller\\ChequeController::edit1'], ['ref'], null, null, false, true, null]],
-        312 => [[['_route' => 'ch1_edit', '_controller' => 'App\\Controller\\ChequeController::edit11'], ['ref'], null, null, false, true, null]],
-        333 => [[['_route' => 'rec_edit1', '_controller' => 'App\\Controller\\ChequeController::edit111'], ['ref'], null, null, false, true, null]],
-        355 => [[['_route' => 'generate_pdf', '_controller' => 'App\\Controller\\ChequeController::generatePdf'], ['ref'], null, null, false, true, null]],
-        394 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
-        414 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
-        460 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
-        474 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
-        494 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
-        507 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        517 => [
+        27 => [[['_route' => 'cheque_list1', '_controller' => 'App\\Controller\\ChequeController::list1'], ['ref'], null, null, false, true, null]],
+        44 => [[['_route' => 'cheque_list11', '_controller' => 'App\\Controller\\ChequeController::list1111'], ['ref'], null, null, false, true, null]],
+        74 => [[['_route' => 'ajouterreclamtion1', '_controller' => 'App\\Controller\\ChequeController::ajouterreclamtion1'], ['ref'], null, null, false, true, null]],
+        94 => [[['_route' => 'ajouterreclamtion2', '_controller' => 'App\\Controller\\ChequeController::ajouterreclamtion11'], ['ref'], null, null, false, true, null]],
+        124 => [[['_route' => 'ajoutercheque1', '_controller' => 'App\\Controller\\ChequeController::ajoutercheque1'], ['ref'], null, null, false, true, null]],
+        142 => [[['_route' => 'a1', '_controller' => 'App\\Controller\\ChequeController::emptyRECTraitée1'], ['ref'], null, null, false, true, null]],
+        159 => [[['_route' => 'a11', '_controller' => 'App\\Controller\\ChequeController::emptyRECTraitée'], ['ref'], null, null, false, true, null]],
+        184 => [[['_route' => 'rec_edit', '_controller' => 'App\\Controller\\ChequeController::edit'], ['ref'], null, null, false, true, null]],
+        214 => [[['_route' => 'reclamtion_remove', '_controller' => 'App\\Controller\\ChequeController::deleteReclamtion'], ['id'], null, null, false, true, null]],
+        232 => [[['_route' => 'Reclamtion_remove1', '_controller' => 'App\\Controller\\ChequeController::deleteReclamtion1'], ['id'], null, null, false, true, null]],
+        259 => [[['_route' => 'cheque_remove', '_controller' => 'App\\Controller\\ChequeController::deleteCheque'], ['id'], null, null, false, true, null]],
+        277 => [[['_route' => 'cheque_remove1', '_controller' => 'App\\Controller\\ChequeController::deleteCheque1'], ['id'], null, null, false, true, null]],
+        315 => [[['_route' => 'ch_edit', '_controller' => 'App\\Controller\\ChequeController::edit1'], ['ref'], null, null, false, true, null]],
+        333 => [[['_route' => 'ch1_edit', '_controller' => 'App\\Controller\\ChequeController::edit11'], ['ref'], null, null, false, true, null]],
+        354 => [[['_route' => 'rec_edit1', '_controller' => 'App\\Controller\\ChequeController::edit111'], ['ref'], null, null, false, true, null]],
+        376 => [[['_route' => 'generate_pdf', '_controller' => 'App\\Controller\\ChequeController::generatePdf'], ['ref'], null, null, false, true, null]],
+        415 => [[['_route' => '_preview_error', '_controller' => 'error_controller::preview', '_format' => 'html'], ['code', '_format'], null, null, false, true, null]],
+        435 => [[['_route' => '_wdt', '_controller' => 'web_profiler.controller.profiler::toolbarAction'], ['token'], null, null, false, true, null]],
+        481 => [[['_route' => '_profiler_search_results', '_controller' => 'web_profiler.controller.profiler::searchResultsAction'], ['token'], null, null, false, false, null]],
+        495 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
+        515 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
+        528 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
+        538 => [
             [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -81,27 +81,28 @@ class __TwigTemplate_98cc708f70ef32578e8c9e9a98423367 extends Template
         // line 9
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 9, $this->source); })()), "montantC", [], "any", false, false, false, 9), 'errors');
         echo " 
+          
         <div style=\"margin-bottom: 20px;\">
             ";
-        // line 11
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 11, $this->source); })()), "destinationC", [], "any", false, false, false, 11), 'widget', ["attr" => ["class" => "form-control form-control-lg", "placeholder" => "Enter destination"]]);
+        // line 12
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 12, $this->source); })()), "destinationC", [], "any", false, false, false, 12), 'widget', ["attr" => ["class" => "form-control form-control-lg", "placeholder" => "Enter destination"]]);
         echo "
         </div>
                   ";
-        // line 13
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 13, $this->source); })()), "destinationC", [], "any", false, false, false, 13), 'errors');
+        // line 14
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 14, $this->source); })()), "destinationC", [], "any", false, false, false, 14), 'errors');
         echo " 
 
 
          <div style=\"margin-bottom: 20px;\">
             ";
-        // line 17
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 17, $this->source); })()), "compteID", [], "any", false, false, false, 17), 'widget', ["attr" => ["class" => "form-control form-control-lg", "placeholder" => "Enter CompteID"]]);
+        // line 18
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 18, $this->source); })()), "compteID", [], "any", false, false, false, 18), 'widget', ["attr" => ["class" => "form-control form-control-lg", "placeholder" => "Enter CompteID"]]);
         echo "
         </div>
                   ";
-        // line 19
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 19, $this->source); })()), "compteID", [], "any", false, false, false, 19), 'errors');
+        // line 20
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 20, $this->source); })()), "compteID", [], "any", false, false, false, 20), 'errors');
         echo " 
 
 
@@ -111,8 +112,8 @@ class __TwigTemplate_98cc708f70ef32578e8c9e9a98423367 extends Template
             <button type=\"submit\" class=\"btn btn-primary btn-lg\">Add</button>
         </div>
         ";
-        // line 27
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 27, $this->source); })()), 'form_end');
+        // line 28
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 28, $this->source); })()), 'form_end');
         echo "
     </div>
 ";
@@ -145,7 +146,7 @@ class __TwigTemplate_98cc708f70ef32578e8c9e9a98423367 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  115 => 27,  104 => 19,  99 => 17,  92 => 13,  87 => 11,  82 => 9,  77 => 7,  72 => 5,  68 => 3,  58 => 2,  35 => 1,);
+        return array (  116 => 28,  105 => 20,  100 => 18,  93 => 14,  88 => 12,  82 => 9,  77 => 7,  72 => 5,  68 => 3,  58 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -159,6 +160,7 @@ class __TwigTemplate_98cc708f70ef32578e8c9e9a98423367 extends Template
             {{ form_widget(cheque.montantC, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Enter montant'}}) }}
         </div>
           {{ form_errors(cheque.montantC) }} 
+          
         <div style=\"margin-bottom: 20px;\">
             {{ form_widget(cheque.destinationC, {'attr': {'class': 'form-control form-control-lg', 'placeholder': 'Enter destination'}}) }}
         </div>
@@ -179,6 +181,6 @@ class __TwigTemplate_98cc708f70ef32578e8c9e9a98423367 extends Template
         {{ form_end(cheque) }}
     </div>
 {% endblock %}
-", "cheque/back/index.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\cheque\\back\\index.html.twig");
+", "cheque/back/index.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\cheque\\back\\index.html.twig");
     }
 }

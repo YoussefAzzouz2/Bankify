@@ -67,10 +67,10 @@ class Cheque extends \App\Entity\Cheque implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'montantC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'destinationC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'compteID', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'DateEmission', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'reclamtions'];
+            return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'montantC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'destinationC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'compteID', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'DateEmission', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'reclamtions', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'isfav'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'montantC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'destinationC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'compteID', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'DateEmission', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'reclamtions'];
+        return ['__isInitialized__', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'id', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'montantC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'destinationC', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'compteID', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'DateEmission', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'reclamtions', '' . "\0" . 'App\\Entity\\Cheque' . "\0" . 'isfav'];
     }
 
     /**
@@ -311,6 +311,28 @@ class Cheque extends \App\Entity\Cheque implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeReclamtion', [$reclamtion]);
 
         return parent::removeReclamtion($reclamtion);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getIsfav(): ?int
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getIsfav', []);
+
+        return parent::getIsfav();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setIsfav(int $isfav): static
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setIsfav', [$isfav]);
+
+        return parent::setIsfav($isfav);
     }
 
 }

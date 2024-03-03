@@ -547,6 +547,6 @@ col-sm-10
         </div>{#--#}
     </div>
 {%- endblock checkbox_row %}
-", "bootstrap_4_horizontal_layout.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_4_horizontal_layout.html.twig");
+", "bootstrap_4_horizontal_layout.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\vendor\\symfony\\twig-bridge\\Resources\\views\\Form\\bootstrap_4_horizontal_layout.html.twig");
     }
 }

@@ -566,6 +566,6 @@ class __TwigTemplate_d95133ae13548fc608b3fb2f36e4b2d8 extends Template
         {% endif %}
     </div>
 {% endblock %}
-", "@WebProfiler/Collector/http_client.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\http_client.html.twig");
+", "@WebProfiler/Collector/http_client.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\vendor\\symfony\\web-profiler-bundle\\Resources\\views\\Collector\\http_client.html.twig");
     }
 }

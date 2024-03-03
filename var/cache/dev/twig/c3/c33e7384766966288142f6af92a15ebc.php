@@ -79,6 +79,6 @@ class __TwigTemplate_517f2e01dd64ab3537edecc4368eeb92 extends Template
     <path d=\"M4 6v6a8 3 0 0 0 16 0v-6\"></path>
     <path d=\"M4 12v6a8 3 0 0 0 16 0v-6\"></path>
 </svg>
-", "@Doctrine/Collector/database.svg", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\vendor\\doctrine\\doctrine-bundle\\Resources\\views\\Collector\\database.svg");
+", "@Doctrine/Collector/database.svg", "C:\\Users\\Yassin\\Downloads\\Bankify\\vendor\\doctrine\\doctrine-bundle\\Resources\\views\\Collector\\database.svg");
     }
 }

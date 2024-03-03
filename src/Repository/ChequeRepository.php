@@ -48,14 +48,16 @@ class ChequeRepository extends ServiceEntityRepository
  /**
      * @return Cheque[] Returns an array of Cheque objects
    */
-  public function findByCompteID($value): array
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.compteID = :val')
-           ->setParameter('val', $value)
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
+  public function findByCompteIDAndIsFav($value): array
+  {
+      return $this->createQueryBuilder('c')
+          ->andWhere('c.compteID = :val')
+          ->setParameter('val', $value)
+          ->andWhere('c.isfav = :isFav')
+          ->setParameter('isFav', 1) // Filter where isFav is 1 (true)
+          ->getQuery()
+          ->getResult();
+  }
+  
+ 
 }

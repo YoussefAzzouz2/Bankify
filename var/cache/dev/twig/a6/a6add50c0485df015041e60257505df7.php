@@ -251,6 +251,6 @@ class __TwigTemplate_be0b889b02133fe61dd2ba96838d9904 extends Template
             </table>
         
 {% endblock %}
-", "cheque/front/pdf.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\cheque\\front\\pdf.html.twig");
+", "cheque/front/pdf.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\cheque\\front\\pdf.html.twig");
     }
 }

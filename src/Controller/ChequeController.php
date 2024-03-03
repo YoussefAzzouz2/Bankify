@@ -6,6 +6,8 @@ use DateTimeImmutable; // Import DateTimeImmutable
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\ChequeRepository;
@@ -26,6 +28,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Form\FormError;
+use Psr\Log\LoggerInterface;
+
 
 
 
@@ -33,7 +38,18 @@ use Dompdf\Options;
 
 
 class ChequeController extends AbstractController
-{
+{  private $flashBag;
+
+   
+    private $logger;
+
+    public function __construct(LoggerInterface $logger,FlashBagInterface $flashBag)
+    {
+        $this->logger = $logger;
+        $this->flashBag = $flashBag;
+
+    }
+
     #[Route('/', name: 'homepage')]
     public function homepage()
     {
@@ -74,6 +90,49 @@ class ChequeController extends AbstractController
         ]);
     }
 
+    #[Route('/cheques1/{ref}', name: 'cheque_list11')]
+    public function list1111(ChequeRepository $chequeRepository, $ref, ReclamtionRepository $ReclamtionRepository, Request $request, ManagerRegistry $managerRegistry)
+    {    
+        if ($request->headers->get('content-type') === 'application/json' && $request->isMethod('POST')) {
+            // Get the data sent via POST
+            $data = json_decode($request->getContent(), true);
+        
+            // Log the received data for verification
+            // Log the received data for verification
+      $this->logger->info('Received data:', $data);
+
+        
+            // Assuming you're sending the isFav value via POST
+            $isFav = $data['isFav'];
+            $ID = $data['itemId'];
+            var_dump($isFav);   
+            
+            $cheque = $chequeRepository->find($ID);
+            $cheque->setIsfav($isFav);
+            $entityManager = $managerRegistry->getManager();
+        
+            $entityManager->flush();
+        
+            return new JsonResponse(['success' => true]);
+        }
+
+      
+    
+        // If it's not an AJAX POST request, continue with the regular rendering logic
+        $cheques = $chequeRepository-> findByCompteIDAndIsFav($ref);
+        $Reclamtions = $ReclamtionRepository->findAll();
+        $randomNumber = mt_rand(1000, 9999); // Generate a random number between 1000 and 9999
+    
+        return $this->render("cheque/front/listt.html.twig", [
+            "tabcheque" => $cheques,
+            "tab" => $Reclamtions,
+            "ref" => $ref,
+            'random' => $randomNumber,
+        ]);
+    }
+    
+
+
 
 
 
@@ -85,24 +144,30 @@ class ChequeController extends AbstractController
     /**
      * @Route("/ajoutercheque", name="ajoutercheque")
      */
-    public function ajoutercheque(Request $request): Response
-    {
+    public function ajoutercheque(Request $request, ManagerRegistry $managerRegistry): Response
+    { 
+        
         $cheque = new Cheque();
         $form = $this->createForm(ChequeType::class, $cheque);
         $randomNumber = mt_rand(1000, 9999);
-
+       $cheque->setIsfav(0);
         $form->handleRequest($request);
+        $entityManager = $managerRegistry->getManager();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+           
+          
             $entityManager->persist($cheque);
             $entityManager->flush();
-            return $this->redirectToRoute('cheque_list');
-        }
+            return $this->redirectToRoute('cheque_list');}
+        
 
         return $this->render('cheque/back/index.html.twig', [
             'cheque' => $form->createView(),
             'random' => $randomNumber,
+            
+          
         ]);
     }
     /**
@@ -188,28 +253,60 @@ class ChequeController extends AbstractController
     /**
      * @Route("/ajoutercheque1/{ref}", name="ajoutercheque1")                                                      //front
      */
-    public function ajoutercheque1(Request $request, $ref, ManagerRegistry $managerRegistry): Response //front
+    public function ajoutercheque1(Request $request, $ref, ManagerRegistry $managerRegistry): Response
     {
-        $cheque = new Cheque();
         $entityManager = $managerRegistry->getManager();
+        
+        // Find the compte by its ID
         $compte = $entityManager->getRepository(Compte::class)->find($ref);
 
-        $cheque->setCompteId($compte);
-        $cheque->setDateEmission(new DateTime());
+        // Find all cheques related to the compte
+        $cheques = $entityManager->getRepository(Cheque::class)->findByCompteID($ref);
 
-        $form = $this->createForm(CheqType::class, $cheque);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($cheque);
-            $entityManager->flush();
-            return $this->redirectToRoute('cheque_list1', ['ref' => $ref]);
+        // Calculate the total sum of amounts of cheques
+        $sommeCheques = 0;
+        foreach ($cheques as $cheque) {
+            $sommeCheques += $cheque->getMontantC();
         }
 
+        // Create a new Cheque instance
+        $cheque = new Cheque();
+        $cheque->setCompteId($compte);
+        $cheque->setIsfav(0);
+        $cheque->setDateEmission(new DateTime());
+
+        // Create the form
+        $form = $this->createForm(CheqType::class, $cheque);
+
+        // Handle the form submission
+        $form->handleRequest($request);
+        $diff=(($compte->getSolde()) - $sommeCheques);
+        if($diff<0){$diff=0;}
+
+        if ($form->isSubmitted() ) {
+       
+          
+            if (($cheque->getMontantC()) > $diff) {
+         
+                // Set a custom error message directly on the form
+                $form->get('montantC')->addError(new FormError('Insufficient balance. Please enter a lower amount.'));
+            } else {
+                // Persist and flush the new cheque
+                $entityManager->persist($cheque);
+                $entityManager->flush();
+
+                // Redirect to the cheque list page
+                return $this->redirectToRoute('cheque_list1', ['ref' => $ref]);
+            }
+        }
+
+        // Render the form with or without error message
         return $this->render('cheque/front/addCheque.html.twig', [
             'cheque' => $form->createView(),
+            'a' => $diff,
+            's' => $sommeCheques,
+       
+
         ]);
     }
 
@@ -265,12 +362,7 @@ class ChequeController extends AbstractController
         // Optionally, you can redirect the user to another page after emptying the array
         return $this->redirectToRoute('cheque_list1', ['ref' => $c->getId()]);
     }
-    private $flashBag;
-
-    public function __construct(FlashBagInterface $flashBag)
-    {
-        $this->flashBag = $flashBag;
-    }
+  
     /**
      * @Route("/rec/{ref}", name="rec_edit")
      */
@@ -384,6 +476,15 @@ class ChequeController extends AbstractController
     {
         $entityManager = $managerRegistry->getManager();
         $ch = $entityManager->getRepository(Cheque::class)->find($ref);
+        $reff=$ch->getCompteId()->getId();
+        $entityManager = $managerRegistry->getManager();
+        $compte = $entityManager->getRepository(Compte::class)->find($reff);
+        $cheques = $entityManager->getRepository(Cheque::class)->findByCompteID($reff);
+     $sommeCheques = 0;
+    foreach ($cheques as $cheque) {
+        $sommeCheques += $cheque->getMontantC();
+    }
+    $newsomme=$sommeCheques-$ch->getMontantC();
         $randomNumber = mt_rand(1000, 9999);
 
         if (!$ch) {
@@ -394,10 +495,15 @@ class ChequeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($ch->getMontantC()> $compte->getSolde() -  $newsomme) {
+                // Set a custom error message directly on the form
+                $form->get('montantC')->addError(new FormError('Insufficient balance. Please enter a lower amount.'));
+            } else {
+              
             $entityManager->flush();
 
             return $this->redirectToRoute('cheque_list');
-        }
+        }}
 
         return $this->renderForm('cheque/back/edit.html.twig', [
             'cheque' => $form,
@@ -412,6 +518,17 @@ class ChequeController extends AbstractController
         $entityManager = $managerRegistry->getManager();
         $ch = $entityManager->getRepository(Cheque::class)->find($ref);
         $c = $ch->getCompteId();
+        $ref=$c->getId();
+        
+    $cheques = $entityManager->getRepository(Cheque::class)->findByCompteID($ref);
+    $sommeCheques = 0;
+    $s=$c->getSolde();
+    foreach ($cheques as $cheque) {
+        $sommeCheques += $cheque->getMontantC();
+    }
+    $newsomme=$sommeCheques-$ch->getMontantC();
+      
+       
 
 
 
@@ -419,45 +536,52 @@ class ChequeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($ch->getMontantC()> $c->getSolde() -  $newsomme) {
+                // Set a custom error message directly on the form
+                $form->get('montantC')->addError(new FormError('Insufficient balance. Please enter a lower amount.'));
+            } else {
             $entityManager->flush();
 
-            return $this->redirectToRoute('cheque_list1', ['ref' => $c->getId()]);
+            return $this->redirectToRoute('cheque_list1', ['ref' => $c->getId()]);}
         }
 
         return $this->renderForm('cheque/front/editCh.html.twig', [
             'cheque' => $form,
         ]);
     }
-
-
-    /**
+       /**
      * @Route("/enc1/{ref}", name="rec_edit1")
      */
-    public function edit111(Request $request, $ref, ManagerRegistry $managerRegistry): Response                 //front
+    public function edit111(Request $request,$ref,ManagerRegistry $managerRegistry): Response                 //front
     {
-        $entityManager = $managerRegistry->getManager();
+        $entityManager= $managerRegistry->getManager();
         $Rec = $entityManager->getRepository(Reclamtion::class)->find($ref);
-        $ch = $Rec->getChequeId();
-        $c = $ch->getCompteId();
+        $ch =$Rec->getChequeId();
+        $c=$ch->getCompteId();
 
-
-
+      
+        
         $form = $this->createForm(Rec1Type::class, $Rec);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+         
             $entityManager->flush();
 
-
+          
             return $this->redirectToRoute('cheque_list1', ['ref' => $c->getId()]);
+           
         }
 
         return $this->renderForm('cheque/front/editRec.html.twig', [
             'reclamtion' => $form,
-
+          
         ]);
     }
+
+
+
+  
 
 
 

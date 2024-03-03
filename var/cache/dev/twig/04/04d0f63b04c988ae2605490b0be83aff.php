@@ -147,6 +147,6 @@ class __TwigTemplate_5a2e38c4f63f97a0a33379eba5bc2ce5 extends Template
 
    
 {% endblock %}
-", "cheque/front/editRec.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\cheque\\front\\editRec.html.twig");
+", "cheque/front/editRec.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\cheque\\front\\editRec.html.twig");
     }
 }

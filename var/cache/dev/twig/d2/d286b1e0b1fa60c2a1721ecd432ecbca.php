@@ -1485,6 +1485,6 @@ class __TwigTemplate_2b1b367ca33a9e6242c17549b0a8e24a extends Template
 \t\t</body>
 \t{% endblock %}
 </html>
-", "base.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\base.html.twig");
+", "base.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\base.html.twig");
     }
 }

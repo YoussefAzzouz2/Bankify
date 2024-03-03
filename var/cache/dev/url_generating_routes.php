@@ -6,6 +6,7 @@ return [
     'homepage' => [[], ['_controller' => 'App\\Controller\\ChequeController::homepage'], [], [['text', '/']], [], [], []],
     'cheque_list' => [[], ['_controller' => 'App\\Controller\\ChequeController::list'], [], [['text', '/cheques']], [], [], []],
     'cheque_list1' => [['ref'], ['_controller' => 'App\\Controller\\ChequeController::list1'], [], [['variable', '/', '[^/]++', 'ref', true], ['text', '/cheques']], [], [], []],
+    'cheque_list11' => [['ref'], ['_controller' => 'App\\Controller\\ChequeController::list1111'], [], [['variable', '/', '[^/]++', 'ref', true], ['text', '/cheques1']], [], [], []],
     'ajoutercheque' => [[], ['_controller' => 'App\\Controller\\ChequeController::ajoutercheque'], [], [['text', '/ajoutercheque']], [], [], []],
     'ajouterreclamtion1' => [['ref'], ['_controller' => 'App\\Controller\\ChequeController::ajouterreclamtion1'], [], [['variable', '/', '[^/]++', 'ref', true], ['text', '/addRec']], [], [], []],
     'ajouterreclamtion2' => [['ref'], ['_controller' => 'App\\Controller\\ChequeController::ajouterreclamtion11'], [], [['variable', '/', '[^/]++', 'ref', true], ['text', '/addenc1']], [], [], []],

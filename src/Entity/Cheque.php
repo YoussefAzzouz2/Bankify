@@ -42,6 +42,9 @@ private ?\DateTimeInterface $DateEmission = null;
     #[ORM\OneToMany(mappedBy: 'chequeID', targetEntity: Reclamtion::class)]
     private Collection $reclamtions;
 
+    #[ORM\Column]
+    private ?int $isfav = null;
+
     public function __construct()
     {
         $this->reclamtions = new ArrayCollection();
@@ -51,6 +54,7 @@ private ?\DateTimeInterface $DateEmission = null;
     {
         return $this->id;
     }
+   
 
     public function getMontantC(): ?float
     {
@@ -126,6 +130,18 @@ private ?\DateTimeInterface $DateEmission = null;
                 $reclamtion->setChequeID(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsfav(): ?int
+    {
+        return $this->isfav;
+    }
+
+    public function setIsfav(int $isfav): static
+    {
+        $this->isfav = $isfav;
 
         return $this;
     }

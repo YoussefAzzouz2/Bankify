@@ -1847,6 +1847,6 @@ class __TwigTemplate_3283dd73e22a059531740e65bdb62e2a extends Template
         </tbody>
     </table>
 {% endmacro %}
-", "@Doctrine/Collector/db.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\vendor\\doctrine\\doctrine-bundle\\Resources\\views\\Collector\\db.html.twig");
+", "@Doctrine/Collector/db.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\vendor\\doctrine\\doctrine-bundle\\Resources\\views\\Collector\\db.html.twig");
     }
 }

@@ -163,6 +163,6 @@ class __TwigTemplate_084db31e599673abb6307bc651bb009a extends Template
     </ul>
 </div>
 {% endblock %}
-", "mailer/index.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\mailer\\index.html.twig");
+", "mailer/index.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\mailer\\index.html.twig");
     }
 }

@@ -96,6 +96,8 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
         echo "\" rel=\"stylesheet\"/>
 
          <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
+             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\"> <!-- Font Awesome for star icon -->
+
     <!-- Font Awesome CSS -->
     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\">
     <style>
@@ -105,6 +107,46 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
             top: 0;
             right: 0;
         }
+  
+           
+
+      .star-button-container {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* Style for the star icon */
+        .star-icon {
+            color: black;
+        }
+         .star-icon.active{
+            color: yellow;
+        }
+
+
+        .star-button-container1 {
+            display: inline-block;
+            cursor: pointer;
+        }
+.cheque-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cheque-info i {
+    margin-right: 0px; /* Pushes \"p\" to the far right */
+}
+
+.cheque-info h5 {
+    margin: 0 auto; /* Centers \"cheque\" horizontally */
+}
+
+
+
+       
+
+         
     </style>
 
     
@@ -112,9 +154,9 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 </head>
 
 \t";
-        // line 54
+        // line 96
         $this->displayBlock('body', $context, $blocks);
-        // line 518
+        // line 613
         echo "    
 </html>
 ";
@@ -147,7 +189,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 
     }
 
-    // line 54
+    // line 96
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -157,7 +199,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_6f47bbe9983af81f1e7450e9a3e3768f->enter($__internal_6f47bbe9983af81f1e7450e9a3e3768f_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 55
+        // line 97
         echo "\t\t<body>
 
     <div class=\"hero_area\">
@@ -165,7 +207,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
         <div class=\"hero_bg_box\">
             <div class=\"bg_img_box\">
                 <img src=\"";
-        // line 61
+        // line 103
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("front/images/hero-bg.png"), "html", null, true);
         echo "\" alt=\"\">
             </div>
@@ -246,7 +288,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
                         <div class=\"col-md-6\">
                             <div class=\"img-box\">
                                 <img src=\"";
-        // line 139
+        // line 181
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("front/images/slider-img.png"), "html", null, true);
         echo "\" alt=\"\">
                             </div>
@@ -269,7 +311,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
                         <div class=\"col-md-6\">
                             <div class=\"img-box\">
                                 <img src=\"";
-        // line 159
+        // line 201
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("front/images/slider-img.png"), "html", null, true);
         echo "\" alt=\"\">
                             </div>
@@ -292,7 +334,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
                         <div class=\"col-md-6\">
                             <div class=\"img-box\">
                                 <img src=\"";
-        // line 179
+        // line 221
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("front/images/slider-img.png"), "html", null, true);
         echo "\" alt=\"\">
                             </div>
@@ -315,9 +357,9 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 
 \t\t\t<!-- service section -->
             ";
-        // line 199
-        $context["RECTraitée"] = twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 199, $this->source); })()), "session", [], "any", false, false, false, 199), "get", ["RECTraitée"], "method", false, false, false, 199);
-        // line 200
+        // line 241
+        $context["RECTraitée"] = twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 241, $this->source); })()), "session", [], "any", false, false, false, 241), "get", ["RECTraitée"], "method", false, false, false, 241);
+        // line 242
         echo "
 <section class=\"service_section layout_padding\">
     <div class=\"service_container\">
@@ -332,101 +374,101 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
                 </p>
             </div>
             ";
-        // line 213
+        // line 255
         $context["x"] = 1;
-        // line 214
+        // line 256
         echo "              <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
     <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent";
-        // line 215
-        echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 215, $this->source); })()), "html", null, true);
+        // line 257
+        echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 257, $this->source); })()), "html", null, true);
         echo "\">
         <ul class=\"navbar-nav mr-auto\">
             <!-- Add your notification dropdown menu here -->
             <li class=\"nav-item dropdown\">
                 <!-- Your dropdown trigger button -->
                  ";
-        // line 220
+        // line 262
         $context["a"] = 0;
-        // line 221
+        // line 263
         echo "                 ";
         $context["tabchequeIds"] = [];
-        // line 222
+        // line 264
         echo "                    ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["tabcheque"]) || array_key_exists("tabcheque", $context) ? $context["tabcheque"] : (function () { throw new RuntimeError('Variable "tabcheque" does not exist.', 222, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["tabcheque"]) || array_key_exists("tabcheque", $context) ? $context["tabcheque"] : (function () { throw new RuntimeError('Variable "tabcheque" does not exist.', 264, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
-            // line 223
+            // line 265
             echo "                     ";
-            $context["tabchequeIds"] = twig_array_merge((isset($context["tabchequeIds"]) || array_key_exists("tabchequeIds", $context) ? $context["tabchequeIds"] : (function () { throw new RuntimeError('Variable "tabchequeIds" does not exist.', 223, $this->source); })()), [twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 223)]);
-            // line 224
+            $context["tabchequeIds"] = twig_array_merge((isset($context["tabchequeIds"]) || array_key_exists("tabchequeIds", $context) ? $context["tabchequeIds"] : (function () { throw new RuntimeError('Variable "tabchequeIds" does not exist.', 265, $this->source); })()), [twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 265)]);
+            // line 266
             echo "                      ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['item'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 225
+        // line 267
         echo "                     ";
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 225, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 267, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["REC"]) {
-            // line 226
+            // line 268
             echo "             ";
-            if (twig_in_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "getChequeID", [], "method", false, false, false, 226), "getId", [], "method", false, false, false, 226), (isset($context["tabchequeIds"]) || array_key_exists("tabchequeIds", $context) ? $context["tabchequeIds"] : (function () { throw new RuntimeError('Variable "tabchequeIds" does not exist.', 226, $this->source); })()))) {
+            if (twig_in_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "getChequeID", [], "method", false, false, false, 268), "getId", [], "method", false, false, false, 268), (isset($context["tabchequeIds"]) || array_key_exists("tabchequeIds", $context) ? $context["tabchequeIds"] : (function () { throw new RuntimeError('Variable "tabchequeIds" does not exist.', 268, $this->source); })()))) {
                 echo "    
          ";
-                // line 227
-                $context["a"] = ((isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 227, $this->source); })()) + 1);
-                // line 228
+                // line 269
+                $context["a"] = ((isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 269, $this->source); })()) + 1);
+                // line 270
                 echo "                          ";
             }
-            // line 229
+            // line 271
             echo "                     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['REC'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 230
+        // line 272
         echo "                <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdown";
-        echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 230, $this->source); })()), "html", null, true);
+        echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 272, $this->source); })()), "html", null, true);
         echo "\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     <i class=\"fas fa-bell\"></i> <span class=\"badge badge-warning\">";
-        // line 231
-        echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 231, $this->source); })()), "html", null, true);
+        // line 273
+        echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 273, $this->source); })()), "html", null, true);
         echo "</span>
                 </a>
                 
                 <!-- Your dropdown menu -->
                 <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"navbarDropdown";
-        // line 235
-        echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 235, $this->source); })()), "html", null, true);
+        // line 277
+        echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 277, $this->source); })()), "html", null, true);
         echo "\">
                     <div class=\"dropdown-header\">You have ";
-        // line 236
-        echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 236, $this->source); })()), "html", null, true);
+        // line 278
+        echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 278, $this->source); })()), "html", null, true);
         echo " notifications</div>
                   
                      ";
-        // line 238
+        // line 280
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 238, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 280, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["REC"]) {
-            // line 239
+            // line 281
             echo "             ";
-            if (twig_in_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "getChequeID", [], "method", false, false, false, 239), "getId", [], "method", false, false, false, 239), (isset($context["tabchequeIds"]) || array_key_exists("tabchequeIds", $context) ? $context["tabchequeIds"] : (function () { throw new RuntimeError('Variable "tabchequeIds" does not exist.', 239, $this->source); })()))) {
+            if (twig_in_filter(twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "getChequeID", [], "method", false, false, false, 281), "getId", [], "method", false, false, false, 281), (isset($context["tabchequeIds"]) || array_key_exists("tabchequeIds", $context) ? $context["tabchequeIds"] : (function () { throw new RuntimeError('Variable "tabchequeIds" does not exist.', 281, $this->source); })()))) {
                 echo "    
                         
                        <a class=\"dropdown-item\">
                       
                         <i class=\"fa fa-users mr-2 text-aqua\">  
                         la reclamtion ";
-                // line 244
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "id", [], "any", false, false, false, 244), "html", null, true);
+                // line 286
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "id", [], "any", false, false, false, 286), "html", null, true);
                 echo " a été ";
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "statutR", [], "any", false, false, false, 244), "html", null, true);
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "statutR", [], "any", false, false, false, 286), "html", null, true);
                 echo "  </i>
     ";
             }
-            // line 246
+            // line 288
             echo "
    </a>
   
@@ -435,12 +477,12 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['REC'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 250
+        // line 292
         echo "                    <!-- Add more notification items here as needed -->
                     <div class=\"dropdown-divider\"></div>
                     <a class=\"dropdown-item\" href=\"";
-        // line 252
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("a1", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 252, $this->source); })())]), "html", null, true);
+        // line 294
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("a1", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 294, $this->source); })())]), "html", null, true);
         echo "\">clear</a>
 
                 </div>
@@ -450,28 +492,61 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 </nav> 
 
             ";
-        // line 260
+        // line 302
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["tabcheque"]) || array_key_exists("tabcheque", $context) ? $context["tabcheque"] : (function () { throw new RuntimeError('Variable "tabcheque" does not exist.', 260, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["tabcheque"]) || array_key_exists("tabcheque", $context) ? $context["tabcheque"] : (function () { throw new RuntimeError('Variable "tabcheque" does not exist.', 302, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["cheque"]) {
-            // line 261
-            echo "           
+            // line 303
+            echo "        
             
 
-
+                                                                      
             <div class=\"row\">
                 <div class=\"col-md-10 mx-auto\">
                     <div class=\"box\">
                         <div class=\"detail-box\">
-                            <h5>cheque";
-            // line 269
-            echo twig_escape_filter($this->env, (isset($context["x"]) || array_key_exists("x", $context) ? $context["x"] : (function () { throw new RuntimeError('Variable "x" does not exist.', 269, $this->source); })()), "html", null, true);
+
+                            <div class=\"cheque-info\">
+    <h5>cheque";
+            // line 313
+            echo twig_escape_filter($this->env, (isset($context["x"]) || array_key_exists("x", $context) ? $context["x"] : (function () { throw new RuntimeError('Variable "x" does not exist.', 313, $this->source); })()), "html", null, true);
             echo "</h5>
+     ";
+            // line 314
+            if ((twig_get_attribute($this->env, $this->source, $context["cheque"], "getIsfav", [], "method", false, false, false, 314) == 0)) {
+                // line 315
+                echo "    <div class=\"star-button-container\" id=\"star-button-";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 315), "html", null, true);
+                echo "\" data-item-id=\"";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 315), "html", null, true);
+                echo "\">
+        <i class=\"fas fa-star star-icon\"></i>
+    </div>
+";
+            } else {
+                // line 319
+                echo "    <div class=\"star-button-container\" id=\"star-button-";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 319), "html", null, true);
+                echo "\" data-item-id=\"";
+                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 319), "html", null, true);
+                echo "\">
+        <i class=\"fas fa-star star-icon active\"></i> <!-- Add the 'active' class here -->
+    </div>
+";
+            }
+            // line 322
+            echo "   
+</div>
+
                             ";
-            // line 270
-            $context["x"] = ((isset($context["x"]) || array_key_exists("x", $context) ? $context["x"] : (function () { throw new RuntimeError('Variable "x" does not exist.', 270, $this->source); })()) + 1);
-            // line 271
-            echo "                            <table border=\"1\">
+            // line 325
+            $context["x"] = ((isset($context["x"]) || array_key_exists("x", $context) ? $context["x"] : (function () { throw new RuntimeError('Variable "x" does not exist.', 325, $this->source); })()) + 1);
+            echo "  
+
+                                                                              
+                             
+                       
+                            <table border=\"1\">
                                 <tr>
                                     <td>montantC</td>
                                     <td>dateEmission</td>
@@ -487,16 +562,16 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
                                 
                                 <tr>
                                     <td>";
-            // line 286
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "montantC", [], "any", false, false, false, 286), "html", null, true);
+            // line 345
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "montantC", [], "any", false, false, false, 345), "html", null, true);
             echo "</td>
                                     <td>";
-            // line 287
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "dateEmission", [], "any", false, false, false, 287)), "html", null, true);
+            // line 346
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["cheque"], "dateEmission", [], "any", false, false, false, 346)), "html", null, true);
             echo "</td>
                                     <td>";
-            // line 288
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["cheque"], "destinationC", [], "any", false, false, false, 288), "getFullName", [], "method", false, false, false, 288), "html", null, true);
+            // line 347
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["cheque"], "destinationC", [], "any", false, false, false, 347), "getFullName", [], "method", false, false, false, 347), "html", null, true);
             echo "</td>
                                     <td>
                                         <table border=\"1\">
@@ -505,92 +580,92 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
                                                 <td>statut</td>
                                                 <td> <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">
     <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent";
-            // line 295
-            echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 295, $this->source); })()), "html", null, true);
+            // line 354
+            echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 354, $this->source); })()), "html", null, true);
             echo "\">
         <ul class=\"navbar-nav mr-auto\">
             <!-- Add your notification dropdown menu here -->
             <li class=\"nav-item dropdown\">
                 <!-- Your dropdown trigger button -->
                  ";
-            // line 300
+            // line 359
             $context["a"] = 0;
-            // line 301
+            // line 360
             echo "                     ";
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 301, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 360, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["REC"]) {
-                // line 302
+                // line 361
                 echo "                     ";
-                if ((twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 302) == twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "chequeID", [], "any", false, false, false, 302), "getId", [], "method", false, false, false, 302))) {
-                    // line 303
+                if ((twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 361) == twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "chequeID", [], "any", false, false, false, 361), "getId", [], "method", false, false, false, 361))) {
+                    // line 362
                     echo "                       ";
-                    $context["a"] = ((isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 303, $this->source); })()) + 1);
-                    // line 304
+                    $context["a"] = ((isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 362, $this->source); })()) + 1);
+                    // line 363
                     echo "                     ";
                 }
-                // line 305
+                // line 364
                 echo "                     ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['REC'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 306
+            // line 365
             echo "                <a class=\"nav-link dropdown-toggle\" id=\"navbarDropdown";
-            echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 306, $this->source); })()), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 365, $this->source); })()), "html", null, true);
             echo "\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
                     <i class=\"fas fa-bell\"></i> <span class=\"badge badge-warning\">";
-            // line 307
-            echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 307, $this->source); })()), "html", null, true);
+            // line 366
+            echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 366, $this->source); })()), "html", null, true);
             echo "</span>
                 </a>
                 
                 <!-- Your dropdown menu -->
                 <div class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"navbarDropdown";
-            // line 311
-            echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 311, $this->source); })()), "html", null, true);
+            // line 370
+            echo twig_escape_filter($this->env, (isset($context["random"]) || array_key_exists("random", $context) ? $context["random"] : (function () { throw new RuntimeError('Variable "random" does not exist.', 370, $this->source); })()), "html", null, true);
             echo "\">
                     <div class=\"dropdown-header\">You have ";
-            // line 312
-            echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 312, $this->source); })()), "html", null, true);
+            // line 371
+            echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 371, $this->source); })()), "html", null, true);
             echo " notifications</div>
                   
                      ";
-            // line 314
+            // line 373
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 314, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["RECTraitée"]) || array_key_exists("RECTraitée", $context) ? $context["RECTraitée"] : (function () { throw new RuntimeError('Variable "RECTraitée" does not exist.', 373, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["REC"]) {
-                // line 315
+                // line 374
                 echo "                         ";
-                if ((twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 315) == twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "chequeID", [], "any", false, false, false, 315), "getId", [], "method", false, false, false, 315))) {
-                    // line 316
+                if ((twig_get_attribute($this->env, $this->source, $context["cheque"], "getId", [], "method", false, false, false, 374) == twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, $context["REC"], "chequeID", [], "any", false, false, false, 374), "getId", [], "method", false, false, false, 374))) {
+                    // line 375
                     echo "                        
                        <a class=\"dropdown-item\">
                       
                         <i class=\"fa fa-users mr-2 text-aqua\">  
                         la reclamtion ";
-                    // line 320
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "id", [], "any", false, false, false, 320), "html", null, true);
+                    // line 379
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "id", [], "any", false, false, false, 379), "html", null, true);
                     echo " a été ";
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "statutR", [], "any", false, false, false, 320), "html", null, true);
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["REC"], "statutR", [], "any", false, false, false, 379), "html", null, true);
                     echo "  </i>
 
 
    </a> ";
                 }
-                // line 324
+                // line 383
                 echo "  
                   ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['REC'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 326
+            // line 385
             echo "                    <!-- Add more notification items here as needed -->
                     <div class=\"dropdown-divider\"></div>
                     <a class=\"dropdown-item\" href=\"";
-            // line 328
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("a11", ["ref" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 328)]), "html", null, true);
+            // line 387
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("a11", ["ref" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 387)]), "html", null, true);
             echo "\">clear</a>
 
                 </div>
@@ -600,64 +675,64 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 </nav>   </td>
                                             </tr>
                                             ";
-            // line 336
+            // line 395
             $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable((isset($context["tab"]) || array_key_exists("tab", $context) ? $context["tab"] : (function () { throw new RuntimeError('Variable "tab" does not exist.', 336, $this->source); })()));
+            $context['_seq'] = twig_ensure_traversable((isset($context["tab"]) || array_key_exists("tab", $context) ? $context["tab"] : (function () { throw new RuntimeError('Variable "tab" does not exist.', 395, $this->source); })()));
             foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-                // line 337
+                // line 396
                 echo "                                                ";
-                if (($context["cheque"] == twig_get_attribute($this->env, $this->source, $context["i"], "chequeID", [], "any", false, false, false, 337))) {
-                    // line 338
+                if (($context["cheque"] == twig_get_attribute($this->env, $this->source, $context["i"], "chequeID", [], "any", false, false, false, 396))) {
+                    // line 397
                     echo "                                                    <tr>
                                                         <td>";
-                    // line 339
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "categorie", [], "any", false, false, false, 339), "html", null, true);
+                    // line 398
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "categorie", [], "any", false, false, false, 398), "html", null, true);
                     echo "</td>
                                                         <td>";
-                    // line 340
-                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "statutR", [], "any", false, false, false, 340), "html", null, true);
+                    // line 399
+                    echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["i"], "statutR", [], "any", false, false, false, 399), "html", null, true);
                     echo "</td>
                                                         <td>
                                                             <a href=\"";
-                    // line 342
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("Reclamtion_remove1", ["id" => twig_get_attribute($this->env, $this->source, $context["i"], "id", [], "any", false, false, false, 342)]), "html", null, true);
+                    // line 401
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("Reclamtion_remove1", ["id" => twig_get_attribute($this->env, $this->source, $context["i"], "id", [], "any", false, false, false, 401)]), "html", null, true);
                     echo "\" class=\"class=\"btn-box\"\">delete</a>
                                                        
                                                             <a href=\"";
-                    // line 344
-                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("rec_edit1", ["ref" => twig_get_attribute($this->env, $this->source, $context["i"], "id", [], "any", false, false, false, 344)]), "html", null, true);
+                    // line 403
+                    echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("rec_edit1", ["ref" => twig_get_attribute($this->env, $this->source, $context["i"], "id", [], "any", false, false, false, 403)]), "html", null, true);
                     echo "\" class=\"class=\"btn-box\"\">update</a>
                                                         </td>
                                                     </tr>
                                                 ";
                 }
-                // line 348
+                // line 407
                 echo "                                            ";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 349
+            // line 408
             echo "                                        </table>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <a href=\"";
-            // line 354
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cheque_remove1", ["id" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 354)]), "html", null, true);
+            // line 413
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cheque_remove1", ["id" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 413)]), "html", null, true);
             echo "\" class=\"class=\"btn-box\"\">delete cheque</a>
                                     </td>
                                     <td>
                                         <a href=\"";
-            // line 357
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ch1_edit", ["ref" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 357)]), "html", null, true);
+            // line 416
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ch1_edit", ["ref" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 416)]), "html", null, true);
             echo "\" class=\"class=\"btn-box\"\">update cheque</a>
                                     </td>
                                     <td>
                                         <a href=\"";
-            // line 360
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajouterreclamtion2", ["ref" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 360)]), "html", null, true);
+            // line 419
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajouterreclamtion2", ["ref" => twig_get_attribute($this->env, $this->source, $context["cheque"], "id", [], "any", false, false, false, 419)]), "html", null, true);
             echo "\" class=\"class=\"btn-box\"\">Add Reclamation</a>
                                     </td>
                                 </tr>
@@ -672,17 +747,23 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['cheque'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 370
+        // line 429
         echo "            <div class=\"btn-box\">
                 <a href=\"";
-        // line 371
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("generate_pdf", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 371, $this->source); })())]), "html", null, true);
+        // line 430
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("generate_pdf", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 430, $this->source); })())]), "html", null, true);
         echo "\">PDF</a>
+            </div>
+             <div class=\"btn-box\">
+                <a href=\"";
+        // line 433
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("cheque_list11", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 433, $this->source); })())]), "html", null, true);
+        echo "\">Marked cheques</a>
             </div>
             <div class=\"btn-box\">
                 <a href=\"";
-        // line 374
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajoutercheque1", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 374, $this->source); })())]), "html", null, true);
+        // line 436
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("ajoutercheque1", ["ref" => (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 436, $this->source); })())]), "html", null, true);
         echo "\">Add New cheque</a>
             </div>
         </div>
@@ -825,6 +906,42 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 \t\t\t<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap\"></script>
 \t\t\t<!-- End Google Map -->
 
+
+<script>
+    // Get all star button elements
+    const starButtons = document.querySelectorAll('.star-button-container');
+
+    // Add click event listener to each star button
+    starButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Toggle active class on the star icon within this button
+            const starIcon = this.querySelector('.star-icon');
+            starIcon.classList.toggle('active');
+            
+            // Get the item ID from the data attribute
+            const itemId = this.dataset.itemId;
+
+            // Send AJAX request to update favorite status
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log('Favorite status updated successfully.');
+                    } else {
+                        console.error('Error updating favorite status.');
+                    }
+                }
+            };
+            xhr.open('POST', '/cheques1/";
+        // line 604
+        echo twig_escape_filter($this->env, (isset($context["ref"]) || array_key_exists("ref", $context) ? $context["ref"] : (function () { throw new RuntimeError('Variable "ref" does not exist.', 604, $this->source); })()), "html", null, true);
+        echo "');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({ itemId: itemId, isFav: starIcon.classList.contains('active') ? 1 : 0 }));
+        });
+    });
+</script>
+
 \t\t</body>
 \t";
         
@@ -856,7 +973,7 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  685 => 374,  679 => 371,  676 => 370,  660 => 360,  654 => 357,  648 => 354,  641 => 349,  635 => 348,  628 => 344,  623 => 342,  618 => 340,  614 => 339,  611 => 338,  608 => 337,  604 => 336,  593 => 328,  589 => 326,  582 => 324,  573 => 320,  567 => 316,  564 => 315,  560 => 314,  555 => 312,  551 => 311,  544 => 307,  539 => 306,  533 => 305,  530 => 304,  527 => 303,  524 => 302,  519 => 301,  517 => 300,  509 => 295,  499 => 288,  495 => 287,  491 => 286,  474 => 271,  472 => 270,  468 => 269,  458 => 261,  454 => 260,  443 => 252,  439 => 250,  430 => 246,  423 => 244,  414 => 239,  410 => 238,  405 => 236,  401 => 235,  394 => 231,  389 => 230,  383 => 229,  380 => 228,  378 => 227,  373 => 226,  368 => 225,  362 => 224,  359 => 223,  354 => 222,  351 => 221,  349 => 220,  341 => 215,  338 => 214,  336 => 213,  321 => 200,  319 => 199,  296 => 179,  273 => 159,  250 => 139,  169 => 61,  161 => 55,  151 => 54,  140 => 17,  130 => 16,  118 => 518,  116 => 54,  95 => 36,  89 => 33,  83 => 30,  71 => 21,  67 => 19,  65 => 16,  60 => 14,  45 => 1,);
+        return array (  937 => 604,  766 => 436,  760 => 433,  754 => 430,  751 => 429,  735 => 419,  729 => 416,  723 => 413,  716 => 408,  710 => 407,  703 => 403,  698 => 401,  693 => 399,  689 => 398,  686 => 397,  683 => 396,  679 => 395,  668 => 387,  664 => 385,  657 => 383,  648 => 379,  642 => 375,  639 => 374,  635 => 373,  630 => 371,  626 => 370,  619 => 366,  614 => 365,  608 => 364,  605 => 363,  602 => 362,  599 => 361,  594 => 360,  592 => 359,  584 => 354,  574 => 347,  570 => 346,  566 => 345,  543 => 325,  538 => 322,  528 => 319,  518 => 315,  516 => 314,  512 => 313,  500 => 303,  496 => 302,  485 => 294,  481 => 292,  472 => 288,  465 => 286,  456 => 281,  452 => 280,  447 => 278,  443 => 277,  436 => 273,  431 => 272,  425 => 271,  422 => 270,  420 => 269,  415 => 268,  410 => 267,  404 => 266,  401 => 265,  396 => 264,  393 => 263,  391 => 262,  383 => 257,  380 => 256,  378 => 255,  363 => 242,  361 => 241,  338 => 221,  315 => 201,  292 => 181,  211 => 103,  203 => 97,  193 => 96,  182 => 17,  172 => 16,  160 => 613,  158 => 96,  95 => 36,  89 => 33,  83 => 30,  71 => 21,  67 => 19,  65 => 16,  60 => 14,  45 => 1,);
     }
 
     public function getSourceContext()
@@ -899,6 +1016,8 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
     <link href=\"{{ asset('front/css/responsive.css') }}\" rel=\"stylesheet\"/>
 
          <link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\">
+             <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css\"> <!-- Font Awesome for star icon -->
+
     <!-- Font Awesome CSS -->
     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\">
     <style>
@@ -908,6 +1027,46 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
             top: 0;
             right: 0;
         }
+  
+           
+
+      .star-button-container {
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        /* Style for the star icon */
+        .star-icon {
+            color: black;
+        }
+         .star-icon.active{
+            color: yellow;
+        }
+
+
+        .star-button-container1 {
+            display: inline-block;
+            cursor: pointer;
+        }
+.cheque-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cheque-info i {
+    margin-right: 0px; /* Pushes \"p\" to the far right */
+}
+
+.cheque-info h5 {
+    margin: 0 auto; /* Centers \"cheque\" horizontally */
+}
+
+
+
+       
+
+         
     </style>
 
     
@@ -1121,16 +1280,33 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 </nav> 
 
             {% for cheque in tabcheque %}
-           
+        
             
 
-
+                                                                      
             <div class=\"row\">
                 <div class=\"col-md-10 mx-auto\">
                     <div class=\"box\">
                         <div class=\"detail-box\">
-                            <h5>cheque{{ x }}</h5>
-                            {% set x = x + 1 %}
+
+                            <div class=\"cheque-info\">
+    <h5>cheque{{ x }}</h5>
+     {% if cheque.getIsfav() == 0 %}
+    <div class=\"star-button-container\" id=\"star-button-{{ cheque.getId() }}\" data-item-id=\"{{ cheque.getId() }}\">
+        <i class=\"fas fa-star star-icon\"></i>
+    </div>
+{% else %}
+    <div class=\"star-button-container\" id=\"star-button-{{ cheque.getId() }}\" data-item-id=\"{{ cheque.getId() }}\">
+        <i class=\"fas fa-star star-icon active\"></i> <!-- Add the 'active' class here -->
+    </div>
+{% endif %}   
+</div>
+
+                            {% set x = x + 1 %}  
+
+                                                                              
+                             
+                       
                             <table border=\"1\">
                                 <tr>
                                     <td>montantC</td>
@@ -1232,6 +1408,9 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
             {% endfor %}
             <div class=\"btn-box\">
                 <a href=\"{{ path('generate_pdf', {'ref': ref}) }}\">PDF</a>
+            </div>
+             <div class=\"btn-box\">
+                <a href=\"{{ path('cheque_list11', {'ref': ref}) }}\">Marked cheques</a>
             </div>
             <div class=\"btn-box\">
                 <a href=\"{{ path('ajoutercheque1', {'ref': ref}) }}\">Add New cheque</a>
@@ -1376,10 +1555,43 @@ class __TwigTemplate_bdd7637fd550ecae6713c1345a7714d3 extends Template
 \t\t\t<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap\"></script>
 \t\t\t<!-- End Google Map -->
 
+
+<script>
+    // Get all star button elements
+    const starButtons = document.querySelectorAll('.star-button-container');
+
+    // Add click event listener to each star button
+    starButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Toggle active class on the star icon within this button
+            const starIcon = this.querySelector('.star-icon');
+            starIcon.classList.toggle('active');
+            
+            // Get the item ID from the data attribute
+            const itemId = this.dataset.itemId;
+
+            // Send AJAX request to update favorite status
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        console.log('Favorite status updated successfully.');
+                    } else {
+                        console.error('Error updating favorite status.');
+                    }
+                }
+            };
+            xhr.open('POST', '/cheques1/{{ ref }}');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({ itemId: itemId, isFav: starIcon.classList.contains('active') ? 1 : 0 }));
+        });
+    });
+</script>
+
 \t\t</body>
 \t{% endblock %}
     
 </html>
-", "cheque/front/list.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\cheque\\front\\list.html.twig");
+", "cheque/front/list.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\cheque\\front\\list.html.twig");
     }
 }

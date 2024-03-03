@@ -85,6 +85,15 @@ class __TwigTemplate_082aba668e9064c414a2f6f5f7c52480 extends Template
         // line 11
         echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 11, $this->source); })()), "montantC", [], "any", false, false, false, 11), 'errors');
         echo "  
+            ";
+        // line 12
+        echo twig_escape_filter($this->env, (isset($context["a"]) || array_key_exists("a", $context) ? $context["a"] : (function () { throw new RuntimeError('Variable "a" does not exist.', 12, $this->source); })()), "html", null, true);
+        echo "
+            ";
+        // line 13
+        echo twig_escape_filter($this->env, (isset($context["s"]) || array_key_exists("s", $context) ? $context["s"] : (function () { throw new RuntimeError('Variable "s" does not exist.', 13, $this->source); })()), "html", null, true);
+        echo "
+             
         </div>
         
         <!-- Add more form fields here as needed -->
@@ -92,16 +101,16 @@ class __TwigTemplate_082aba668e9064c414a2f6f5f7c52480 extends Template
         <div class=\"form-group\">
             <!-- Example: Select field for destinationC -->
             ";
-        // line 18
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 18, $this->source); })()), "destinationC", [], "any", false, false, false, 18), 'label', ["label_attr" => ["class" => "col-form-label"], "label" => "Destination Compte"]);
+        // line 21
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 21, $this->source); })()), "destinationC", [], "any", false, false, false, 21), 'label', ["label_attr" => ["class" => "col-form-label"], "label" => "Destination Compte"]);
         echo "
             ";
-        // line 19
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 19, $this->source); })()), "destinationC", [], "any", false, false, false, 19), 'widget', ["attr" => ["class" => "form-control"]]);
+        // line 22
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 22, $this->source); })()), "destinationC", [], "any", false, false, false, 22), 'widget', ["attr" => ["class" => "form-control"]]);
         echo "
             ";
-        // line 20
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 20, $this->source); })()), "destinationC", [], "any", false, false, false, 20), 'errors');
+        // line 23
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 23, $this->source); })()), "destinationC", [], "any", false, false, false, 23), 'errors');
         echo "  
         </div>
         
@@ -110,8 +119,8 @@ class __TwigTemplate_082aba668e9064c414a2f6f5f7c52480 extends Template
         </div>
         
         ";
-        // line 27
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 27, $this->source); })()), 'form_end');
+        // line 30
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["cheque"]) || array_key_exists("cheque", $context) ? $context["cheque"] : (function () { throw new RuntimeError('Variable "cheque" does not exist.', 30, $this->source); })()), 'form_end');
         echo "
     </div>
 ";
@@ -144,7 +153,7 @@ class __TwigTemplate_082aba668e9064c414a2f6f5f7c52480 extends Template
      */
     public function getDebugInfo()
     {
-        return array (  114 => 27,  104 => 20,  100 => 19,  96 => 18,  86 => 11,  82 => 10,  78 => 9,  72 => 6,  68 => 4,  58 => 3,  35 => 1,);
+        return array (  123 => 30,  113 => 23,  109 => 22,  105 => 21,  94 => 13,  90 => 12,  86 => 11,  82 => 10,  78 => 9,  72 => 6,  68 => 4,  58 => 3,  35 => 1,);
     }
 
     public function getSourceContext()
@@ -160,6 +169,9 @@ class __TwigTemplate_082aba668e9064c414a2f6f5f7c52480 extends Template
             {{ form_label(cheque.montantC, 'Cheque Montant', {'label_attr': {'class': 'col-form-label'}}) }}
             {{ form_widget(cheque.montantC, {'attr': {'class': 'form-control', 'placeholder': 'Enter cheque montant'}}) }}
             {{ form_errors(cheque.montantC) }}  
+            {{a}}
+            {{s}}
+             
         </div>
         
         <!-- Add more form fields here as needed -->
@@ -178,6 +190,6 @@ class __TwigTemplate_082aba668e9064c414a2f6f5f7c52480 extends Template
         {{ form_end(cheque) }}
     </div>
 {% endblock %}
-", "cheque/front/addCheque.html.twig", "C:\\Users\\Yassin\\Desktop\\Bankify-sal3am\\templates\\cheque\\front\\addCheque.html.twig");
+", "cheque/front/addCheque.html.twig", "C:\\Users\\Yassin\\Downloads\\Bankify\\templates\\cheque\\front\\addCheque.html.twig");
     }
 }
