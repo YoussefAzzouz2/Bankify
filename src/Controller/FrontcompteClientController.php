@@ -1,15 +1,32 @@
 <?php
 
 namespace App\Controller;
-
 use App\Entity\CompteClient;
 use App\Form\CompteClientType;
-use App\Repository\CompteClientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\Color\Color;
+use App\Repository\CompteClientRepository;
+use Endroid\QrCode\Encoding\Encoding;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
+
+
+
+
+
+
 
 class FrontcompteClientController extends AbstractController
 {
@@ -43,15 +60,84 @@ class FrontcompteClientController extends AbstractController
         ]);
     }
     #[Route('/show/{id}', name: 'app_frontcompte_client_show', methods: ['GET'])]
-    public function show(CompteClient $compteClient): Response
+    public function generateQrCode(CompteClientRepository $rep,$id): Response
     {
-        // Check if the entity is correctly fetched
-        return $this->render('frontcompte_client/show.html.twig', [
-            'compte_client' => $compteClient,
+        $infos = $rep->find($id);
+
+    // Extract information from the Specification entity
+    $content = [
+        'nom' => $infos->getNom(),
+        'prenom' => $infos->getPrenom(),
+        'mail' => $infos->getMail(),
+        'tel' => $infos->getTel(),
+        'rib' => $infos->getRib(),
+        'solde' => $infos->getSolde(),
+    
+        // Add more attributes as needed
+    ];
+
+    // Convert the array to a string
+    $contentString = json_encode($content);
+
+        $writer = new PngWriter();
+        $qrCode = QrCode::create($contentString)
+            ->setEncoding(new Encoding('UTF-8'))
+           
+            ->setSize(200)
+            ->setMargin(0)
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $qrCodeUri = $writer->write($qrCode)->getDataUri();
+
+        return $this->render('qr_code_generator/index.html.twig', [
+            'qrCodeUri' => $qrCodeUri,
+           
         ]);
     }
     
+    #[Route('/show/{id}/pdf', name: 'app_frontcompte_client_show_pdf', methods: ['GET'])]
+    public function showPdf(CompteClient $compteClient): Response
+    {
+        // Generate PDF content with user information
+        $pdfContent = $this->generatePdfContent($compteClient);
+        
+        // Create a DOMPDF instance
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($pdfContent);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+        
+        // Set response headers for PDF download
+        $response = new Response($dompdf->output());
+        $response->headers->set('Content-Type', 'application/pdf');
+        $response->headers->set('Content-Disposition', 'attachment; filename="compte_client.pdf"');
+        
+        return $response;
+    }
+    private function generatePdfContent(CompteClient $compteClient): string
+    {
+        // Generate PDF content with user information
+        $content = '<html>';
+        $content .= '<body>';
+        $content .= '<h1>User Information</h1>';
+        $content .= '<p>Name: ' . $compteClient->getNom() . '</p>';
+        $content .= '<p>Prenom: ' . $compteClient->getPrenom() . '</p>';
+        $content .= '<p>Tel: ' . $compteClient->getTel() . '</p>';
+        $content .= '<p>Mail: ' . $compteClient->getMail() . '</p>';
+        $content .= '<p>Rib: ' . $compteClient->getRib() . '</p>';
+        $content .= '<p>Solde: ' . $compteClient->getSolde() . '</p>';
+        // Include other user information fields as needed
+        $content .= '</body>';
+        $content .= '</html>';
+        
+        return $content;
+    }
 
+    
+
+    
+    
 
     #[Route('/{id}/edit', name: 'app_frontcompte_client_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, CompteClient $compteClient, EntityManagerInterface $entityManager): Response

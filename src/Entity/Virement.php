@@ -40,8 +40,9 @@ class Virement
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $heure = null;
 
-    #[ORM\ManyToOne(inversedBy: 'virements')]
-    private ?CompteClient $id_compte = null;
+    /* Removed or commented out the id_compte property */
+    // #[ORM\ManyToOne(inversedBy: 'virements')]
+    // private ?CompteClient $id_compte = null;
 
     public function getId(): ?int
     {
@@ -108,15 +109,5 @@ class Virement
         return $this;
     }
 
-    public function getIdCompte(): ?CompteClient
-    {
-        return $this->id_compte;
-    }
-
-    public function setIdCompte(?CompteClient $id_compte): static
-    {
-        $this->id_compte = $id_compte;
-
-        return $this;
-    }
+    /* Removed or commented out getIdCompte and setIdCompte methods */
 }

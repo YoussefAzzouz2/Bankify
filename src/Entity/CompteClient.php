@@ -30,7 +30,7 @@ class CompteClient
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Length(min: 8)]
+    #[Assert\Length(min: 8, max:8)]
     private ?string $tel = null;
 
     #[ORM\Column(length: 255)]

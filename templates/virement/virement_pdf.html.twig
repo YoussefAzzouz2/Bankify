@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}<title>Virement Details</title>{% endblock %}
+
+{% block body %}
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Virement Details</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 20px;
+            }
+            h1 {
+                color: #333;
+                text-align: center;
+            }
+            .details {
+                margin-top: 20px;
+            }
+            .details p {
+                margin-bottom: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Virement Details</h1>
+        <div class="details">
+            <p><strong>ID:</strong> {{ virement.id }}</p>
+            <p><strong>Compte Source:</strong> {{ virement.compteSource }}</p>
+            <p><strong>Compte Destination:</strong> {{ virement.compteDestination }}</p>
+            <p><strong>Montant:</strong> {{ virement.montant }}</p>
+            <p><strong>Date:</strong> {{ virement.date|date('Y-m-d') }}</p>
+            <p><strong>Heure:</strong> {{ virement.heure ? virement.heure|date('H:i:s') : '' }}</p>
+            <!-- Add more details as needed -->
+        </div>
+    </body>
+    </html>
+{% endblock %}
