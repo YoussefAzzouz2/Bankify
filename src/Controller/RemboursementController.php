@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Compte;
 use App\Entity\Remboursement;
 use App\Form\RemboursementType;
 use App\Repository\RemboursementRepository;
@@ -12,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
+use Twilio\Rest\Client;
 
 #[Route('/remboursement')]
 class RemboursementController extends AbstractController
@@ -67,6 +69,19 @@ class RemboursementController extends AbstractController
                 $this->addFlash('danger', 'Le montant doit être compris entre 100 et 299.');
                 return $this->redirectToRoute('remboursement_new', ['id' => $id]);
             }
+
+            $accountSid = 'AC3c608f407fd3e259afc11997317f4308';
+            $authToken = 'be754f90b1c0dd455e87f07f8f2d57dd';
+            $twilioNumber = '+14243734278';
+            $client = new Client($accountSid, $authToken);
+            $clientPhoneNumber = $compte->getTel();
+            $client->messages->create(
+                $clientPhoneNumber,
+                [
+                    'from' => $twilioNumber,
+                    'body' => 'Succés de remboursement'
+                ]
+            );
 
             $entityManager->persist($remboursement);
             $entityManager->flush();

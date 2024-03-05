@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategorieCreditRepository;
 use Dompdf\Dompdf;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/credit')]
 class CreditController extends AbstractController
@@ -43,11 +44,21 @@ class CreditController extends AbstractController
     }
 
     #[Route('/accepted', name: 'credit_accepted', methods: ['GET'])]
-    public function accepted(CreditRepository $creditRepository): Response
+    public function accepted(CreditRepository $creditRepository, PaginatorInterface $paginator, Request $request): Response
     {
-        return $this->render('credit/accepted.html.twig', [
-            'credits' => $creditRepository->findBy(['accepted' => true,'payed' => false]),
-        ]);
+    // Récupérez tous les crédits acceptés mais non payés
+    $creditsQuery = $creditRepository->findBy(['accepted' => true, 'payed' => false]);
+
+    // Paginer les résultats
+    $credits = $paginator->paginate(
+        $creditsQuery, // Requête à paginer
+        $request->query->getInt('page', 1), // Numéro de page, 1 par défaut
+        1 // Nombre d'éléments par page
+    );
+
+    return $this->render('credit/accepted.html.twig', [
+        'credits' => $credits,
+    ]);
     }
 
     #[Route('/demandes', name: 'credits_demandes', methods: ['GET'])]
