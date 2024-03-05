@@ -20,6 +20,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 
@@ -168,4 +169,36 @@ class FrontcompteClientController extends AbstractController
 
         return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
     }
+    #[Route('/statistics', name: 'app_frontcompte_client_statistics', methods: ['GET'])]
+    public function statistics(CompteClientRepository $compteClientRepository): Response
+    {
+        $compteClients = $compteClientRepository->findAll();
+        $statistics = [
+            'types' => [],
+            'packs' => []
+        ];
+    
+        foreach ($compteClients as $compteClient) {
+            $type = $compteClient->getNomType()->getNomType();
+            $pack = $compteClient->getNomPack()->getNomPack();
+    
+            if (!isset($statistics['types'][$type])) {
+                $statistics['types'][$type] = 1;
+            } else {
+                $statistics['types'][$type]++;
+            }
+    
+            if (!isset($statistics['packs'][$pack])) {
+                $statistics['packs'][$pack] = 1;
+            } else {
+                $statistics['packs'][$pack]++;
+            }
+        }
+    
+        // Rendre la vue twig avec les données des statistiques
+        return $this->render('frontcompte_client/statistics.html.twig', [
+            'statistics' => $statistics // Passer les statistiques en tant qu'objet PHP
+        ]);
+    }
+       
 }

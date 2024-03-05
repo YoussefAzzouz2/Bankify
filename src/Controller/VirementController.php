@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;  
+use Twig\Environment as TwigEnvironment;
+
 #[Route('/virement')]
 class VirementController extends AbstractController
 {
@@ -51,26 +53,27 @@ class VirementController extends AbstractController
     }
 
     #[Route('/virement/{id}/pdf', name: 'app_virement_show_pdf', methods: ['GET'])]
-    public function showPdf(Virement $virement): Response
+    public function showPdf(Virement $virement, TwigEnvironment $twig): Response
     {
         // Render the Twig template to generate HTML content
-        $htmlContent = $this->renderView('virement/virement_pdf.html.twig', [
+        $htmlContent = $twig->render('virement/virement_pdf.html.twig', [
             'virement' => $virement,
         ]);
-
+    
         // Create a DOMPDF instance
         $dompdf = new Dompdf();
         $dompdf->loadHtml($htmlContent);
         $dompdf->setPaper('A4', 'portrait');
         $dompdf->render();
-
+    
         // Set response headers for PDF download
         $response = new Response($dompdf->output());
         $response->headers->set('Content-Type', 'application/pdf');
         $response->headers->set('Content-Disposition', 'attachment; filename="virement.pdf"');
-
+    
         return $response;
     }
+
 
     
     private function generatePdfContent(Virement $virement): string
