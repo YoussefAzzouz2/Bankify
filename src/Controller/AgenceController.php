@@ -11,11 +11,53 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Symfony\Component\Form\Extension\Core\Type\EmailType; // Importer EmailType
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route('/agence')]
 class AgenceController extends AbstractController
 {
+    #[Route('/qr-codes/{id}', name: 'app_qr_codes')]
+    public function generateQrCode(AgenceRepository $rep, $id): Response
+    {
+        $specification = $rep->find($id);
+
+        // Extract information from the Agence entity
+        $content = [
+            'nom_agence' => $specification->getNomAgence(),
+            'tel_agence' => $specification->getTelAgence(),
+            'email_agence' => $specification->getEmailAgence(),
+            // Ajoutez d'autres attributs si nécessaire
+        ];
+
+        // Convert the array to a string
+        $contentString = json_encode($content);
+
+        $writer = new PngWriter();
+        $qrCode = QrCode::create($contentString)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setSize(250)
+            ->setMargin(0)
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $qrCodeUri = $writer->write($qrCode)->getDataUri();
+
+        return $this->render('agence/qrcode.html.twig', [
+            'qrCodeUri' => $qrCodeUri,
+        ]);
+    }
     #[Route('/', name: 'app_agence_index', methods: ['GET'])]
     public function index(AgenceRepository $agenceRepository): Response
     {
