@@ -100,7 +100,7 @@
         </tbody>
     </table>
 
-     <a href="{{ path('app_frontcompte_client') }}" class="btn btn-primary" style="width: 150px; display: block; margin: 0 auto;">Back to List</a>
+     <a href="{{ path('app_frontcompte_client'), {'id': app.user.id} }}" class="btn btn-primary" style="width: 150px; display: block; margin: 0 auto;">Back to List</a>
 
 	<a href="{{ path('app_frontcompte_client_edit', {'id': compte_client.id}) }}" class="btn btn-primary" style="width: 150px; display: block; margin: 0 auto;">Edit</a>
 

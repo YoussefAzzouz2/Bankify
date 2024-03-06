@@ -57,9 +57,13 @@ class CompteClient
     #[ORM\JoinColumn(name: "nom_pack", referencedColumnName: "nom_pack")]
     private ?Pack $nom_pack = null;
 
+    
+
     public function __construct()
     {
         $this->virements = new ArrayCollection();
+        $this->cheques = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -138,6 +142,19 @@ class CompteClient
 
         return $this;
     }
+    #[ORM\ManyToOne(inversedBy: 'comptes')]
+    private ?User $UserID = null;
+    public function getUserID(): ?User
+    {
+        return $this->UserID;
+    }
+
+    public function setUserID(?User $UserID): static
+    {
+        $this->UserID = $UserID;
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Virement>
@@ -192,4 +209,37 @@ class CompteClient
 
         return $this;
     }
+    #[ORM\OneToMany(mappedBy: 'compteID', targetEntity: Cheque::class)]
+    private Collection $cheques;
+      /**
+     * @return Collection<int, Cheque>
+     */
+    public function getCheques(): Collection
+    {
+        return $this->cheques;
+    }
+
+    public function addCheque(Cheque $cheque): static
+    {
+        if (!$this->cheques->contains($cheque)) {
+            $this->cheques->add($cheque);
+            $cheque->setCompteID($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheque(Cheque $cheque): static
+    {
+        if ($this->cheques->removeElement($cheque)) {
+            // set the owning side to null (unless already changed)
+            if ($cheque->getCompteID() === $this) {
+                $cheque->setCompteID(null);
+            }
+        }
+
+        return $this;
+    }
+
+   
 }

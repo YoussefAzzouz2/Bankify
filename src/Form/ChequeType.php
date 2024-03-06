@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Cheque;
-use App\Entity\Compte;
+use App\Entity\CompteClient;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -49,7 +49,7 @@ class ChequeType extends AbstractType
     
     private function getCompteChoices(): array
     {
-        $compteRepository = $this->entityManager->getRepository(Compte::class);
+        $compteRepository = $this->entityManager->getRepository(CompteClient::class);
         $comptes = $compteRepository->findAll();
         
         $choices = [];

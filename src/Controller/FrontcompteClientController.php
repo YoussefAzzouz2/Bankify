@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 use App\Entity\CompteClient;
+use App\Entity\user;
+
 use App\Form\CompteClientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,6 +17,9 @@ use Endroid\QrCode\Logo\Logo;
 use Endroid\QrCode\Label\Font\NotoSans;
 use Endroid\QrCode\Color\Color;
 use App\Repository\CompteClientRepository;
+use App\Repository\UserRepository;
+
+use Doctrine\ORM\Mapping\Id;
 use Endroid\QrCode\Encoding\Encoding;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Endroid\QrCode\ErrorCorrectionLevel;
@@ -31,28 +36,31 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class FrontcompteClientController extends AbstractController
 {
-    #[Route('/frontcompte/client', name: 'app_frontcompte_client')]
-    public function index(CompteClientRepository $compteClientRepository): Response
+    #[Route('/frontcompte/client/{id}', name: 'app_frontcompte_client')]
+    public function index(CompteClientRepository $compteClientRepository,$id): Response
     {
-        $compteClients = $compteClientRepository->findAll();
+        $compteClients = $compteClientRepository->findByUserID($id);
 
         return $this->render('frontcompte_client/index.html.twig', [
             'compte_clients' => $compteClients,
             'controller_name' => 'FrontcompteClientController',
         ]);
     }
-    #[Route('/new', name: 'app_frontcompte_client_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{id}', name: 'app_frontcompte_client_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager,$id,UserRepository $userR): Response
     {
         $compteClient = new CompteClient();
         $form = $this->createForm(CompteClientType::class, $compteClient);
         $form->handleRequest($request);
+        
+        $u=$userR->find($id);
+        $compteClient->setUserID($u);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($compteClient);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontcompte_client', ['id' => $id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('frontcompte_client/new.html.twig', [
@@ -97,43 +105,7 @@ class FrontcompteClientController extends AbstractController
         ]);
     }
     
-    #[Route('/show/{id}/pdf', name: 'app_frontcompte_client_show_pdf', methods: ['GET'])]
-    public function showPdf(CompteClient $compteClient): Response
-    {
-        // Generate PDF content with user information
-        $pdfContent = $this->generatePdfContent($compteClient);
-        
-        // Create a DOMPDF instance
-        $dompdf = new Dompdf();
-        $dompdf->loadHtml($pdfContent);
-        $dompdf->setPaper('A4', 'portrait');
-        $dompdf->render();
-        
-        // Set response headers for PDF download
-        $response = new Response($dompdf->output());
-        $response->headers->set('Content-Type', 'application/pdf');
-        $response->headers->set('Content-Disposition', 'attachment; filename="compte_client.pdf"');
-        
-        return $response;
-    }
-    private function generatePdfContent(CompteClient $compteClient): string
-    {
-        // Generate PDF content with user information
-        $content = '<html>';
-        $content .= '<body>';
-        $content .= '<h1>User Information</h1>';
-        $content .= '<p>Name: ' . $compteClient->getNom() . '</p>';
-        $content .= '<p>Prenom: ' . $compteClient->getPrenom() . '</p>';
-        $content .= '<p>Tel: ' . $compteClient->getTel() . '</p>';
-        $content .= '<p>Mail: ' . $compteClient->getMail() . '</p>';
-        $content .= '<p>Rib: ' . $compteClient->getRib() . '</p>';
-        $content .= '<p>Solde: ' . $compteClient->getSolde() . '</p>';
-        // Include other user information fields as needed
-        $content .= '</body>';
-        $content .= '</html>';
-        
-        return $content;
-    }
+   
 
     
 
@@ -145,11 +117,11 @@ class FrontcompteClientController extends AbstractController
     {
         $form = $this->createForm(CompteClientType::class, $compteClient);
         $form->handleRequest($request);
-
+        $ref=$compteClient->getUserID()->getId();
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontcompte_client', ['id' => $ref], Response::HTTP_SEE_OTHER);
 
         }
 
@@ -163,11 +135,12 @@ class FrontcompteClientController extends AbstractController
     public function delete(Request $request, CompteClient $compteClient, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$compteClient->getId(), $request->request->get('_token'))) {
+            $ref=$compteClient->getUserID()->getId();
             $entityManager->remove($compteClient);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_frontcompte_client', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_frontcompte_client', ['id' => $ref], Response::HTTP_SEE_OTHER);
     }
     #[Route('/statistics', name: 'app_frontcompte_client_statistics', methods: ['GET'])]
     public function statistics(CompteClientRepository $compteClientRepository): Response

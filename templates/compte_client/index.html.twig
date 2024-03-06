@@ -85,6 +85,8 @@
                 <td>
                     <a href="{{ path('app_compte_client_show', {'id': compte_client.id}) }}" class="button2">show</a>
                     <a href="{{ path('app_compte_client_edit', {'id': compte_client.id}) }}" class="button2">edit</a>
+                    <a href="{{ path('cheque_list1', {'id': compte_client.id}) }}" class="button2">Show Cheques</a>
+
                 </td>
             </tr>
         {% else %}

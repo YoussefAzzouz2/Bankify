@@ -96,6 +96,8 @@
                         <!-- Liens pour afficher et éditer le compte client -->
                         <a href="{{ path('app_frontcompte_client_show', {'id': compte_client.id}) }}">show</a>
                         <a href="{{ path('app_frontcompte_client_edit', {'id': compte_client.id}) }}">edit</a>
+                                            <a href="{{ path('cheque_list1', {'ref': compte_client.id}) }}" class="button2">Show Cheques</a>
+
                     </td>
                 </tr>
                 {% else %}
@@ -108,7 +110,7 @@
         </table>
 
         <!-- Lien pour créer un nouveau compte client -->
-        <a href="{{ path('app_frontcompte_client_new') }}">Create new</a>
+<a class="nav-link" href="{{ path('app_frontcompte_client_new', {'id': app.user.id}) }}">Create new</a>
         
         <!-- Bouton pour accéder aux statistiques -->
         <a class="btn" href="{{ path('app_frontcompte_client_statistics') }}">Statistiques</a>

@@ -21,20 +21,20 @@ class CompteClientRepository extends ServiceEntityRepository
         parent::__construct($registry, CompteClient::class);
     }
 
-//    /**
-//     * @return CompteClient[] Returns an array of CompteClient objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+     * @return CompteClient[] Returns an array of CompteClient objects
+     */
+    public function findByUserID($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.UserID = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+   }
 
 //    public function findOneBySomeField($value): ?CompteClient
 //    {

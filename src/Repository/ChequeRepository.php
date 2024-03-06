@@ -58,6 +58,18 @@ class ChequeRepository extends ServiceEntityRepository
           ->getQuery()
           ->getResult();
   }
+
+  /**
+     * @return Cheque[] Returns an array of Cheque objects
+   */
+  public function findByCompteID($value): array
+  {
+      return $this->createQueryBuilder('c')
+          ->andWhere('c.compteID = :val')
+          ->setParameter('val', $value)
+          ->getQuery()
+          ->getResult();
+  }
   
  
 }

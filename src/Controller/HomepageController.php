@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
-class HomepageController extends AbstractController
+class HomePageController extends AbstractController
 {
     #[Route('/', name: 'app_landinpage')]
     public function landin_page(): Response
