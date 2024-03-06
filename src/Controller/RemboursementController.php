@@ -82,8 +82,12 @@ public function trierRemboursements(RemboursementRepository $remboursementReposi
         $compte = $credit->getCompte();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $remboursement->setMontantRestant($credit->getMontantTotale() - $remboursement->getMontantR());
-            $today = new \DateTime();
+            $liste=$credit->getRemboursements();
+            $index=count($liste) - 1;
+            if($index==-1)
+                $remboursement->setMontantRestant($credit->getMontantTotale() - $remboursement->getMontantR());
+            else
+                $remboursement->setMontantRestant($liste[$index]->getMontantRestant() - $remboursement->getMontantR());            $today = new \DateTime();
             $remboursement->setDateR($today);
             $date = $today->diff($credit->getDateC());
             $remboursement->setdureeRestante($credit->getDureeTotale() - $date->format('%m'));

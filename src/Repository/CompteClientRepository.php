@@ -21,10 +21,10 @@ class CompteClientRepository extends ServiceEntityRepository
         parent::__construct($registry, CompteClient::class);
     }
 
-    /**
+ /**
      * @return CompteClient[] Returns an array of CompteClient objects
      */
-    public function findByCompteID($value): array
+    public function findByUserID($value): array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.UserID = :val')

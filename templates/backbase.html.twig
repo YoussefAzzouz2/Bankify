@@ -392,14 +392,24 @@
 								</a>
 								<ul class="treeview-menu">
 									<li>
-										<a href="pages/tables/simple.html">
+										<a href="{{ path('app_compte_client_index') }}">
 											<i class="fa fa-circle-o"></i>
 											Compte</a>
 									</li>
 									<li>
-										<a href="pages/tables/data.html">
+										<a href="{{ path('app_type_index') }}">
 											<i class="fa fa-circle-o"></i>
-											Virement</a>
+											Types</a>
+									</li>
+									<li>
+										<a href="{{ path('app_back_virement') }}">
+											<i class="fa fa-circle-o"></i>
+											Virements</a>
+									</li>
+									<li>
+										<a href="{{ path('app_pack_index') }}">
+											<i class="fa fa-circle-o"></i>
+											Packs</a>
 									</li>
 								</ul>
 							</li>
@@ -449,16 +459,25 @@
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
-									<li>
-										<a href="pages/forms/general.html">
-											<i class="fa fa-circle-o"></i>
-											Agences</a>
-									</li>
-									<li>
-										<a href="pages/forms/advanced.html">
-											<i class="fa fa-circle-o"></i>
-											Assurances</a>
-									</li>
+									  <li>
+        <a href="{{ path('app_agence_index') }}">
+            <i class="fa fa-circle-o"></i>
+            Agences
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('app_assurance_index') }}">
+            <i class="fa fa-circle-o"></i>
+            Assurances
+        </a>
+    </li>
+	    <li>
+        <a href="{{ path('app_categorie_assurance_index') }}">
+            <i class="fa fa-circle-o"></i>
+            Categorie Assurances
+        </a>
+    </li>
 								</ul>
 							</li>
 

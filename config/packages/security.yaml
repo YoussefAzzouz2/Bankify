@@ -46,8 +46,9 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/back, roles: ROLE_ADMIN }
-    - { path: ^/cheques, roles: ROLE_ADMIN }
-    - { path: ^/credit, roles: ROLE_ADMIN }
+    - { path: ^/assurance, roles: ROLE_ADMIN }
+    - { path: ^/categorie, roles: ROLE_ADMIN }
+    - { path: ^/agence, roles: ROLE_ADMIN }
     # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
