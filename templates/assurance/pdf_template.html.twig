@@ -1,0 +1,33 @@
+
+
+{% block content %}
+    <h1 style="color: #3C8DBC;">Bankify Assurance</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type d'Assurance</th>
+                <th>Montant Prime</th>
+                <th>Nom de l'Assuré</th>
+                <th>Nom du Bénéficiaire</th>
+                <th>Info sur l'Assurance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assurance in assurances %}
+                <tr>
+                    <td>{{ assurance.id }}</td>
+                    <td>{{ assurance.typeAssurance }}</td>
+                    <td>{{ assurance.montantPrime }}</td>
+                    <td>{{ assurance.nomAssure }}</td>
+                    <td>{{ assurance.nomBeneficiaire }}</td>
+                    <td>{{ assurance.infoAssurance }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}<title>Ajouter Les Assurance</title>{% endblock %}
+
+{% block content %}
+    <h1>Ajouter Une Assurance</h1>
+
+    {{ include('assurance/_form.html.twig') }}
+
+    <a href="{{ path('app_assurance_index') }}"class="btn btn-primary">back to list</a>
+    
+{% endblock %}
