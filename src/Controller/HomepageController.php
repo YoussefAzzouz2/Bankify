@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 
-class HomepageController extends AbstractController
+class HomePageController extends AbstractController
 {
     #[Route('/', name: 'app_landinpage')]
     public function landin_page(): Response
@@ -42,5 +42,12 @@ class HomepageController extends AbstractController
         } else {
             return $this->render("user/please-verify-email.html.twig");
         }
+    }
+    #[Route('/home/page', name: 'app_home_page')]
+    public function index(): Response
+    {
+        return $this->render('home_page/index.html.twig', [
+            'controller_name' => 'HomePageController',
+        ]);
     }
 }

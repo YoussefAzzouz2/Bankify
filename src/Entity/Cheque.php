@@ -29,7 +29,7 @@ class Cheque
 
     #[ORM\ManyToOne(inversedBy: 'cheques')]
     #[Assert\NotBlank(message: "compte owner selection is required")]
-    private ?Compte $compteID = null;
+    private ?CompteClient $compteID = null;
 
      /* #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $DateEmission = null; */
@@ -80,12 +80,12 @@ private ?\DateTimeInterface $DateEmission = null;
         return $this;
     }
 
-    public function getCompteID(): ?Compte
+    public function getCompteID(): ?CompteClient
     {
         return $this->compteID;
     }
 
-    public function setCompteID(?Compte $compteID): static
+    public function setCompteID(?CompteClient $compteID): static
     {
         $this->compteID = $compteID;
 

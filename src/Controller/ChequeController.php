@@ -20,7 +20,7 @@ use App\Form\CheqType;
 use App\Form\ReclamtionType;
 use App\Entity\Cheque;
 use App\Entity\Reclamtion;
-use App\Entity\Compte;
+use App\Entity\CompteClient;
 use Symfony\Component\HttpFoundation\Request;
 use Dompdf\Dompdf;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -252,7 +252,7 @@ class ChequeController extends AbstractController
         $entityManager = $managerRegistry->getManager();
         
         // Find the compte by its ID
-        $compte = $entityManager->getRepository(Compte::class)->find($ref);
+        $compte = $entityManager->getRepository(CompteClient::class)->find($ref);
 
         // Find all cheques related to the compte
         $cheques = $entityManager->getRepository(Cheque::class)->findByCompteID($ref);
@@ -472,7 +472,7 @@ class ChequeController extends AbstractController
         $ch = $entityManager->getRepository(Cheque::class)->find($ref);
         $reff=$ch->getCompteId()->getId();
         $entityManager = $managerRegistry->getManager();
-        $compte = $entityManager->getRepository(Compte::class)->find($reff);
+        $compte = $entityManager->getRepository(CompteClient::class)->find($reff);
         $cheques = $entityManager->getRepository(Cheque::class)->findByCompteID($reff);
      $sommeCheques = 0;
     foreach ($cheques as $cheque) {

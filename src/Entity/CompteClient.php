@@ -35,10 +35,29 @@ class CompteClient
 
     #[ORM\OneToMany(targetEntity: Carte::class, mappedBy: 'account')]
     private Collection $cartes;
+    #[ORM\ManyToOne(inversedBy: 'comptes')]
+    private ?User $UserID = null;
+      public function getUserID(): ?User
+    {
+        return $this->UserID;
+    }
+
+    public function setUserID(?User $UserID): static
+    {
+        $this->UserID = $UserID;
+
+        return $this;
+    }
+
+    #[ORM\OneToMany(mappedBy: 'compteID', targetEntity: Cheque::class)]
+    private Collection $cheques;
+
 
     public function __construct()
     {
         $this->cartes = new ArrayCollection();
+       $this->cheques = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -147,4 +166,13 @@ class CompteClient
 
         return $this;
     }
+     /**
+     * @return Collection<int, Cheque>
+     */
+    public function getCheques(): Collection
+    {
+        return $this->cheques;
+    }
+
+   
 }

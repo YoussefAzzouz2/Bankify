@@ -76,8 +76,8 @@
 											</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="about.html">
-												Mon carte</a>
+											<a class="nav-link" href="{{ path('app_macarte') }}">
+											Ma carte</a>
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" href="service.html">Mes Crédits</a>
@@ -150,7 +150,7 @@
 
 
 			<!-- service section -->
-
+{% block section  %}
 			<section class="service_section layout_padding">
 				<div class="service_container">
 					<div class="container ">
@@ -224,7 +224,8 @@
 			</section>
 
 			<!-- end service section -->
-
+{% endblock  %}
+{% block sec2  %}
 
 			<!-- about section -->
 
@@ -257,11 +258,11 @@
 					</div>
 				</div>
 			</section>
+{% endblock  %}
 
-			<!-- end about section -->
 
 			<!-- why section -->
-
+{% block why   %}
 			<section class="why_section layout_padding">
 				<div class="container">
 					<div class="heading_container heading_center">
@@ -317,7 +318,7 @@
 			</section>
 
 			<!-- end why section -->
-
+{% endblock  %}
 
 			<!-- info section -->
 
