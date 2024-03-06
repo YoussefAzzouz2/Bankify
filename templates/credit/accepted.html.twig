@@ -109,4 +109,57 @@
     {% do credits.setPageRange(3) %}
     {{ knp_pagination_render(credits,'credit/pagination.html.twig') }}
 </div>
+
+<form id="searchForm">
+    <input type="text" name="keyword" id="keyword" placeholder="Rechercher par numéro, montant, intérêt, date ou durée totale">
+    <button type="submit">Rechercher</button>
+</form>
+<script>
+    const searchForm = document.getElementById('searchForm');
+
+// Ajoutez un écouteur d'événement pour le soumission du formulaire
+searchForm.addEventListener('submit', function(event) {
+    event.preventDefault(); // Empêchez le formulaire de soumettre normalement
+
+    // Récupérez le mot-clé de recherche depuis l'input
+    const keyword = document.getElementById('keyword').value;
+
+    // Envoyez le mot-clé au contrôleur Symfony via AJAX
+    fetch('{{ path('credit_search') }}?keyword=' + encodeURIComponent(keyword), {
+        method: 'GET',
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Mettez à jour la section des résultats avec les nouveaux crédits
+        const creditsTableBody = document.querySelector('.table tbody');
+        creditsTableBody.innerHTML = ''; // Effacez les résultats précédents
+    
+        data.credits.forEach(credit => {
+            // Vérifiez si credit est défini
+            if (credit && typeof credit === 'object') {
+                // Créez les lignes de tableau pour chaque crédit
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${credit.id ? credit.id : ''}</td>
+                    <td>${credit.compteId ? credit.compteId : ''}</td>
+                    <td>${credit.montantTotale ? credit.montantTotale : ''}</td>
+                    <td>${credit.interet ? credit.interet : ''}</td>
+                    <td>${credit.categorieNom ? credit.categorieNom : ''}</td>
+                    <td>${credit.dateC ? credit.dateC : ''}</td>
+                    <td>${credit.dureeTotale ? credit.dureeTotale : ''}</td>
+                    <td>
+                        <a href="${credit.admin_show_url ? credit.admin_show_url : ''}" class="button2">Plus d'informations</a>
+                        <br>
+                        <a href="${credit.remboursement_admin_url ? credit.remboursement_admin_url : ''}" style="background-color:red" class="button2">Suivre remboursements</a>
+                    </td>
+                `;
+                creditsTableBody.appendChild(row);
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+</script>
 {% endblock %}

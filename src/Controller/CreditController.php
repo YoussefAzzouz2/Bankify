@@ -14,6 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategorieCreditRepository;
 use Dompdf\Dompdf;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[Route('/credit')]
 class CreditController extends AbstractController
@@ -53,13 +55,39 @@ class CreditController extends AbstractController
     $credits = $paginator->paginate(
         $creditsQuery, // Requête à paginer
         $request->query->getInt('page', 1), // Numéro de page, 1 par défaut
-        1 // Nombre d'éléments par page
+        1// Nombre d'éléments par page
     );
 
     return $this->render('credit/accepted.html.twig', [
         'credits' => $credits,
     ]);
     }
+    #[Route('/search', name: 'credit_search', methods: ['GET'])]
+public function search(Request $request, CreditRepository $creditRepository, UrlGeneratorInterface $urlGenerator): JsonResponse
+{
+    // Récupérez les crédits filtrés
+    $keyword = $request->query->get('keyword');
+    $credits = $creditRepository->findByKeyword($keyword);
+
+    // Construisez les URL pour les autres routes
+    $creditsWithUrls = [];
+    foreach ($credits as $credit) {
+        $creditsWithUrls[] = [
+            'id' => $credit->getId(),
+            'compteId' => $credit->getCompte()->getId(),
+            'montantTotale' => $credit->getMontantTotale(),
+            'interet' => $credit->getInteret(),
+            'categorieNom' => $credit->getCategorie()->getNom(),
+            'dateC' => $credit->getDateC()->format('Y-m-d'),
+            'dureeTotale' => $credit->getDureeTotale(),
+            'admin_show_url' => $urlGenerator->generate('admin_show', ['id' => $credit->getId()]),
+            'remboursement_admin_url' => $urlGenerator->generate('remboursement_admin', ['id' => $credit->getId()])
+        ];
+    }
+
+    // Retournez les résultats au format JSON avec les URL incluses
+    return new JsonResponse(['credits' => $creditsWithUrls]);
+}
 
     #[Route('/demandes', name: 'credits_demandes', methods: ['GET'])]
     public function demandes(CreditRepository $creditRepository): Response

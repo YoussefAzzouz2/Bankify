@@ -21,6 +21,18 @@ class CreditRepository extends ServiceEntityRepository
         parent::__construct($registry, Credit::class);
     }
 
+    public function findByKeyword($keyword)
+    {
+        // Créez votre propre logique de recherche en fonction du mot-clé fourni
+        // Cela pourrait impliquer une requête Doctrine personnalisée ou une utilisation de méthodes de recherche déjà existantes
+        // Cet exemple est très simplifié
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.id LIKE :keyword OR c.montantTotale LIKE :keyword OR c.interet LIKE :keyword OR c.dateC LIKE :keyword OR c.dureeTotale LIKE :keyword')
+            ->setParameter('keyword', '%' . $keyword . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return Credit[] Returns an array of Credit objects
 //     */
