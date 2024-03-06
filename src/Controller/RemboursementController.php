@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Compte;
+use App\Entity\CompteClient;
 use App\Entity\Remboursement;
 use App\Form\RemboursementType;
 use App\Repository\RemboursementRepository;
@@ -104,15 +104,16 @@ public function trierRemboursements(RemboursementRepository $remboursementReposi
             }
 
             $accountSid = 'AC3c608f407fd3e259afc11997317f4308';
-            $authToken = 'be754f90b1c0dd455e87f07f8f2d57dd';
+            $authToken = '71464c1aad9d96516cce71d543cf8ffa';
             $twilioNumber = '+14243734278';
             $client = new Client($accountSid, $authToken);
             $clientPhoneNumber = $compte->getTel();
+            $message="Succés de remboursement"."\nDe montant ".$remboursement->getMontantR()." DT\nRéalisé le ".$remboursement->getDateR()->format('Y-m-d')."\nIl vous reste ".$remboursement->getMontantRestant()." DT a payé sur les prochaines ".$remboursement->getDureeRestante()." mois";
             $client->messages->create(
                 $clientPhoneNumber,
                 [
                     'from' => $twilioNumber,
-                    'body' => 'Succés de remboursement'
+                    'body' => $message
                 ]
             );
 

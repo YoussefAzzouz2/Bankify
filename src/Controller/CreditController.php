@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Credit;
 use App\Form\CreditType;
-use App\Repository\CompteRepository;
+use App\Repository\CompteClientRepository;
 use App\Repository\CreditRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class CreditController extends AbstractController
 {
     #[Route('/client', name: 'credit_home')]
-    public function home(CreditRepository $creditRepository,CompteRepository $compteRepository): Response
+    public function home(CreditRepository $creditRepository,CompteClientRepository $compteRepository): Response
     {
         $comptes = $compteRepository->findById(1);//apres integration la commande devient $this->security->getUser()->getCompte();
         $compte = $comptes[0];
@@ -123,7 +123,7 @@ public function search(Request $request, CreditRepository $creditRepository, Url
     }
 
     #[Route('/new', name: 'credit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager,CategorieCreditRepository $categorieCreditRepository,CompteRepository $compteRepository,CreditRepository $creditRepository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager,CategorieCreditRepository $categorieCreditRepository,CompteClientRepository $compteRepository,CreditRepository $creditRepository): Response
     {
         $credit = new Credit();
         $categories = $categorieCreditRepository->findAll();

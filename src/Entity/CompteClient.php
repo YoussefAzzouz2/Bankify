@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\CompteRepository;
+use App\Repository\CompteClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CompteRepository::class)]
-class Compte
+#[ORM\Entity(repositoryClass: CompteClientRepository::class)]
+class CompteClient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

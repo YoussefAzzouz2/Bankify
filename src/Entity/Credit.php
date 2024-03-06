@@ -44,7 +44,7 @@ class Credit
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Compte $compte = null;
+    private ?CompteClient $compte = null;
 
     #[ORM\ManyToOne(inversedBy: 'credits')]
     #[ORM\JoinColumn(nullable: false)]
@@ -169,12 +169,12 @@ class Credit
         return 'Credit #' . $this->id; // Vous pouvez personnaliser cette représentation selon vos besoins
     }
 
-    public function getCompte(): ?Compte
+    public function getCompte(): ?CompteClient
     {
         return $this->compte;
     }
 
-    public function setCompte(Compte $compte): static
+    public function setCompte(CompteClient $compte): static
     {
         $this->compte = $compte;
 
