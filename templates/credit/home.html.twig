@@ -71,7 +71,11 @@
 										<h5>
 											Mon crédit actuel
 										</h5>
+								{% if id == -1 %}
+								<a href="#">Consulter</a>
+								{% else %}
 								<a href="{{ path('client_show',{'id': id}) }}">Consulter</a>
+								{% endif %}
 							</div>
 						</div>
 					</div>

@@ -29,7 +29,7 @@ class CreditController extends AbstractController
         if ($credits!=null){
             $credit=$credits[0];
             $id=$credit->getId();
-        } else $id=508;
+        } else $id=-1;
         return $this->render('credit/home.html.twig',['id' => $id]);
     }
 
