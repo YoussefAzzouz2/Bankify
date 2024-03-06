@@ -1,0 +1,15 @@
+{% extends 'backbase.html.twig' %}
+
+{% block title %}<title>Statistiques Assurance</title>{% endblock %}
+
+{% block content %}
+    <h1>Statistiques Assurance</h1>
+
+    <p>Nombre total d'assurances : {{ totalAssurances }}</p>
+
+    {# Vous pouvez ajouter d'autres statistiques ici #}
+
+    <a href="{{ path('app_assurance_index') }}" class="btn btn-primary">Retour à la liste des assurances</a>
+    <a href="{{ path('app_assurance_stats') }}" class="btn btn-primary">Voir les statistiques</a>
+
+{% endblock %}

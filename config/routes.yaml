@@ -1,3 +1,13 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+# config/routes.yaml
+
+# Route pour afficher la liste des assurances
+app_front_assurance:
+    path: /front/assurance
+    controller: App\Controller\FrontAssuranceController::index
+
+# Route pour mettre à jour la note de l'assurance
+update_rating:
+    path: /update-rating
+    controller: App\Controller\FrontAssuranceController::updateRating
+    methods: POST
+

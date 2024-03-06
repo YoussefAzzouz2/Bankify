@@ -112,4 +112,21 @@ class Assurance
     {
         return $repository->findDistinctTypes();
     }
+
+    #[ORM\Column(type: 'decimal', precision: 3, scale: 2, nullable: true)]
+    private ?float $rating = null;
+    
+    // Getter et setter pour la note
+    public function getRating(): ?float
+    {
+        return $this->rating;
+    }
+    
+    public function setRating(?float $rating): static
+    {
+        $this->rating = $rating;
+    
+        return $this;
+    }
+    
 }
