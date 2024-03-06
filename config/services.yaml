@@ -7,6 +7,8 @@ parameters:
   image_directory: "%kernel.project_dir%/public/uploads/images/users"
 
 services:
+'App\Services\QrcodeService':
+        arguments: ['@Endroid\QrCode\Builder\Builder']
   App\Entity\User:
     public: true
   # default configuration for services in *this* file
