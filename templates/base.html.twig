@@ -80,7 +80,7 @@
 											Ma carte</a>
 										</li>
 										<li class="nav-item">
-											<a class="nav-link" href="service.html">Mes Crédits</a>
+											<a class="nav-link" href="{{ path('credit_home') }}">Mes Crédits</a>
 										</li>
 										<li class="nav-item">
 											<a class="nav-link" href="why.html">Mes chèques</a>
@@ -319,6 +319,8 @@
 
 			<!-- end why section -->
 {% endblock  %}
+{% block info  %}
+
 
 			<!-- info section -->
 
@@ -374,6 +376,7 @@
 					</div>
 				</div>
 			</section>
+			{% endblock  %}
 
 			<!-- end info section -->
 

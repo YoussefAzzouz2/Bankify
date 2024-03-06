@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Remboursement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Réçu de remboursement</h1>
+        <br>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id Remboursement</th>
+                    <td>{{ remboursement.id }}</td>
+                </tr>
+                <tr>
+                    <th>Id Crédit</th>
+                    <td>{{ remboursement.credit.getId() }}</td>
+                </tr>
+                <tr>
+                    <th>Montant Remboursé</th>
+                    <td>{{ remboursement.montantR }}</td>
+                </tr>
+                <tr>
+                    <th>Montant Restant</th>
+                    <td>{{ remboursement.montantRestant }}</td>
+                </tr>
+                <tr>
+                    <th>Date Remboursement</th>
+                    <td>{{ remboursement.dateR ? remboursement.dateR|date('Y-m-d') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Durée Restante</th>
+                    <td>{{ remboursement.dureeRestante }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <h5 style="text-align:right;">Signer</h5>
+    </div>
+</body>
+</html>

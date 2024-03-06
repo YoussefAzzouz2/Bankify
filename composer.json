@@ -12,6 +12,8 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "~2.4",
         "dompdf/dompdf": "^2.0",
+        "twilio/sdk": "^7.16",
+
         "karser/karser-recaptcha3-bundle": "^0.1.26",
         "knpuniversity/oauth2-client-bundle": "^2.18",
         "league/oauth2-google": "^4.0",
