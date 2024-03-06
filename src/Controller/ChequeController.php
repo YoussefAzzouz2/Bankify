@@ -50,13 +50,7 @@ class ChequeController extends AbstractController
 
     }
 
-    #[Route('/', name: 'homepage')]
-    public function homepage()
-    {
-        return $this->render(
-            "frontCheque.html.twig"
-        );
-    }
+ 
 
     #[Route('/cheques', name: 'cheque_list')]
     public function list(ChequeRepository $chequeRepository, ReclamtionRepository $ReclamtionRepository)

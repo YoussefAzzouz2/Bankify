@@ -30,6 +30,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $googleId = null; // Add the googleId property
+    #[ORM\OneToMany(mappedBy: 'UserID', targetEntity: Compte::class)]
+    private Collection $comptes;
+
+    #[ORM\OneToMany(mappedBy: 'destinationC', targetEntity: Cheque::class)]
+    private Collection $cheques;
 
     #[ORM\Column]
     private array $roles = [];
@@ -70,6 +75,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->comptes = new ArrayCollection();
+        $this->cheques = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -308,4 +315,68 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         return $this;
     }
+       /**
+     * @return Collection<int, Compte>
+     */
+    public function getComptes(): Collection
+    {
+        return $this->comptes;
+    }
+
+    public function addCompte(Compte $compte): static
+    {
+        if (!$this->comptes->contains($compte)) {
+            $this->comptes->add($compte);
+            $compte->setUserID($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompte(Compte $compte): static
+    {
+        if ($this->comptes->removeElement($compte)) {
+            // set the owning side to null (unless already changed)
+            if ($compte->getUserID() === $this) {
+                $compte->setUserID(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cheque>
+     */
+    public function getCheques(): Collection
+    {
+        return $this->cheques;
+    }
+
+    public function addCheque(Cheque $cheque): static
+    {
+        if (!$this->cheques->contains($cheque)) {
+            $this->cheques->add($cheque);
+            $cheque->setDestinationC($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCheque(Cheque $cheque): static
+    {
+        if ($this->cheques->removeElement($cheque)) {
+            // set the owning side to null (unless already changed)
+            if ($cheque->getDestinationC() === $this) {
+                $cheque->setDestinationC(null);
+            }
+        }
+
+        return $this;
+    }
+    public function getFullName(): string
+    {
+        return $this->nom . ' ' . $this->prenom;
+    }
+
 }
