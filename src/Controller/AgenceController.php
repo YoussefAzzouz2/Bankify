@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 
 use App\Entity\Agence;
@@ -10,6 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Form\Extension\Core\Type\EmailType; // Importer EmailType
 
 #[Route('/agence')]
 class AgenceController extends AbstractController
@@ -77,5 +79,33 @@ class AgenceController extends AbstractController
         }
 
         return $this->redirectToRoute('app_agence_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/send-email', name: 'app_agence_send_email', methods: ['GET', 'POST'])]
+    public function sendEmail(Request $request, Agence $agence, MailerInterface $mailer): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('email', EmailType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            $email = (new Email())
+                ->from('ben.mansour789@gmail.com')
+                ->to($data['email'])
+                ->subject('Sujet de l\'e-mail')
+                ->text('Contenu du message'); // Vous pouvez également utiliser html() pour inclure un contenu HTML
+
+            $mailer->send($email);
+
+            // Redirection ou affichage d'un message de confirmation
+        }
+
+        return $this->render('agence/send_email.html.twig', [
+            'form' => $form->createView(),
+            'agence' => $agence,
+        ]);
     }
 }

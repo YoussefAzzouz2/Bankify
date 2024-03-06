@@ -30,6 +30,7 @@
 <td>
     <a href="{{ path('app_assurance_show', {'id': assurance.id}) }}" class="btn btn-primary">Show</a>
     <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-primary">Edit</a>
+      
 </td>
 
                 </td>
@@ -48,4 +49,5 @@
     <a href="{{ path('app_agence_index') }}" class="btn btn-primary">Go to Agence</a>
     <a href="{{ path('app_categorie_assurance_index') }}"class="btn btn-primary">GO to Categories</a>
 <a href="{{ path('app_home_page') }}"class="btn btn-primary">Go to FRONT</a>
+<a href="{{ path('app_assurance_pdf') }}" class="btn btn-primary">Générer PDF</a>
 {% endblock %}

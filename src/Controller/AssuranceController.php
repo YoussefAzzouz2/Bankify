@@ -10,6 +10,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 #[Route('/assurance')]
 class AssuranceController extends AbstractController
@@ -21,6 +23,34 @@ class AssuranceController extends AbstractController
             'assurances' => $assuranceRepository->findAll(),
         ]);
     }
+
+    #[Route('/pdf', name: 'app_assurance_pdf', methods: ['GET'])]
+public function generatePdf(AssuranceRepository $assuranceRepository): Response
+{
+    $assurances = $assuranceRepository->findAll();
+
+    // Générez le HTML du contenu du PDF avec le modèle spécifique à la liste des assurances
+    $html = $this->renderView('assurance/pdf_template.html.twig', [
+        'assurances' => $assurances,
+    ]);
+
+    // Créez une instance de Dompdf avec les options nécessaires
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $options->set('isRemoteEnabled', true);
+    $dompdf = new Dompdf($options);
+
+    // Chargez le contenu HTML dans Dompdf
+    $dompdf->loadHtml($html);
+
+    // Rendez le PDF
+    $dompdf->render();
+
+    // Envoyez le PDF en réponse HTTP
+    return new Response($dompdf->output(), Response::HTTP_OK, [
+        'Content-Type' => 'application/pdf',
+    ]);
+}
 
     #[Route('/new', name: 'app_assurance_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
