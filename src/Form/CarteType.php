@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use App\Entity\CompteClient;
-use App\Entity\Type;
+use App\Entity\TypeC;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class CarteType extends AbstractType
@@ -21,13 +21,12 @@ class CarteType extends AbstractType
             ->add('Statut_C')
             ->add('account', EntityType::class, [
                 'class' => CompteClient::class,
-'choice_label' => 'id',
+                'choice_label' => 'id',
             ])
             ->add('type', EntityType::class, [
-                'class' => Type::class,
-'choice_label' => 'type',
-            ])
-        ;
+                'class' => TypeC::class,
+                'choice_label' => 'type',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

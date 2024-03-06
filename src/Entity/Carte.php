@@ -20,22 +20,22 @@ class Carte
     private ?int $id = null;
 
     #[ORM\Column(unique: true)]
-    #[Assert\NotBlank(message:"Vous devez saisir un numero")]
-    
+    #[Assert\NotBlank(message: "Vous devez saisir un numero")]
+
     private ?int $Num_C = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message:"Vous devez saisir une date")]
+    #[Assert\NotBlank(message: "Vous devez saisir une date")]
     private ?\DateTimeInterface $Date_Exp = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"Vous devez saisir un network")]
+    #[Assert\NotBlank(message: "Vous devez saisir un network")]
     #[Assert\Choice(choices: ['visa', 'mastercard'], message: "Les networeks valides sont visa et mastercard.")]
     private ?string $Type_C = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"Vous devez saisir un statue")]
-    #[Assert\Choice(choices: ['active', 'bloquée','expirée'], message: "Les statues valides sont active, bloquée, expirée.")]
+    #[Assert\NotBlank(message: "Vous devez saisir un statue")]
+    #[Assert\Choice(choices: ['active', 'bloquée', 'expirée'], message: "Les statues valides sont active, bloquée, expirée.")]
     private ?string $Statut_C = null;
 
     #[ORM\OneToMany(targetEntity: Transaction::class, mappedBy: 'id_C')]
@@ -45,7 +45,7 @@ class Carte
     private ?CompteClient $account = null;
 
     #[ORM\ManyToOne(inversedBy: 'cartes')]
-    private ?Type $type = null;
+    private ?TypeC $type = null;
 
     public function __construct()
     {
@@ -147,12 +147,12 @@ class Carte
         return $this;
     }
 
-    public function getType(): ?Type
+    public function getType(): ?TypeC
     {
         return $this->type;
     }
 
-    public function setType(?Type $type): static
+    public function setType(?TypeC $type): static
     {
         $this->type = $type;
 

@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Type;
+use App\Entity\TypeC;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TypeType extends AbstractType
+class TypeCType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -21,7 +21,7 @@ class TypeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Type::class,
+            'data_class' => TypeC::class,
         ]);
     }
 }

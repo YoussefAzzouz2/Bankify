@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\TypeRepository;
+use App\Repository\TypeCRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 
 
-#[ORM\Entity(repositoryClass: TypeRepository::class)]
-class Type
+#[ORM\Entity(repositoryClass: TypeCRepository::class)]
+class TypeC
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -26,7 +26,7 @@ class Type
     #[ORM\Column]
     private ?float $montant_min = null;
 
-    #[ORM\OneToMany(targetEntity: Carte::class, mappedBy: 'type')]
+    #[ORM\OneToMany(targetEntity: Carte::class, mappedBy: 'typeC')]
     private Collection $cartes;
 
     public function __construct()
