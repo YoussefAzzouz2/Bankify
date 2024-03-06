@@ -1,0 +1,58 @@
+
+
+{% block content %}
+    <div class="container">
+        <h2>Cheques List</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid black;">ID</th>
+                        <th style="border: 1px solid black;">Montant</th>
+                        <th style="border: 1px solid black;">Date Emission</th>
+                        <th style="border: 1px solid black;">Destination</th>
+                         <th style="border: 1px solid black;">CompteID</th>
+                        <th style="border: 1px solid black;">Reclamations</th>
+                     
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cheque in tabcheque %}
+                        <tr>
+                            <td style="border: 1px solid black;">{{ cheque.id}}</td>
+                            <td style="border: 1px solid black;" >{{ cheque.montantC }}</td>
+                            <td style="border: 1px solid black;">{{ cheque.dateEmission|date }}</td>
+                            <td style="border: 1px solid black;">{{ cheque.destinationC.getFullName() }}</td>
+                            <td style="border: 1px solid black;">{{ cheque.compteID.getid() }}</td>
+                            <td style="border: 1px solid black;">
+                                <table border="1" style="border-color: black;" class="table table-bordered">
+                                    <thead>
+                                        <tr style="border: 1px solid black;">
+                                            <th style="border: 1px solid black;">ID REC</th>
+                                            <th style="border: 1px solid black;">categorie</th>
+                                            <th style="border: 1px solid black;">Statut</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for enc in tab %}
+                                            {% if enc.chequeID == cheque %}
+                                                <tr>
+                                                    <td style="border: 1px solid black;">{{ enc.id }}</td>
+                                                    <td style="border: 1px solid black;">{{ enc.categorie }}</td>
+                                                    
+                                                    <td style="border: 1px solid black;">{{ enc.statutR }}</td>
+                                                    
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                            
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        
+{% endblock %}
