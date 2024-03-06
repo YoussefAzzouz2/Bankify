@@ -158,4 +158,16 @@ class Carte
 
         return $this;
     }
+
+    public function updateStatus(): void
+    {
+        // Get the current date
+        $currentDate = new \DateTime();
+
+        // Compare expiration date with current date
+        if ($this->Date_Exp < $currentDate) {
+            // Set status to 'bloquée' if expiration date has passed
+            $this->Statut_C = 'bloquée';
+        }
+    }
 }

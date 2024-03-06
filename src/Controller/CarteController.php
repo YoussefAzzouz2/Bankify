@@ -42,11 +42,32 @@ class CarteController extends AbstractController
         $visaCount = $carteRepository->countByType('visa');
         $mastercardCount = $carteRepository->countByType('mastercard');
 
+        // Group cards by expiration date
+        $calendar = [];
+        $cartes = $carteRepository->findAll();
+        foreach ($cartes as $carte) {
+            $dateExp = $carte->getDateExp()->format('Y-m-d');
+            $calendar[$dateExp][] = $carte;
+        }
+
+        // Generate calendar matrix
+        $start = new \DateTime('first day of this month');
+        $end = new \DateTime('last day of this month');
+        $interval = new \DateInterval('P1D');
+        $period = new \DatePeriod($start, $interval, $end);
+        $calendarMatrix = [];
+        foreach ($period as $date) {
+            $day = $date->format('Y-m-d');
+            $calendarMatrix[$day]['day'] = $date->format('d');
+            $calendarMatrix[$day]['cards'] = isset($calendar[$day]) ? $calendar[$day] : [];
+        }
+
         return $this->render('carte/index.html.twig', [
             'cartes' => $carteRepository->findAll(),
             'visaCount' => $visaCount,
             'mastercardCount' => $mastercardCount,
             'pagination' => $pagination,
+            'calendar' => array_chunk($calendarMatrix, 7, true),
         ]);
     }
 
@@ -58,6 +79,7 @@ class CarteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash('success', 'Vous avez une nouvelle carte');
             $entityManager->persist($carte);
             $entityManager->flush();
 
@@ -200,6 +222,39 @@ public function searchCartes(Request $request, CarteRepository $carteRepository)
             'cartes' => $cartes,
         ]);
     }
+    
+    #[Route('/calendar', name: 'calendar')]
+    public function calendar(CarteRepository $carteRepository): Response
+    {
+        $cartes = $carteRepository->findAll();
+    
+        // Initialize an array to hold calendar data
+        $calendar = [];
+    
+        // Group cards by expiration date
+        foreach ($cartes as $carte) {
+            // Get the expiration date of the card
+            $expirationDate = $carte->getDateExp();
+    
+            // Check if expiration date is not null
+            if ($expirationDate !== null) {
+                // Extract month and year from the expiration date
+                $expirationMonth = $expirationDate->format('F');
+                $expirationYear = $expirationDate->format('Y');
+    
+                // Format the key for the calendar array
+                $key = $expirationMonth . ' ' . $expirationYear;
+    
+                // Add the expiration date to the corresponding month/year in the calendar
+                $calendar[$key][] = $expirationDate;
+            }
+        }
+    
+        return $this->render('carte/calendar.html.twig', [
+            'calendar' => $calendar,
+        ]);
+    }
+    
 
     
 }

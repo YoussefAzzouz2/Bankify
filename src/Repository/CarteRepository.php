@@ -55,6 +55,16 @@ public function findByPartialNumC($value)
         ->getQuery()
         ->getResult();
 }
+
+
+public function findExpiredCards()
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.Date_Exp < :now')
+            ->setParameter('now', new \DateTime())
+            ->getQuery()
+            ->getResult();
+    }
     
 
 public function countByType(string $type): int

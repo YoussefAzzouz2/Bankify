@@ -1,20 +1,12 @@
 <!DOCTYPE html>
 <html>
-    
 	<head>
 		<meta charset="UTF-8">
 		{% block title %}
-			<title>Bankify</title>
+			<title>AdminLTE 2 | Dashboard</title>
 		{% endblock %}
 		<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 		{% block css %}
-		    <style>
-        /* Adjust the size of the chart */
-        #cardTypeChart {
-            width: 300px;
-            height: 300px;
-        }
-    </style>
 			<!-- Bootstrap 3.3.2 -->
 			<link
 			href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css"/>
@@ -27,7 +19,8 @@
 			<!-- Theme style -->
 			<link
 			href="{{asset('dist/css/AdminLTE.min.css')}}" rel="stylesheet" type="text/css"/>
-			<!-- AdminLTE Skins. Choose a skin from the css/skins 																																																																																																						         folder instead of downloading all of them to reduce the load. -->
+			<!-- AdminLTE Skins. Choose a skin from the css/skins 
+																																																																																																																																																																																																																																																																				         folder instead of downloading all of them to reduce the load. -->
 			<link
 			href="{{asset('dist/css/skins/_all-skins.min.css')}}" rel="stylesheet" type="text/css"/>
 			<!-- iCheck -->
@@ -46,15 +39,14 @@
 			<link
 			href="{{asset('plugins/daterangepicker/daterangepicker-bs3.css')}}" rel="stylesheet" type="text/css"/>
 			<!-- bootstrap wysihtml5 - text editor -->
-			
 			<link href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}" rel="stylesheet" type="text/css"/>
 		{% endblock %}
 		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-																																																						        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-																																																						        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-																																																						    <![endif]-->
+																																																																																																																																																																																						        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+																																																																																																																																																																																						        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+																																																																																																																																																																																						    <![endif]-->
 	</head>
 	{% block body %}
 		<body class="skin-blue">
@@ -304,7 +296,7 @@
 											<li class="user-header">
 												<img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image"/>
 												<p>
-													Admin - Web Developer
+													Admin
 													<small>Member since Nov. 2012</small>
 												</p>
 											</li>
@@ -326,7 +318,7 @@
 													<a href="#" class="btn btn-default btn-flat">Profile</a>
 												</div>
 												<div class="pull-right">
-													<a href="#" class="btn btn-default btn-flat">Sign out</a>
+													<a href="/logout" class="btn btn-default btn-flat">Sign out</a>
 												</div>
 											</li>
 										</ul>
@@ -370,14 +362,30 @@
 						<!-- sidebar menu: : style can be found in sidebar.less -->
 						<ul class="sidebar-menu">
 							<li class="header">MAIN NAVIGATION</li>
-							<li class="treeview">
+
+							<li class="active treeview">
 								<a href="#">
-									<i class="fa fa-dashboard"></i>
-									<span>Gestion des cartes</span>
+									<i class="fa fa-user"></i>
+									<span>Gestion des Utilisateurs</span>
 									<i class="fa fa-angle-left pull-right"></i>
 								</a>
 								<ul class="treeview-menu">
 									<li class="active">
+										<a href="#">
+											<i class="fa fa-circle-o"></i>
+											Clients</a>
+									</li>
+
+								</ul>
+							</li>
+							<li class="treeview">
+								<a href="#">
+									<i class="fa fa-user"></i>
+									<span>Gestion des cartes</span>
+									<i class="fa fa-angle-left pull-right"></i>
+								</a>
+								<ul class="treeview-menu">
+									<li>
 										<a href="{{ path('app_carte_index') }}">
 											<i class="fa fa-circle-o"></i>
 											Cartes</a>
@@ -387,10 +395,10 @@
 											<i class="fa fa-circle-o"></i>
 											Transactions</a>
 									</li>
+
 								</ul>
 							</li>
-							
-                            <li class="treeview">
+							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-table"></i>
 									<span>Gestion des comptes</span>
@@ -431,6 +439,7 @@
 								</ul>
 							</li>
 
+
 							<li class="treeview">
 								<a href="#">
 									<i class="fa fa-laptop"></i>
@@ -470,7 +479,7 @@
 									</li>
 								</ul>
 							</li>
-							
+
 						</ul>
 					</section>
 					<!-- /.sidebar -->
@@ -482,6 +491,8 @@
 					<!-- Content Header (Page header) -->
 					<section class="content-header"></section>
 					{% block content %}
+					   {% block javascripts %}
+	                   {% endblock %}
 						<!-- Main content -->
 						<section
 							class="content">
@@ -616,7 +627,9 @@
 															2:15</small>
 														Mike Doe
 													</a>
-													I would like to meet you to discuss the latest news about																																																																																																																																																																																																																																																																																																																														                      the arrival of the new theme. They say it is going to be one the																																																																																																																																																																																																																																																																																																																													                      best themes on the market
+													I would like to meet you to discuss the latest news about
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														                      the arrival of the new theme. They say it is going to be one the
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														                      best themes on the market
 												</p>
 												<div class="attachment">
 													<h4>Attachments:</h4>
@@ -641,8 +654,8 @@
 														Admin
 													</a>
 													I would like to meet you to discuss the latest news about
-																																																																																																																																																																																																																																																																																																																														                      the arrival of the new theme. They say it is going to be one the
-																																																																																																																																																																																																																																																																																																																														                      best themes on the market
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														                      the arrival of the new theme. They say it is going to be one the
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														                      best themes on the market
 												</p>
 											</div>
 											<!-- /.item -->
@@ -657,8 +670,8 @@
 														Susan Doe
 													</a>
 													I would like to meet you to discuss the latest news about
-																																																																																																																																																																																																																																																																																																																														                      the arrival of the new theme. They say it is going to be one the
-																																																																																																																																																																																																																																																																																																																														                      best themes on the market
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														                      the arrival of the new theme. They say it is going to be one the
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																														                      best themes on the market
 												</p>
 											</div>
 											<!-- /.item -->
@@ -1055,7 +1068,7 @@
 				<!-- jQuery 2.1.3 -->
 				<script src="{{asset('plugins/jQuery/jQuery-2.1.3.min.js')}}"></script>
 				<!-- jQuery UI 1.11.2 -->
-				<script src="{{asset('http://code.jquery.com/ui/1.11.2/jquery-ui.min.js')}}"  type="text/javascript"></script>
+				<script src="{{asset('http://code.jquery.com/ui/1.11.2/jquery-ui.min.js')}}" type="text/javascript"></script>
 				<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 				<script>
 					$.widget.bridge('uibutton', $.ui.button);
@@ -1094,7 +1107,7 @@
 				<script src="{{asset('dist/js/demo.js')}}" type="text/javascript"></script>
 			{% endblock %}
 		</body>
-		{% block javascripts %}
-		{% endblock %}
 	{% endblock %}
+	
+
 </html>
