@@ -11,16 +11,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/categorie')]
 class CategorieCreditController extends AbstractController
 {
     #[Route('/', name: 'categorie_index', methods: ['GET'])]
-    public function index(CategorieCreditRepository $categorieCreditRepository): Response
+    public function index(CategorieCreditRepository $categorieCreditRepository,PaginatorInterface $paginator,Request $request): Response
     {
+        $categorieQuery = $categorieCreditRepository->findAll();
         $statistiques = $categorieCreditRepository->getStatistiques();
+        $categorie = $paginator->paginate(
+            $categorieQuery, // Requête à paginer
+            $request->query->getInt('page', 1), // Numéro de page, 1 par défaut
+            2// Nombre d'éléments par page
+        );
         return $this->render('categorie_credit/index.html.twig', [
-            'categorie_credits' => $categorieCreditRepository->findAll(),
+            'categorie_credits' => $categorie,
             'statistiques' => $statistiques,
         ]);
     }
@@ -46,10 +53,16 @@ class CategorieCreditController extends AbstractController
     }
 
     #[Route('/{id}', name: 'categorie_show', methods: ['GET'])]
-    public function show(CategorieCreditRepository $categorieCredit,CreditRepository $creditRepository,$id): Response
+    public function show(CategorieCreditRepository $categorieCredit,CreditRepository $creditRepository,$id,PaginatorInterface $paginator,Request $request): Response
     {
+        $categorieQuery = $creditRepository->findBy(['categorie' => $categorieCredit->findById($id)]);
+        $categorie = $paginator->paginate(
+            $categorieQuery, // Requête à paginer
+            $request->query->getInt('page', 1), // Numéro de page, 1 par défaut
+            1// Nombre d'éléments par page
+        );
         return $this->render('categorie_credit/show.html.twig', [
-            'credits' => $creditRepository->findBy(['categorie' => $categorieCredit->findById($id)]),
+            'credits' => $categorie,
         ]);
     }
 

@@ -14,25 +14,58 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Dompdf\Dompdf;
 use Twilio\Rest\Client;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[Route('/remboursement')]
 class RemboursementController extends AbstractController
 {
     #[Route('/admin/credit/{id}', name: 'remboursement_admin', methods: ['GET'])]
-    public function admin(RemboursementRepository $remboursementRepository,CreditRepository $creditRepository,$id): Response
-    {
-        $credit=$creditRepository->findById($id);
-            return $this->render('remboursement/adminindex.html.twig', [
-                'remboursements' => $remboursementRepository->findBy(['credit' => $credit[0]]),
-            ]);
+public function admin(RemboursementRepository $remboursementRepository,CreditRepository $creditRepository,$id): Response
+{
+    $credit=$creditRepository->findById($id);
+    $remboursements = $remboursementRepository->findBy(['credit' => $credit[0]]);
+    
+    return $this->render('remboursement/adminindex.html.twig', [
+        'remboursements' => $remboursements,
+        'credit' => $credit[0] // Passer la variable $credit à la vue
+    ]);
+}
+
+    #[Route('/client/credit/{id}/tri', name: 'tri_remboursements', methods: ['GET'])]
+public function trierRemboursements(RemboursementRepository $remboursementRepository, CreditRepository $creditRepository, $id, Request $request,UrlGeneratorInterface $urlGenerator): JsonResponse
+{
+    $ordre = $request->query->get('ordre');
+    $credit = $creditRepository->findById($id);
+
+    $remboursements = $remboursementRepository->triParDate($credit[0], $ordre);
+
+
+    // Renvoyer les remboursements au format JSON
+    $data = [];
+    foreach ($remboursements as $remboursement) {
+        $data[] = [
+            'id' => $remboursement->getId(),
+            'credit' => $remboursement->getCredit()->getId(),
+            'montantR' => $remboursement->getMontantR(),
+            'montantRestant' => $remboursement->getMontantRestant(),
+            'dateR' => $remboursement->getDateR() ? $remboursement->getDateR()->format('Y-m-d') : '',
+            'dureeRestante' => $remboursement->getDureeRestante(),
+            'remboursement_show_client' => $this->generateUrl('remboursement_show_client', ['id' => $remboursement->getId()])
+        ];
     }
+
+    return new JsonResponse($data);
+}
 
     #[Route('/client/credit/{id}', name: 'remboursement_client', methods: ['GET'])]
     public function client(RemboursementRepository $remboursementRepository,CreditRepository $creditRepository,$id): Response
     {
         $credit=$creditRepository->findById($id);
+        $remboursements = $remboursementRepository->findBy(['credit' => $credit[0]]);
         return $this->render('remboursement/clientindex.html.twig', [
-            'remboursements' => $remboursementRepository->findBy(['credit' => $credit[0]]),
+            'remboursements' => $remboursements,
+            'credit' => $credit[0]
         ]);
     }
 

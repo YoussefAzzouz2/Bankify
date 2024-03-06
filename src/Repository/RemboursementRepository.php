@@ -21,6 +21,23 @@ class RemboursementRepository extends ServiceEntityRepository
         parent::__construct($registry, Remboursement::class);
     }
 
+    public function triParDate($credit, $ordre)
+    {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->andWhere('r.credit = :credit')
+            ->setParameter('credit', $credit);
+
+        if ($ordre === 'ascendant') {
+            $queryBuilder->orderBy('r.dateR', 'ASC')
+                         ->addOrderBy('r.montantRestant', 'DESC');
+        } else {
+            $queryBuilder->orderBy('r.dateR', 'DESC')
+                         ->addOrderBy('r.montantRestant', 'ASC');
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Remboursement[] Returns an array of Remboursement objects
 //     */

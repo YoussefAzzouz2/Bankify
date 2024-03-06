@@ -37,7 +37,6 @@
     .btn:hover {
         background-color: #0056b3;
     }
-    
 </style>
 <table class="table table-striped">
     <thead>
@@ -69,6 +68,10 @@
         {% endfor %}
     </tbody>
 </table>
+<div style="text-align: center; margin-top: 20px;">
+    {% do categorie_credits.setPageRange(3) %}
+    {{ knp_pagination_render(categorie_credits,'pagination.html.twig') }}
+</div>
 <button class="btn btn-success" onclick="window.location.href='{{ path('categorie_new') }}'">Ajouter une nouvelle catégorie</button>
 
 <canvas id="horizontalBarChart"></canvas>
@@ -94,6 +97,7 @@
             }]
         },
         options: {
+            aspectRatio: 3,
             responsive: true,
             legend: {
                 display: false

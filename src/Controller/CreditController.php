@@ -72,6 +72,12 @@ public function search(Request $request, CreditRepository $creditRepository, Url
     // Construisez les URL pour les autres routes
     $creditsWithUrls = [];
     foreach ($credits as $credit) {
+        if ($credit->isAccepted() && $credit->isPayed()==false)
+            $statut="En cours";
+        if ($credit->isAccepted()==false)
+            $statut="En attente";
+        if ($credit->isPayed())
+            $statut="Payé";
         $creditsWithUrls[] = [
             'id' => $credit->getId(),
             'compteId' => $credit->getCompte()->getId(),
@@ -80,8 +86,7 @@ public function search(Request $request, CreditRepository $creditRepository, Url
             'categorieNom' => $credit->getCategorie()->getNom(),
             'dateC' => $credit->getDateC()->format('Y-m-d'),
             'dureeTotale' => $credit->getDureeTotale(),
-            'admin_show_url' => $urlGenerator->generate('admin_show', ['id' => $credit->getId()]),
-            'remboursement_admin_url' => $urlGenerator->generate('remboursement_admin', ['id' => $credit->getId()])
+            'statut' => $statut
         ];
     }
 
@@ -90,18 +95,30 @@ public function search(Request $request, CreditRepository $creditRepository, Url
 }
 
     #[Route('/demandes', name: 'credits_demandes', methods: ['GET'])]
-    public function demandes(CreditRepository $creditRepository): Response
+    public function demandes(CreditRepository $creditRepository,PaginatorInterface $paginator, Request $request): Response
     {
+        $creditsQuery = $creditRepository->findBy(['accepted' => false, 'payed' => false]);
+        $credits = $paginator->paginate(
+            $creditsQuery, // Requête à paginer
+            $request->query->getInt('page', 1), // Numéro de page, 1 par défaut
+            1// Nombre d'éléments par page
+        );
         return $this->render('credit/demandes.html.twig', [
-            'credits' => $creditRepository->findBy(['accepted' => false,'payed' => false]),
+            'credits' => $credits,
         ]);
     }
 
     #[Route('/payes', name: 'credits_payes', methods: ['GET'])]
-    public function payes(CreditRepository $creditRepository): Response
+    public function payes(CreditRepository $creditRepository,PaginatorInterface $paginator, Request $request): Response
     {
+        $creditsQuery = $creditRepository->findBy(['accepted' => true,'payed' => true]);
+        $credits = $paginator->paginate(
+            $creditsQuery, // Requête à paginer
+            $request->query->getInt('page', 1), // Numéro de page, 1 par défaut
+            1// Nombre d'éléments par page
+        );
         return $this->render('credit/payes.html.twig', [
-            'credits' => $creditRepository->findBy(['accepted' => true,'payed' => true]),
+            'credits' => $credits,
         ]);
     }
 

@@ -102,4 +102,8 @@
     {% endfor %}
     </tbody>
 </table>
+<div style="text-align: center; margin-top: 20px;">
+    {% do credits.setPageRange(3) %}
+    {{ knp_pagination_render(credits,'pagination.html.twig') }}
+</div>
 {% endblock %}

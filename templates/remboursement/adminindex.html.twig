@@ -66,6 +66,9 @@
     }
 </style>
 <a href="{{ path('credit_accepted') }}" class="button">Retour</a>
+<br><br>
+<button class="button" id="triAscendant">Plus anciens</button>
+<button class="button" id="triDescendant">Plus récents</button>
 
     <table class="table">
         <thead>
@@ -99,4 +102,42 @@
         {% endfor %}
         </tbody>
     </table>
+    <script>
+        document.getElementById('triAscendant').addEventListener('click', function() {
+            trierRemboursements('ascendant');
+        });
+    
+        document.getElementById('triDescendant').addEventListener('click', function() {
+            trierRemboursements('descendant');
+        });
+    
+        function trierRemboursements(ordre) {
+            var url = '{{ path('tri_remboursements', {'id': credit.id}) }}'; // Utilisez credit.id au lieu de remboursement.credit.getId()
+            url += '?ordre=' + ordre;
+    
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var tbody = document.getElementById('tbody');
+                    tbody.innerHTML = '';
+    
+                    data.forEach(remboursement => {
+                        var row = `
+                            <tr>
+                                <td>${remboursement.id}</td>
+                                <td>${remboursement.credit}</td>
+                                <td>${remboursement.montantR}</td>
+                                <td>${remboursement.montantRestant}</td>
+                                <td>${remboursement.dateR ? remboursement.dateR : ''}</td>
+                                <td>${remboursement.dureeRestante}</td>
+                                <td>
+                                    <a href="${remboursement.remboursement_show_admin ? remboursement.remboursement_show_admin : ''}" class="button2">Plus d'informations</a>
+                                </td>
+                            </tr>`;
+                        tbody.innerHTML += row;
+                    });
+                });
+        }
+    </script>
+       
 {% endblock %}

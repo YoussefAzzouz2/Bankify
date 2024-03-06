@@ -99,6 +99,9 @@
 <div class="container">
     <a href="{{ path('credit_home') }}" class="button">Retour</a>
     <h2>Liste des remboursements</h2>
+    <br><br>
+    <button class="button" id="triAscendant">Plus anciens</button>
+    <button class="button" id="triDescendant">Plus récents</button>
     <table class="table">
         <thead>
             <tr>
@@ -110,7 +113,7 @@
                 <th class="center">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody">
             {% for remboursement in remboursements %}
             <tr>
                 <td class="center">{{ remboursement.id }}</td>
@@ -130,6 +133,42 @@
         </tbody>
     </table>
 </div>
+<script>
+    document.getElementById('triAscendant').addEventListener('click', function() {
+        trierRemboursements('ascendant');
+    });
+
+    document.getElementById('triDescendant').addEventListener('click', function() {
+        trierRemboursements('descendant');
+    });
+
+    function trierRemboursements(ordre) {
+        var url = '{{ path('tri_remboursements', {'id': credit.id}) }}'; // Utilisez credit.id au lieu de remboursement.credit.getId()
+        url += '?ordre=' + ordre;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                var tbody = document.getElementById('tbody');
+                tbody.innerHTML = '';
+
+                data.forEach(remboursement => {
+                    var row = `
+                        <tr>
+                            <td>${remboursement.id}</td>
+                            <td>${remboursement.montantR}</td>
+                            <td>${remboursement.montantRestant}</td>
+                            <td>${remboursement.dateR ? remboursement.dateR : ''}</td>
+                            <td>${remboursement.dureeRestante}</td>
+                            <td>
+                                <a href="${remboursement.remboursement_show_admin ? remboursement.remboursement_show_admin : ''}" class="button2">Plus d'informations</a>
+                            </td>
+                        </tr>`;
+                    tbody.innerHTML += row;
+                });
+            });
+    }
+</script>
 {% endblock %}
 {% block sec2 %}{% endblock %}
 {% block why %}{% endblock %}
