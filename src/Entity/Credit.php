@@ -42,7 +42,7 @@ class Credit
     #[ORM\OneToMany(targetEntity: Remboursement::class, mappedBy: 'credit', orphanRemoval: true)]
     private Collection $remboursements;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne()]
     #[ORM\JoinColumn(nullable: false)]
     private ?CompteClient $compte = null;
 
