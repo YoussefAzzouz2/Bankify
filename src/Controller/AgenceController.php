@@ -72,14 +72,17 @@ class AgenceController extends AbstractController
         $agence = new Agence();
         $form = $this->createForm(AgenceType::class, $agence);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($agence);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_agence_index', [], Response::HTTP_SEE_OTHER);
+    
+            // flash message 
+            $this->addFlash('success', 'Agence ajoutée avec succès.');
+    
+            return $this->redirectToRoute('app_agence_new', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->renderForm('agence/new.html.twig', [
             'agence' => $agence,
             'form' => $form,

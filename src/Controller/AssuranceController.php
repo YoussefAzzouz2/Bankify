@@ -10,8 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 
 #[Route('/assurance')]
 class AssuranceController extends AbstractController
@@ -25,32 +23,32 @@ class AssuranceController extends AbstractController
     }
 
     #[Route('/pdf', name: 'app_assurance_pdf', methods: ['GET'])]
-public function generatePdf(AssuranceRepository $assuranceRepository): Response
-{
-    $assurances = $assuranceRepository->findAll();
+    public function generatePdf(AssuranceRepository $assuranceRepository): Response
+    {
+        $assurances = $assuranceRepository->findAll();
 
-    // Générez le HTML du contenu du PDF avec le modèle spécifique à la liste des assurances
-    $html = $this->renderView('assurance/pdf_template.html.twig', [
-        'assurances' => $assurances,
-    ]);
+        // Generate the HTML content of the PDF with the specific template for the list of assurances
+        $html = $this->renderView('assurance/pdf_template.html.twig', [
+            'assurances' => $assurances,
+        ]);
 
-    // Créez une instance de Dompdf avec les options nécessaires
-    $options = new Options();
-    $options->set('isHtml5ParserEnabled', true);
-    $options->set('isRemoteEnabled', true);
-    $dompdf = new Dompdf($options);
+        // Create an instance of Dompdf with the necessary options
+        $options = new \Dompdf\Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new \Dompdf\Dompdf($options);
 
-    // Chargez le contenu HTML dans Dompdf
-    $dompdf->loadHtml($html);
+        // Load the HTML content into Dompdf
+        $dompdf->loadHtml($html);
 
-    // Rendez le PDF
-    $dompdf->render();
+        // Render the PDF
+        $dompdf->render();
 
-    // Envoyez le PDF en réponse HTTP
-    return new Response($dompdf->output(), Response::HTTP_OK, [
-        'Content-Type' => 'application/pdf',
-    ]);
-}
+        // Send the PDF as an HTTP response
+        return new Response($dompdf->output(), Response::HTTP_OK, [
+            'Content-Type' => 'application/pdf',
+        ]);
+    }
 
     #[Route('/new', name: 'app_assurance_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -58,19 +56,23 @@ public function generatePdf(AssuranceRepository $assuranceRepository): Response
         $assurance = new Assurance();
         $form = $this->createForm(AssuranceType::class, $assurance);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($assurance);
             $entityManager->flush();
-
-            return $this->redirectToRoute('app_assurance_index', [], Response::HTTP_SEE_OTHER);
+    
+            //  flash message 
+            $this->addFlash('success', 'Assurance ajoutée avec succès.');
+    
+            return $this->redirectToRoute('app_assurance_new', [], Response::HTTP_SEE_OTHER);
         }
-
+    
         return $this->renderForm('assurance/new.html.twig', [
             'assurance' => $assurance,
             'form' => $form,
         ]);
     }
+    
 
     #[Route('/{id}', name: 'app_assurance_show', methods: ['GET'])]
     public function show(Assurance $assurance): Response
