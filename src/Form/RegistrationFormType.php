@@ -65,10 +65,11 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'label' => 'Date of Birth',
                 // You can specify additional options for the BirthdayType here
-            ])->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(),
-                'action_name' => 'register'
             ]);
+            // ->add('captcha', Recaptcha3Type::class, [
+            //     'constraints' => new Recaptcha3(),
+            //     'action_name' => 'register'
+            // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
