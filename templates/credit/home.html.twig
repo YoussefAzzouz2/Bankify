@@ -56,7 +56,7 @@
 											Un nouveau crédit
 										</h5>
 							
-										<a href="{{ path('credit_new') }}">
+										<a href="{{ path('credit_new',{'id': compte.id}) }}">
 											Demander
 										</a>
 									</div>
@@ -71,10 +71,9 @@
 										<h5>
 											Mon crédit actuel
 										</h5>
-								{% if id == -1 %}
-								<a href="#">Consulter</a>
-								{% else %}
-								<a href="{{ path('client_show',{'id': id}) }}">Consulter</a>
+								{% if credit != null %}
+								
+								<a href="{{ path('client_show',{'id': credit.id}) }}">Consulter</a>
 								{% endif %}
 							</div>
 						</div>

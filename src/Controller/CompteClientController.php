@@ -4,10 +4,14 @@ namespace App\Controller;
 
 use App\Entity\CompteClient;
 use App\Entity\Carte;
+use App\Entity\Credit;
+
 use App\Repository\CarteRepository;
 
 use App\Form\CompteClientType;
 use App\Repository\CompteClientRepository;
+use App\Repository\CreditRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +43,29 @@ class CompteClientController extends AbstractController
     return $this->render('carte/indexfront.html.twig', [
         'compte' => $compte,
         'cartes' => $cartes,
+    ]);
+
+    }
+    #[Route('/{id}/credits', name: 'credit_index_for_compte', methods: ['GET'])]
+    public function indexForCompteCredit($id, CreditRepository $creditRepository,CompteClientRepository $CompteClientRepository): Response
+    {
+    // Récupérer le compte client spécifique
+    $compte = $CompteClientRepository->find($id);
+
+    // Récupérer les cartes associées à ce compte client spécifique
+    $credits = $creditRepository->findBy(['compte' => $compte]);
+
+    if($credits ==null)
+    {$credit=NULL;}
+    else
+    {$credit=$credits[0];}
+
+    
+
+    // Rendre la vue avec les informations sur les cartes et le compte client
+    return $this->render('credit/home.html.twig', [
+        'compte' => $compte,
+        'credit' => $credit,
     ]);
 
     }

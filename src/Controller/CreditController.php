@@ -122,8 +122,8 @@ public function search(Request $request, CreditRepository $creditRepository, Url
         ]);
     }
 
-    #[Route('/new', name: 'credit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager,CategorieCreditRepository $categorieCreditRepository,CompteClientRepository $compteRepository,CreditRepository $creditRepository): Response
+    #[Route('/new/{id}', name: 'credit_new', methods: ['GET', 'POST'])]
+    public function new($id,Request $request, EntityManagerInterface $entityManager,CategorieCreditRepository $categorieCreditRepository,CompteClientRepository $compteRepository,CreditRepository $creditRepository): Response
     {
         $credit = new Credit();
         $categories = $categorieCreditRepository->findAll();
@@ -136,9 +136,10 @@ public function search(Request $request, CreditRepository $creditRepository, Url
             $credit->setDateC(new \DateTime());
             $montant = $credit->getMontantTotale() + ($credit->getMontantTotale() * ($credit->getInteret() / 100));
             $credit->setMontantTotale($montant);
-            $comptes = $compteRepository->findById(2);//apres integration la commande devient $this->security->getUser()->getCompte();
-            $compte = $comptes[0];
-            $credit->setCompte($compte);
+            $compte = $compteRepository->find($id);//apres integration la commande devient $this->security->getUser()->getCompte();
+            $test=$creditRepository->findBy(['compte' => $compte]);
+            if($test==null)
+                $credit->setCompte($compte);
             $interet = $form->get('interet')->getData();
             if($interet==10)
                 $credit->setDureeTotale(36);
@@ -146,10 +147,10 @@ public function search(Request $request, CreditRepository $creditRepository, Url
                 $credit->setDureeTotale(48);
             if($interet==20)
                 $credit->setDureeTotale(60);
-            if(count($creditRepository->findBy(['compte'=>$compte]))>0){
-                $this->addFlash('danger', 'Ce compte a déjà un crédit');
-                return $this->redirectToRoute('credit_new');
-            }
+                if($test!=null){
+                    $this->addFlash('danger', 'Ce compte a déjà un crédit');
+                    return $this->redirectToRoute('credit_new',['id' => $id], Response::HTTP_SEE_OTHER);
+                }
             $entityManager->persist($credit);
             $entityManager->flush();
 

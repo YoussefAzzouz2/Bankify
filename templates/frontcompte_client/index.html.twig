@@ -96,7 +96,11 @@
                         <!-- Liens pour afficher et éditer le compte client -->
                         <a href="{{ path('app_frontcompte_client_show', {'id': compte_client.id}) }}">show</a>
                         <a href="{{ path('app_frontcompte_client_edit', {'id': compte_client.id}) }}">edit</a>
-                                            <a href="{{ path('cheque_list1', {'ref': compte_client.id}) }}" class="button2">Show Cheques</a>
+                         <a href="{{ path('cheque_list1', {'ref': compte_client.id}) }}" class="button2">Show Cheques</a>
+                        <a href="{{ path('carte_index_for_compte', {'id': compte_client.id}) }}" class="button2">Mes Cartes</a>
+                     <a href="{{ path('credit_index_for_compte', {'id': compte_client.id}) }}" class="button2">Mes Credits</a>
+
+
 
                     </td>
                 </tr>

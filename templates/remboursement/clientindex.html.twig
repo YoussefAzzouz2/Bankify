@@ -97,8 +97,10 @@
     
 </style>
 <div class="container">
-    <a href="{{ path('credit_home') }}" class="button">Retour</a>
+{% if remboursements != null %}
+    <a href="{{ path('credit_index_for_compte', {'id': remboursements[0].credit.getCompte().getId()}) }}" class="button">Retour</a>
     <h2>Liste des remboursements</h2>
+{% endif %}
     <br><br>
     <button class="button" id="triAscendant">Plus anciens</button>
     <button class="button" id="triDescendant">Plus récents</button>
